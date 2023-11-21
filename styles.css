@@ -39,9 +39,24 @@ section {
     margin-bottom: 1em;
 }
 
+/* styles.css */
+
 footer {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 1em;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+}
+
+#dark-mode-toggle {
+    /* Add styles for the dark mode toggle button here */
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
 }
