@@ -1,11 +1,11 @@
 /* styles.css */
 
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition for dark mode */
+    min-height: 100vh; /* Set minimum height to at least 100% of the viewport height */
+    display: flex;
+    flex-direction: column;
 }
+
 
 .light-mode {
     background-color: #f0f0f0;
