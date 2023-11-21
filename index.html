@@ -36,5 +36,16 @@
         <!-- Add any additional footer content here -->
     </footer>
 
+    <!-- Add this script to the end of your body tag in the HTML file -->
+<script>
+    const body = document.body;
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+  
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+    });
+  </script>
+  
+
 </body>
 </html>
