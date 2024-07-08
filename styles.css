@@ -1,11 +1,9 @@
 /* styles.css */
-
 body {
-    min-height: 100vh; /* Set minimum height to at least 100% of the viewport height */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
-
 
 .light-mode {
     background-color: #f0f0f0;
@@ -33,13 +31,12 @@ nav {
 
 main {
     padding: 1em;
+    flex-grow: 1;
 }
 
 section {
     margin-bottom: 1em;
 }
-
-/* styles.css */
 
 footer {
     background-color: #333;
@@ -47,12 +44,11 @@ footer {
     text-align: center;
     padding: 1em;
     display: flex;
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
+    justify-content: center;
+    align-items: center;
 }
 
 #dark-mode-toggle {
-    /* Add styles for the dark mode toggle button here */
     cursor: pointer;
     background-color: #333;
     color: #fff;
@@ -62,20 +58,51 @@ footer {
 }
 
 .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    padding: 20px;
+}
+
+.image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    background-color: white;
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    align-items: center;
     justify-content: center;
 }
 
-figure {
-    max-width: 300px;
-    text-align: center;
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
 }
 
-figure img {
-    max-width: 100%;
-    height: auto;
+.image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.image-container:hover .image-overlay {
+    opacity: 1;
+}
+
+.image-date {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
+
+.image-caption {
+    font-size: 0.9em;
 }
 
 .projects-container {
@@ -103,4 +130,22 @@ nav a {
 nav a:hover {
     text-decoration: underline;
 }
- 
+
+@media (max-width: 768px) {
+    .image-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .image-gallery {
+        grid-template-columns: 1fr;
+    }
+}
+.page-title {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 18px;
+    color: #333;
+    font-weight: normal; /* This ensures the text is not bold */
+}
