@@ -30,6 +30,7 @@ nav {
 }
 
 main {
+    text-align: center;
     padding: 1em;
     flex-grow: 1;
 }
