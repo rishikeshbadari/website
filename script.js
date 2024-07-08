@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (movieRecsBtn) {
         movieRecsBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            window.open('https://letterboxd.com/your-username', '_blank');
+            window.open('https://letterboxd.com/rbadari/', '_blank');
         });
     }
 
