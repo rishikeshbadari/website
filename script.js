@@ -17,3 +17,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
  
+document.addEventListener('DOMContentLoaded', function() {
+    const gallery = document.getElementById('image-gallery');
+
+    galleryData.forEach((image, index) => {
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'image-container';
+
+        imageContainer.innerHTML = `
+            <img src="${image.src}" alt="Picture ${index + 1}">
+            <div class="image-overlay">
+                <div class="image-date">${image.date}</div>
+                <div class="image-caption">${image.caption}</div>
+            </div>
+        `;
+
+        gallery.appendChild(imageContainer);
+    });
+});
