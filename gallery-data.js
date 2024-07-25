@@ -6,7 +6,7 @@ const galleryData = [
     },
     {
         src: "pictures/61.JPEG",
-        date: "July 24, 2024 at 9:05 PM",
+        date: "July 24, 2024 at  PM",
         caption: "cat at night"
     },
     {

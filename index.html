@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Home</title>
+    <style>
+        #recent-picture {
+            width: 50%;
+            max-width: 600px; /* Optional: you can set a maximum width */
+            margin: 0 auto; /* Center the container horizontally */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -17,9 +24,26 @@
         <a href="#" id="movie-recs-btn">LetterBoxd</a>
     </nav>
     <main>
-        welcome to my website
+        <p>Welcome to my website</p>
+        <div id="recent-picture" class="image-container"></div>
     </main>
     <script src="gallery-data.js"></script>
+    <script>
+        // Directly use the specified object
+        const recentPic = {
+            src: "pictures/62.JPEG",
+            date: "July 24, 2024 at 9:05 PM",
+            caption: "cat at night"
+        };
+
+        document.getElementById('recent-picture').innerHTML = `
+            <img src="${recentPic.src}" alt="${recentPic.caption}">
+            <div class="image-overlay">
+                <p class="image-caption">${recentPic.caption}</p>
+                <p class="image-date">${recentPic.date}</p>
+            </div>
+        `;
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
