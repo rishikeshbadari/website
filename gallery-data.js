@@ -1,5 +1,15 @@
 const galleryData = [
     {
+        src: "pictures/62.JPEG",
+        date: "July 24, 2024 at 9:05 PM",
+        caption: "cat at night"
+    },
+    {
+        src: "pictures/61.JPEG",
+        date: "July 24, 2024 at 9:05 PM",
+        caption: "cat at night"
+    },
+    {
         src: "pictures/60.JPEG",
         date: "July 21, 2024 at 8:18 PM",
         caption: "cat at night"
