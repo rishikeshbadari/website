@@ -1,5 +1,40 @@
 const galleryData = [
     {
+        src: "pictures/69.JPEG",
+        date: "August 8, 2024 at 2:38 PM",
+        caption: "cabs team picture"
+    },
+    {
+        src: "pictures/68.JPEG",
+        date: "August 6, 2024 at 1:15 PM",
+        caption: "panang curry"
+    },
+    {
+        src: "pictures/67.JPEG",
+        date: "August 2, 2024 at 7:58 PM",
+        caption: "sunset"
+    },
+    {
+        src: "pictures/66.JPEG",
+        date: "August 2, 2024 at 7:55 PM",
+        caption: "rainbow outside of BBA gym"
+    },
+    {
+        src: "pictures/65.JPEG",
+        date: "August 2, 2024 at 6:28 PM",
+        caption: "cat"
+    },
+    {
+        src: "pictures/64.JPEG",
+        date: "August 2, 2024 at 6:28 PM",
+        caption: "garfield type cat"
+    },
+    {
+        src: "pictures/63.JPEG",
+        date: "August 2, 2024 at 6:27 PM",
+        caption: "cat outside"
+    },
+    {
         src: "pictures/62.JPEG",
         date: "July 24, 2024 at 9:05 PM",
         caption: "cat at night"
