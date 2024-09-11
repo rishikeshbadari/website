@@ -27,7 +27,7 @@ const galleryData = [
     {
         src: "pictures/70.JPEG",
         date: "August 13, 2024 at 7:22 AM",
-        caption: "ocean"
+        caption: "punta cana ocean"
     },
     {
         src: "pictures/69.JPEG",
