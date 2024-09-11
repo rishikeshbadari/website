@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishikesh Badari</title>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Karla&family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <title>Home</title>
-    <style>
-        #recent-picture {
-            width: 75%;
-            max-width: 900px; /* Optional: you can set a maximum width */
-            margin: 0 auto; /* Center the container horizontally */
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <h1>Rishikesh Badari</h1>
-    </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="pictures.html">Pictures</a>
-        <a href="projects.html">Projects</a>
-        <a href="#" id="movie-recs-btn">LetterBoxd</a>
-    </nav>
-    <main>
-        <p>Welcome to my website</p>
-        <div id="recent-picture" class="image-container"></div>
-    </main>
-    <script src="gallery-data.js"></script>
-    <script>
-        // Directly use the specified object
-        const recentPic = {
-            src: "pictures/62.JPEG",
-            date: "July 24, 2024 at 9:05 PM",
-            caption: "cat at night"
-        };
+    <div class="container">
+        <header>
+            <nav class="nav-v3">
+                <a href="index.html" class="landing-link-about w--current">Home</a>
+                <a href="pictures.html" class="landing-link-about">Pictures</a>
+                <a href="projects.html" class="landing-link-about">Projects</a>
+                <a href="#" id="movie-recs-btn" class="landing-link-about">LetterBoxd</a>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="intro">
+                <h1 class="landing-intro-bio">Rishikesh Badari</h1>
+            </section>
+        </main>
+    </div>
 
-        document.getElementById('recent-picture').innerHTML = `
-            <img src="${recentPic.src}" alt="${recentPic.caption}">
-            <div class="image-overlay">
-                <p class="image-caption">${recentPic.caption}</p>
-                <p class="image-date">${recentPic.date}</p>
+    <footer class="footer-universal">
+        <div class="container">
+            <div class="footer-row-neu">
+                <div class="footer-column">
+                    <div class="footer-header">Rishikesh Badari</div>
+                    <div class="footer-subheader">Student @ Georgia Tech</div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-header">Contact</div>
+                    <div class="footer-subheader">badari.rishikesh@gmail.com</div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-header">Social</div>
+                    <div class="footer-subheader">Instagram, LetterBoxd, LinkedIn</div>
+                </div>
             </div>
-        `;
-    </script>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
