@@ -3,17 +3,6 @@ const GITHUB_RAW_URL = "https://raw.githubusercontent.com/rishikeshbadari/websit
 
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
-    const pathname = url.pathname;
-    
-    // Only handle image requests - pass everything else through to origin
-    const isImageRequest = pathname.match(/\.(jpg|jpeg|png|webp|gif)$/i) || pathname === '/headshot.JPG';
-    
-    if (!isImageRequest) {
-      // Pass through to the origin (your static site)
-      return fetch(request);
-    }
-    
     return handleImageRequest(request, env);
   }
 };
