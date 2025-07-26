@@ -267,12 +267,12 @@ const galleryData = [
     {
         src: "pictures/22.JPEG",
         date: "June 22, 2024 at 8:13 PM",
-        caption: "Golden Gate Bridge w/ Jatong"
+        caption: "Golden Gate Bridge"
     },
     {
         src: "pictures/21.JPEG",
         date: "June 9, 2024 at 3:58 PM",
-        caption: "sand castles in Santa Cruz w/ Harshil"
+        caption: "sand castles in Santa Cruz"
     },
     {
         src: "pictures/20.JPEG",
