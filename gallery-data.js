@@ -1,6 +1,6 @@
 const galleryData = [
     {
-        src: "https://www.rishikeshbadari.com/75.JPEG",
+        src: "https://www.rishikeshbadari.com/pictures/75.JPEG",
         date: "September 6, 2024 at 8:02 PM",
         caption: "backyard at night"
     },
