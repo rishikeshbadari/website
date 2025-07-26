@@ -9,11 +9,5 @@
     "GITHUB_USERNAME": "rishikeshbadari",
     "GITHUB_REPO": "website-images",
     "GITHUB_PAT": "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"
-  },
-  "routes": [
-    {
-      "pattern": "*/api/images/*",
-      "zone_name": "www.rishikeshbadari.com"
-    }
-  ]
+  }
 } 
