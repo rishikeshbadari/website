@@ -57,6 +57,16 @@
             border-radius: 4px;
             overflow-x: auto;
             font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .response-headers {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
         }
     </style>
 </head>
@@ -101,24 +111,74 @@
                 const response = await fetch(url);
                 const loadTime = Date.now() - startTime;
                 
+                // Get all response headers
+                const headers = {};
+                for (let [key, value] of response.headers.entries()) {
+                    headers[key] = value;
+                }
+                
                 if (response.ok) {
-                    const blob = await response.blob();
-                    const imageUrl = URL.createObjectURL(blob);
+                    const contentType = response.headers.get('content-type');
                     
-                    resultDiv.innerHTML = `
-                        <h3>✅ ${imageName} - SUCCESS</h3>
-                        <div class="status success">
-                            Status: ${response.status} ${response.statusText}<br>
-                            Content-Type: ${response.headers.get('content-type')}<br>
-                            Size: ${blob.size} bytes<br>
-                            Load Time: ${loadTime}ms<br>
-                            Cache Status: ${response.headers.get('CF-Cache-Status') || 'N/A'}<br>
-                            Debug Source: ${response.headers.get('X-Debug-Source') || 'N/A'}<br>
-                            Debug URL: ${response.headers.get('X-Debug-URL') || 'N/A'}
-                        </div>
-                        <img src="${imageUrl}" alt="${imageName}" class="test-image success" onload="this.style.opacity='1'" style="opacity:0.5">
-                    `;
+                    if (contentType && contentType.startsWith('image/')) {
+                        // It's supposed to be an image
+                        try {
+                            const blob = await response.blob();
+                            const imageUrl = URL.createObjectURL(blob);
+                            
+                            resultDiv.innerHTML = `
+                                <h3>✅ ${imageName} - SUCCESS</h3>
+                                <div class="status success">
+                                    Status: ${response.status} ${response.statusText}<br>
+                                    Content-Type: ${contentType}<br>
+                                    Size: ${blob.size} bytes<br>
+                                    Load Time: ${loadTime}ms<br>
+                                    Cache Status: ${response.headers.get('CF-Cache-Status') || 'N/A'}<br>
+                                    Debug Source: ${response.headers.get('X-Debug-Source') || 'N/A'}<br>
+                                    Debug URL: ${response.headers.get('X-Debug-URL') || 'N/A'}
+                                </div>
+                                <div class="response-headers">Response Headers: ${JSON.stringify(headers, null, 2)}</div>
+                                <img src="${imageUrl}" alt="${imageName}" class="test-image success" onload="this.style.opacity='1'" style="opacity:0.5">
+                            `;
+                        } catch (decodeError) {
+                            // Image decode failed
+                            const text = await response.clone().text();
+                            resultDiv.innerHTML = `
+                                <h3>❌ ${imageName} - IMAGE DECODE FAILED</h3>
+                                <div class="status error">
+                                    Status: ${response.status} ${response.statusText}<br>
+                                    Content-Type: ${contentType}<br>
+                                    Load Time: ${loadTime}ms<br>
+                                    Error: ${decodeError.message}<br>
+                                    Cache Status: ${response.headers.get('CF-Cache-Status') || 'N/A'}<br>
+                                    Debug Source: ${response.headers.get('X-Debug-Source') || 'N/A'}<br>
+                                    Debug URL: ${response.headers.get('X-Debug-URL') || 'N/A'}
+                                </div>
+                                <div class="response-headers">Response Headers: ${JSON.stringify(headers, null, 2)}</div>
+                                <div class="status info">Response Body (first 500 chars):</div>
+                                <pre>${text.substring(0, 500)}${text.length > 500 ? '...' : ''}</pre>
+                            `;
+                        }
+                    } else {
+                        // Response is not an image
+                        const text = await response.text();
+                        resultDiv.innerHTML = `
+                            <h3>❌ ${imageName} - NOT AN IMAGE</h3>
+                            <div class="status error">
+                                Status: ${response.status} ${response.statusText}<br>
+                                Content-Type: ${contentType}<br>
+                                Load Time: ${loadTime}ms<br>
+                                Cache Status: ${response.headers.get('CF-Cache-Status') || 'N/A'}<br>
+                                Debug Source: ${response.headers.get('X-Debug-Source') || 'N/A'}<br>
+                                Debug URL: ${response.headers.get('X-Debug-URL') || 'N/A'}
+                            </div>
+                            <div class="response-headers">Response Headers: ${JSON.stringify(headers, null, 2)}</div>
+                            <div class="status info">Response Body:</div>
+                            <pre>${text}</pre>
+                        `;
+                    }
                 } else {
+                    // Response failed
                     let errorText = await response.text();
                     let errorData;
                     try {
@@ -135,6 +195,7 @@
                             Debug URL: ${response.headers.get('X-Debug-URL') || 'N/A'}<br>
                             Debug Status: ${response.headers.get('X-Debug-Status') || 'N/A'}
                         </div>
+                        <div class="response-headers">Response Headers: ${JSON.stringify(headers, null, 2)}</div>
                         <pre>${JSON.stringify(errorData, null, 2)}</pre>
                     `;
                 }
