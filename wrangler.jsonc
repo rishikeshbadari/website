@@ -1,7 +1,18 @@
 {
   "name": "rishikesh-website",
   "compatibility_date": "2025-01-26",
+  "main": "worker.js",
   "assets": {
     "directory": "."
-  }
+  },
+  "vars": {
+    "GITHUB_USERNAME": "rishikeshbadari",
+    "GITHUB_REPO": "website-images"
+  },
+  "routes": [
+    {
+      "pattern": "*/api/images/*",
+      "zone_name": "your-domain.com"
+    }
+  ]
 } 
