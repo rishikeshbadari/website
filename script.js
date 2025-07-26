@@ -193,4 +193,45 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`Displaying ${sortedGalleryData.length} photos sorted by date`);
         });
     }
+
+    // Setup modal event listeners
+    function setupModalListeners() {
+        // Close modal when clicking outside or on close button
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal || e.target === closeBtn) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.style.display === 'flex') {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Headshot loading animation
+    const headshotContainer = document.getElementById('headshot-container');
+    const headshotImg = document.getElementById('headshot');
+    
+    if (headshotContainer && headshotImg) {
+        // Add loading state
+        headshotContainer.classList.add('loading');
+        
+        // Load headshot image
+        const headshot = new Image();
+        headshot.onload = function() {
+            // Remove loading state after image loads
+            setTimeout(() => {
+                headshotContainer.classList.remove('loading');
+            }, 500); // Small delay to ensure the animation is visible
+        };
+        headshot.onerror = function() {
+            headshotContainer.classList.remove('loading');
+        };
+        headshot.src = headshotImg.src;
+    }
 });

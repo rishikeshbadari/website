@@ -92,6 +92,38 @@ main {
     border-color: #e0e0e0;
 }
 
+/* Headshot loading animation */
+.headshot-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 32px;
+}
+
+.headshot-container.loading::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top: 3px solid #007bff;
+    border-right: 3px solid #007bff;
+    animation: headshotSpin 1s linear infinite;
+    z-index: 1;
+}
+
+.headshot-container.loading .headshot {
+    opacity: 0.7;
+    border-color: transparent;
+}
+
+@keyframes headshotSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .landing-intro-bio {
     color: #1a1a1a;
     font-size: 48px;
