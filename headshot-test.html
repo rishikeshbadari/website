@@ -42,7 +42,7 @@
     <div class="test-section">
         <h2>Test 1: Direct Image Tag</h2>
         <p>This should show your headshot if the URL works:</p>
-        <img src="https://www.rishikeshbadari.com/headshot.JPG" 
+        <img src="headshot.JPG" 
              alt="Rishikesh Badari" 
              class="headshot-original"
              onload="showStatus('direct-status', 'success', 'Image loaded successfully!')"
@@ -60,7 +60,7 @@
     <div class="test-section">
         <h2>Test 3: Different Loading Methods</h2>
         <h3>With crossorigin="anonymous":</h3>
-        <img src="https://www.rishikeshbadari.com/headshot.JPG" 
+        <img src="headshot.JPG" 
              alt="Test 1" 
              class="headshot-original"
              crossorigin="anonymous"
@@ -69,7 +69,7 @@
         <div id="cors-status" class="status loading">Loading...</div>
 
         <h3>With loading="eager":</h3>
-        <img src="https://www.rishikeshbadari.com/headshot.JPG" 
+        <img src="headshot.JPG" 
              alt="Test 2" 
              class="headshot-original"
              loading="eager"
@@ -98,7 +98,7 @@
             statusElement.textContent = 'Testing fetch...';
             
             try {
-                const response = await fetch('https://www.rishikeshbadari.com/headshot.JPG');
+                const response = await fetch('headshot.JPG');
                 
                 if (response.ok) {
                     const blob = await response.blob();
