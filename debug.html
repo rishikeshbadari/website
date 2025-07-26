@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image API Debug - Rishikesh Badari</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-image {
+            max-width: 300px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        .test-image.error {
+            border-color: #ff4444;
+        }
+        .test-image.success {
+            border-color: #44ff44;
+        }
+        .status {
+            font-family: monospace;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #0056b3; }
+        .loading { opacity: 0.6; pointer-events: none; }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image API Debug Tool</h1>
+    
+    <div class="debug-section">
+        <h2>Quick Tests</h2>
+        <button onclick="testImage('headshot.JPG')">Test Headshot</button>
+        <button onclick="testImage('75.JPEG')">Test Image 75</button>
+        <button onclick="testImage('1.JPEG')">Test Image 1</button>
+        <button onclick="testAllImages()">Test All Recent Images</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <div class="debug-section">
+        <h2>Custom Test</h2>
+        <input type="text" id="customImage" placeholder="Enter image name (e.g., 75.JPEG)" style="width: 200px; padding: 8px;">
+        <button onclick="testCustomImage()">Test Custom Image</button>
+    </div>
+
+    <div id="results" class="debug-section">
+        <h2>Test Results</h2>
+        <p>Click a test button above to see results...</p>
+    </div>
+
+    <script>
+        const results = document.getElementById('results');
+        
+        async function testImage(imageName) {
+            const resultDiv = document.createElement('div');
+            resultDiv.innerHTML = `
+                <h3>Testing: ${imageName}</h3>
+                <div class="status info">Loading...</div>
+            `;
+            results.appendChild(resultDiv);
+            
+            const url = `/api/images/${imageName}`;
+            const startTime = Date.now();
+            
+            try {
+                const response = await fetch(url);
+                const loadTime = Date.now() - startTime;
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const imageUrl = URL.createObjectURL(blob);
+                    
+                    resultDiv.innerHTML = `
+                        <h3>✅ ${imageName} - SUCCESS</h3>
+                        <div class="status success">
+                            Status: ${response.status} ${response.statusText}<br>
+                            Content-Type: ${response.headers.get('content-type')}<br>
+                            Size: ${blob.size} bytes<br>
+                            Load Time: ${loadTime}ms<br>
+                            Cache Status: ${response.headers.get('CF-Cache-Status') || 'N/A'}<br>
+                            Debug Source: ${response.headers.get('X-Debug-Source') || 'N/A'}<br>
+                            Debug URL: ${response.headers.get('X-Debug-URL') || 'N/A'}
+                        </div>
+                        <img src="${imageUrl}" alt="${imageName}" class="test-image success" onload="this.style.opacity='1'" style="opacity:0.5">
+                    `;
+                } else {
+                    let errorText = await response.text();
+                    let errorData;
+                    try {
+                        errorData = JSON.parse(errorText);
+                    } catch (e) {
+                        errorData = { error: errorText };
+                    }
+                    
+                    resultDiv.innerHTML = `
+                        <h3>❌ ${imageName} - FAILED</h3>
+                        <div class="status error">
+                            Status: ${response.status} ${response.statusText}<br>
+                            Load Time: ${loadTime}ms<br>
+                            Debug URL: ${response.headers.get('X-Debug-URL') || 'N/A'}<br>
+                            Debug Status: ${response.headers.get('X-Debug-Status') || 'N/A'}
+                        </div>
+                        <pre>${JSON.stringify(errorData, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                const loadTime = Date.now() - startTime;
+                resultDiv.innerHTML = `
+                    <h3>❌ ${imageName} - NETWORK ERROR</h3>
+                    <div class="status error">
+                        Error: ${error.message}<br>
+                        Load Time: ${loadTime}ms
+                    </div>
+                `;
+            }
+        }
+        
+        async function testAllImages() {
+            const testImages = ['headshot.JPG', '75.JPEG', '74.JPEG', '73.JPEG', '1.JPEG'];
+            for (const image of testImages) {
+                await testImage(image);
+                await new Promise(resolve => setTimeout(resolve, 500)); // Small delay between tests
+            }
+        }
+        
+        function testCustomImage() {
+            const imageName = document.getElementById('customImage').value.trim();
+            if (imageName) {
+                testImage(imageName);
+            } else {
+                alert('Please enter an image name');
+            }
+        }
+        
+        function clearResults() {
+            results.innerHTML = '<h2>Test Results</h2><p>Click a test button above to see results...</p>';
+        }
+        
+        // Test the API on page load
+        window.addEventListener('load', () => {
+            console.log('Debug page loaded. You can now test your image API.');
+        });
+    </script>
+</body>
+</html> 
