@@ -1,7 +1,10 @@
 {
   "name": "rishikesh-website",
+  "main": "worker.js",
   "compatibility_date": "2025-01-26",
-  "assets": {
-    "directory": "."
+  "vars": {
+    "GITHUB_USERNAME": "rishikeshbadari",
+    "GITHUB_REPO": "website-images",
+    "GITHUB_PAT": "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"
   }
 } 
