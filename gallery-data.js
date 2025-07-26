@@ -1,366 +1,366 @@
 const galleryData = [
     {
-        src: "/api/images?image=75.JPEG",
+        src: "pictures/75.JPEG",
         date: "September 6, 2024 at 8:02 PM",
         caption: "backyard at night"
     },
     {
-        src: "/api/images?image=74.JPEG",
+        src: "pictures/74.JPEG",
         date: "August 22, 2024 at 9:38 PM",
         caption: "dbr tour"
     },
     {
-        src: "/api/images?image=73.JPEG",
+        src: "pictures/73.JPEG",
         date: "August 19, 2024 at 8:43 PM",
         caption: "ali silhouette"
     },
     {
-        src: "/api/images?image=72.JPEG",
+        src: "pictures/72.JPEG",
         date: "August 13, 2024 at 12:21 PM",
         caption: "dune buggy"
     },
     {
-        src: "/api/images?image=71.JPEG",
+        src: "pictures/71.JPEG",
         date: "August 13, 2024 at 7:45 AM",
         caption: "turtle"
     },
     {
-        src: "/api/images?image=70.JPEG",
+        src: "pictures/70.JPEG",
         date: "August 13, 2024 at 7:22 AM",
         caption: "punta cana ocean"
     },
     {
-        src: "/api/images?image=69.JPEG",
+        src: "pictures/69.JPEG",
         date: "August 8, 2024 at 2:38 PM",
         caption: "cabs team picture"
     },
     {
-        src: "/api/images?image=68.JPEG",
+        src: "pictures/68.JPEG",
         date: "August 6, 2024 at 1:15 PM",
         caption: "panang curry"
     },
     {
-        src: "/api/images?image=67.JPEG",
+        src: "pictures/67.JPEG",
         date: "August 2, 2024 at 7:58 PM",
         caption: "sunset"
     },
     {
-        src: "/api/images?image=66.JPEG",
+        src: "pictures/66.JPEG",
         date: "August 2, 2024 at 7:55 PM",
         caption: "rainbow outside of BBA gym"
     },
     {
-        src: "/api/images?image=65.JPEG",
+        src: "pictures/65.JPEG",
         date: "August 2, 2024 at 6:28 PM",
         caption: "cat"
     },
     {
-        src: "/api/images?image=64.JPEG",
+        src: "pictures/64.JPEG",
         date: "August 2, 2024 at 6:28 PM",
         caption: "garfield type cat"
     },
     {
-        src: "/api/images?image=63.JPEG",
+        src: "pictures/63.JPEG",
         date: "August 2, 2024 at 6:27 PM",
         caption: "cat outside"
     },
     {
-        src: "/api/images?image=62.JPEG",
+        src: "pictures/62.JPEG",
         date: "July 24, 2024 at 9:05 PM",
         caption: "cat at night"
     },
     {
-        src: "/api/images?image=61.JPEG",
+        src: "pictures/61.JPEG",
         date: "July 24, 2024 at  PM",
         caption: "cat at night"
     },
     {
-        src: "/api/images?image=60.JPEG",
+        src: "pictures/60.JPEG",
         date: "July 21, 2024 at 8:18 PM",
         caption: "cat at night"
     },
     {
-        src: "/api/images?image=59.JPEG",
+        src: "pictures/59.JPEG",
         date: "July 21, 2024 at 10:03 AM",
         caption: "cat wouldn't stop staring in the morning"
     },
     {
-        src: "/api/images?image=58.JPEG",
+        src: "pictures/58.JPEG",
         date: "July 20, 2024 at 4:47 PM",
         caption: "Oppenheimer Way in Berkeley"
     },
     {
-        src: "/api/images?image=57.JPEG",
+        src: "pictures/57.JPEG",
         date: "July 19, 2024 at 8:18 PM",
         caption: "cat after work"
     },
     {
-        src: "/api/images?image=56.JPEG",
+        src: "pictures/56.JPEG",
         date: "July 15, 2024 at 7:50 PM",
         caption: "cat after work"
     },
     {
-        src: "/api/images?image=55.JPEG",
+        src: "pictures/55.JPEG",
         date: "July 13, 2024 at 7:41 PM",
         caption: "'There Will Be Blood' at Presidio, LA w/ Jatong"
     },
     {
-        src: "/api/images?image=54.JPEG",
+        src: "pictures/54.JPEG",
         date: "July 12, 2024 at 8:56 PM",
         caption: "cat on the way to Walmart"
     },
     {
-        src: "/api/images?image=53.JPEG",
+        src: "pictures/53.JPEG",
         date: "July 7, 2024 at 7:26 PM",
         caption: "Beverly Hills at night"
     },
     {
-        src: "/api/images?image=52.JPEG",
+        src: "pictures/52.JPEG",
         date: "July 7, 2024 at 6:22 PM",
         caption: "dinner at Otus Thai Kitchen & Coffee - Spicy Basil Fried Rice"
     },
     {
-        src: "/api/images?image=51.JPEG",
+        src: "pictures/51.JPEG",
         date: "July 7, 2024 at 1:49 PM",
         caption: "'Seven Samurai' 4K Premiere at the Egyptian Theatre"
     },
     {
-        src: "/api/images?image=50.JPEG",
+        src: "pictures/50.JPEG",
         date: "July 7, 2024 at 12:46 PM",
         caption: "Michael Jackson's imprint outside the Chinese Theatre"
     },
     {
-        src: "/api/images?image=49.JPEG",
+        src: "pictures/49.JPEG",
         date: "July 6, 2024 at 9:01 PM",
         caption: "'TENET' in 70mm at the Egyptian Theatre"
     },
     {
-        src: "/api/images?image=48.JPEG",
+        src: "pictures/48.JPEG",
         date: "July 6, 2024 at 5:48 PM",
         caption: "'Inception' in 70mm at the Egyptian Theatre"
     },
     {
-        src: "/api/images?image=47.JPEG",
+        src: "pictures/47.JPEG",
         date: "July 6, 2024 at 5:48 PM",
         caption: "ceiling of Egyptian Theatre"
     },
     {
-        src: "/api/images?image=46.JPEG",
+        src: "pictures/46.JPEG",
         date: "July 6, 2024 at 5:44 PM",
         caption: "outside the Egyptian Theatre"
     },
     {
-        src: "/api/images?image=45.JPEG",
+        src: "pictures/45.JPEG",
         date: "July 6, 2024 at 5:44 PM",
         caption: "Egyptian Theatre"
     },
     {
-        src: "/api/images?image=44.JPEG",
+        src: "pictures/44.JPEG",
         date: "July 6, 2024 at 2:13 PM",
         caption: "the 'Ranger' from Interstellar"
     },
     {
-        src: "/api/images?image=43.JPEG",
+        src: "pictures/43.JPEG",
         date: "July 6, 2024 at 1:52 PM",
         caption: "restaurant where Michael Corleone kills Sollozo and McClusky"
     },
     {
-        src: "/api/images?image=42.JPEG",
+        src: "pictures/42.JPEG",
         date: "July 6, 2024 at 1:52 PM",
         caption: "set pieces from 'The Godfather Pt. 2'"
     },
     {
-        src: "/api/images?image=41.JPEG",
+        src: "pictures/41.JPEG",
         date: "July 6, 2024 at 1:32 PM",
         caption: "fake newsletter used in 'The Godfather'"
     },
     {
-        src: "/api/images?image=40.JPEG",
+        src: "pictures/40.JPEG",
         date: "July 6, 2024 at 1:25 PM",
         caption: "production pictures from 'The Godfather'"
     },
     {
-        src: "/api/images?image=39.JPEG",
+        src: "pictures/39.JPEG",
         date: "July 6, 2024 at 2:56 AM",
         caption: "'Django Unchained' in 35mm at New Beverly Cinema - Tarantino's Theatre!"
     },
     {
-        src: "/api/images?image=38.JPEG",
+        src: "pictures/38.JPEG",
         date: "July 5, 2024 at 8:38 PM",
         caption: "Howard Hughes highway in LA at night"
     },
     {
-        src: "/api/images?image=37.JPEG",
+        src: "pictures/37.JPEG",
         date: "July 5, 2024 at 3:48 PM",
         caption: "Hollywood Sign as seen from Griffith Park"
     },
     {
-        src: "/api/images?image=36.JPEG",
+        src: "pictures/36.JPEG",
         date: "July 5, 2024 at 2:22 PM",
         caption: "original entrance to Warner Bros. Studio"
     },
     {
-        src: "/api/images?image=35.JPEG",
+        src: "pictures/35.JPEG",
         date: "July 5, 2024 at 2:08 PM",
         caption: "largest Sound Stage at Warner Bros."
     },
     {
-        src: "/api/images?image=34.JPEG",
+        src: "pictures/34.JPEG",
         date: "July 5, 2024 at 1:59 PM",
         caption: "Ingrid Bergman's globe from 'Casablanca'"
     },
     {
-        src: "/api/images?image=33.JPEG",
+        src: "pictures/33.JPEG",
         date: "July 5, 2024 at 1:50 PM",
         caption: "Saito's chair from 'Inception'"
     },
     {
-        src: "/api/images?image=32.JPEG",
+        src: "pictures/32.JPEG",
         date: "July 5, 2024 at 12:29 PM",
         caption: "information on 'Casablanca'"
     },
     {
-        src: "/api/images?image=31.JPEG",
+        src: "pictures/31.JPEG",
         date: "July 5, 2024 at 10:56 AM",
         caption: "Grand Central Market"
     },
     {
-        src: "/api/images?image=30.JPEG",
+        src: "pictures/30.JPEG",
         date: "July 4, 2024 at 9:02 PM",
         caption: "'Blowout' at Los Feliz Theatre"
     },
     {
-        src: "/api/images?image=29.JPEG",
+        src: "pictures/29.JPEG",
         date: "July 4, 2024 at 2:39 PM",
         caption: "original entrance to Paramount Studios"
     },
     {
-        src: "/api/images?image=28.JPEG",
+        src: "pictures/28.JPEG",
         date: "July 4, 2024 at 2:29 PM",
         caption: "original entrance to Paramount Studios"
     },
     {
-        src: "/api/images?image=27.JPEG",
+        src: "pictures/27.JPEG",
         date: "July 4, 2024 at 1:52 PM",
         caption: "the Paramount Water Tower"
     },
     {
-        src: "/api/images?image=26.JPEG",
+        src: "pictures/26.JPEG",
         date: "July 4, 2024 at 1:24 PM",
         caption: "TARS from 'Interstellar'"
     },
     {
-        src: "/api/images?image=25.JPEG",
+        src: "pictures/25.JPEG",
         date: "July 4, 2024 at 10:22 AM",
         caption: "breakfast at Venice Beach"
     },
     {
-        src: "/api/images?image=24.JPEG",
+        src: "pictures/24.JPEG",
         date: "June 29, 2024 at 4:40 PM",
         caption: "deer at Yosemite"
     },
     {
-        src: "/api/images?image=23.JPEG",
+        src: "pictures/23.JPEG",
         date: "June 29, 2024 at 4:07 PM",
         caption: "view from Yosemite"
     },
     {
-        src: "/api/images?image=22.JPEG",
+        src: "pictures/22.JPEG",
         date: "June 22, 2024 at 8:13 PM",
         caption: "Golden Gate Bridge w/ Jatong"
     },
     {
-        src: "/api/images?image=21.JPEG",
+        src: "pictures/21.JPEG",
         date: "June 9, 2024 at 3:58 PM",
         caption: "sand castles in Santa Cruz w/ Harshil"
     },
     {
-        src: "/api/images?image=20.JPEG",
+        src: "pictures/20.JPEG",
         date: "June 8, 2024 at 3:14 PM",
         caption: "Redwood Trees in Muir Woods"
     },
     {
-        src: "/api/images?image=18.JPEG",
+        src: "pictures/18.JPEG",
         date: "May 30, 2024 at 8:33 PM",
         caption: "sunset when biking through Sunnyvale"
     },
     {
-        src: "/api/images?image=16.JPEG",
+        src: "pictures/16.JPEG",
         date: "May 20, 2024 at 8:31 AM",
         caption: "cat in Airbnb"
     },
     {
-        src: "/api/images?image=15.JPEG",
+        src: "pictures/15.JPEG",
         date: "May 19, 2024 at 6:00 PM",
         caption: "Lakewood Drive in Sunnyvale"
     },
     {
-        src: "/api/images?image=14.JPEG",
+        src: "pictures/14.JPEG",
         date: "May 19, 2024 at 5:21 PM",
         caption: "cat in backyard"
     },
     {
-        src: "/api/images?image=13.JPEG",
+        src: "pictures/13.JPEG",
         date: "May 5, 2024 at 8:48 PM",
         caption: "Vanderlyn at night"
     },
     {
-        src: "/api/images?image=12.JPEG",
+        src: "pictures/12.JPEG",
         date: "April 8, 2024 at 1:20 AM",
         caption: "the Plaza Theatre"
     },
     {
-        src: "/api/images?image=11.JPEG",
+        src: "pictures/11.JPEG",
         date: "April 7, 2024 at 9:13 PM",
         caption: "'Cotton Club' w/ Francis Ford Coppola at the Plaza"
     },
     {
-        src: "/api/images?image=10.JPEG",
+        src: "pictures/10.JPEG",
         date: "February 1, 2024 at 8:04 PM",
         caption: "'Casino' w/ Naman & Ali at Plaza"
     },
     {
-        src: "/api/images?image=9.JPEG",
+        src: "pictures/9.JPEG",
         date: "November 26, 2023 at 6:06 PM",
         caption: "'High and Low' in 35mm at Plaza"
     },
     {
-        src: "/api/images?image=8.JPEG",
+        src: "pictures/8.JPEG",
         date: "October 29, 2023 at 7:12 PM",
         caption: "view from the Hub"
     },
     {
-        src: "/api/images?image=7.JPEG",
+        src: "pictures/7.JPEG",
         date: "August 14, 2023 at 2:08 PM",
         caption: "'The Harvest of Buckwheat'"
     },
     {
-        src: "/api/images?image=6.JPEG",
+        src: "pictures/6.JPEG",
         date: "August 14, 2023 at 1:36 PM",
         caption: "'The Banquet'"
     },
     {
-        src: "/api/images?image=5.JPEG",
+        src: "pictures/5.JPEG",
         date: "August 14, 2023 at 1:35 PM",
         caption: "'Midday Sorrow'"
     },
     {
-        src: "/api/images?image=4.JPEG",
+        src: "pictures/4.JPEG",
         date: "August 14, 2023 at 1:29 PM",
         caption: "'Chrysanthemums on a Table'"
     },
     {
-        src: "/api/images?image=3.JPEG",
+        src: "pictures/3.JPEG",
         date: "August 8, 2023 at 8:26 PM",
         caption: "'JAWS' at Plaza"
     },
     {
-        src: "/api/images?image=2.JPEG",
+        src: "pictures/2.JPEG",
         date: "February 26, 2023 at 6:26 PM",
         caption: "view from the hammock Freshman year"
     },
     {
-        src: "/api/images?image=1.JPEG",
+        src: "pictures/1.JPEG",
         date: "December 1, 2022 at 3:36 PM",
         caption: "sketch of 'Landscape with Couple Walking and Crescent Moon'"
     }
