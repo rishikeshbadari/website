@@ -5,18 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pictures - Rishikesh Badari</title>
     
+    <!-- Prevent flash by setting background immediately -->
+    <style>
+        html, body { 
+            background-color: #ffffff; 
+            margin: 0; 
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        /* Critical CSS for immediate render */
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 24px; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header { 
+            padding: 32px 0; 
+            border-bottom: 1px solid #f0f0f0; 
+        }
+        .nav-v3 { 
+            display: flex; 
+            justify-content: center; 
+            gap: 40px; 
+        }
+        .landing-link-about { 
+            color: #666666; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
+        .landing-link-about.w--current { 
+            color: #1a1a1a; 
+            font-weight: 600; 
+        }
+        /* Critical gallery CSS */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+    </style>
+    
     <!-- Performance optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     
-    <!-- Critical CSS should be inlined, but keeping external for now -->
+    <!-- Optimized font loading -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Load full CSS after critical rendering -->
     <link rel="stylesheet" href="styles.css">
     
     <!-- Preload critical resources -->
     <link rel="preload" href="gallery-data.js" as="script">
     <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="page-transitions.js" as="script">
 </head>
 <body>
     <div class="container">
@@ -37,5 +85,8 @@
 
     <script src="gallery-data.js"></script>
     <script src="script.js"></script>
+    
+    <!-- Page transition optimization -->
+    <script src="page-transitions.js"></script>
 </body>
 </html>
