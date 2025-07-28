@@ -682,6 +682,13 @@ main {
     margin-bottom: 0;
 }
 
+.readme-content hr {
+    border: none;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 20px 0;
+}
+
 .project-links {
     margin-top: 24px;
     padding-top: 20px;

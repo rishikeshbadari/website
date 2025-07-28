@@ -53,10 +53,10 @@ projects/
            </div>
            <p>Your README content with proper markdown formatting...</p>
            <p>Additional paragraphs as needed.</p>
+           <hr>
        `,
        links: ``,
        demo: `
-           <h3>Try it out:</h3>
            <div class="game-container">
                <iframe src="projects/your-project/your-file.html" 
                        title="Your Project" 
