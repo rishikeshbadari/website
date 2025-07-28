@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barnsley Fern Fractal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        canvas {
+            border: 1px solid #333;
+            background: #000;
+            border-radius: 8px;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .info {
+            max-width: 600px;
+            margin-top: 20px;
+            text-align: center;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Barnsley Fern Fractal</h1>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <div class="controls">
+        <button onclick="startAnimation()">Start</button>
+        <button onclick="stopAnimation()">Stop</button>
+        <button onclick="clearCanvas()">Clear</button>
+        <span>Points: <span id="pointCount">0</span></span>
+    </div>
+    <div class="info">
+        <p>The Barnsley Fern is generated using an iterated function system (IFS) with four probability-weighted transformations. Each point is calculated based on the previous point using these transformations, creating the characteristic fern pattern.</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const pointCountElement = document.getElementById('pointCount');
+        
+        let animationId;
+        let pointCount = 0;
+        let x = 0, y = 0;
+        
+        // Barnsley Fern transformations
+        const transforms = [
+            { a: 0, b: 0, c: 0, d: 0.16, e: 0, f: 0, p: 0.01 },
+            { a: 0.85, b: 0.04, c: -0.04, d: 0.85, e: 0, f: 1.6, p: 0.85 },
+            { a: 0.2, b: -0.26, c: 0.23, d: 0.22, e: 0, f: 1.6, p: 0.07 },
+            { a: -0.15, b: 0.28, c: 0.26, d: 0.24, e: 0, f: 0.44, p: 0.07 }
+        ];
+        
+        function getRandomTransform() {
+            const r = Math.random();
+            let sum = 0;
+            for (let i = 0; i < transforms.length; i++) {
+                sum += transforms[i].p;
+                if (r <= sum) return transforms[i];
+            }
+            return transforms[transforms.length - 1];
+        }
+        
+        function drawPoint(x, y) {
+            const screenX = (x + 3) * canvas.width / 6;
+            const screenY = canvas.height - (y * canvas.height / 10);
+            
+            ctx.fillStyle = `hsl(${120 + y * 10}, 70%, 50%)`;
+            ctx.fillRect(screenX, screenY, 1, 1);
+        }
+        
+        function iterate() {
+            const transform = getRandomTransform();
+            const newX = transform.a * x + transform.b * y + transform.e;
+            const newY = transform.c * x + transform.d * y + transform.f;
+            
+            x = newX;
+            y = newY;
+            
+            if (pointCount > 20) { // Skip first few points
+                drawPoint(x, y);
+            }
+            
+            pointCount++;
+            pointCountElement.textContent = pointCount;
+        }
+        
+        function animate() {
+            for (let i = 0; i < 100; i++) {
+                iterate();
+            }
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        function startAnimation() {
+            if (!animationId) {
+                animate();
+            }
+        }
+        
+        function stopAnimation() {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+        
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pointCount = 0;
+            pointCountElement.textContent = pointCount;
+            x = 0;
+            y = 0;
+        }
+        
+        // Auto-start the animation
+        setTimeout(startAnimation, 1000);
+    </script>
+</body>
+</html> 

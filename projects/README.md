@@ -71,4 +71,5 @@ projects/
 
 ## Current Projects
 
-- **snake-game**: A modern Snake game with fluid animations (Python → JavaScript conversion) 
+- **snake-game**: A modern Snake game with fluid animations (Python → JavaScript conversion)
+- **fractals**: Interactive mathematical fractal visualizations including Mandelbrot Set, Julia Sets, and Barnsley Fern with branch-based navigation 
