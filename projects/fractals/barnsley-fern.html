@@ -47,16 +47,12 @@
     </style>
 </head>
 <body>
-    <h1>Barnsley Fern Fractal</h1>
     <canvas id="canvas" width="600" height="600"></canvas>
     <div class="controls">
         <button onclick="startAnimation()">Start</button>
         <button onclick="stopAnimation()">Stop</button>
         <button onclick="clearCanvas()">Clear</button>
         <span>Points: <span id="pointCount">0</span></span>
-    </div>
-    <div class="info">
-        <p>The Barnsley Fern is generated using an iterated function system (IFS) with four probability-weighted transformations. Each point is calculated based on the previous point using these transformations, creating the characteristic fern pattern.</p>
     </div>
 
     <script>
