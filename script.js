@@ -50,20 +50,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 const img = entry.target;
                 const photoCard = img.closest('.photo-card');
                 
-                // Load the actual image
-                loadImage(img, img.dataset.src).then(() => {
+                // Try WebP first, fallback to JPEG
+                const webpSrc = img.dataset.webpSrc;
+                const jpegSrc = img.dataset.jpegSrc;
+                
+                loadImage(img, webpSrc).then(() => {
                     photoCard.classList.remove('loading');
                     photoCard.classList.add('loaded');
                 }).catch(() => {
-                    photoCard.classList.remove('loading');
-                    photoCard.classList.add('error');
+                    // Fallback to JPEG if WebP fails
+                    loadImage(img, jpegSrc).then(() => {
+                        photoCard.classList.remove('loading');
+                        photoCard.classList.add('loaded');
+                    }).catch(() => {
+                        photoCard.classList.remove('loading');
+                        photoCard.classList.add('error');
+                    });
                 });
                 
                 observer.unobserve(img);
             }
         });
     }, {
-        rootMargin: '50px' // Start loading 50px before the image comes into view
+        rootMargin: '100px' // Start loading 100px before the image comes into view
     });
 
     // Function to load image with better error handling
@@ -79,13 +88,76 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Preload critical images (first 6 images after sorting)
+    // Preload critical images (first 6 images after sorting) with optimized versions
     function preloadCriticalImages() {
         const criticalImages = sortedGalleryData.slice(0, 6);
         criticalImages.forEach(imageData => {
-            const img = new Image();
-            img.src = imageData.src;
+            const imageSources = getOptimizedImageSources(imageData.src);
+            
+            // Preload WebP thumbnail first (priority)
+            const webpImg = new Image();
+            webpImg.src = imageSources.thumbWebP;
+            
+            // Preload JPEG fallback
+            const jpegImg = new Image();
+            jpegImg.src = imageSources.thumbJpeg;
+            
+            // Preload full-size WebP for modal (lower priority)
+            setTimeout(() => {
+                const fullWebpImg = new Image();
+                fullWebpImg.src = imageSources.fullWebP;
+            }, 1000);
         });
+    }
+
+    // Function to get optimized image sources with WebP support
+    function getOptimizedImageSources(originalSrc) {
+        const baseName = originalSrc.split('/')[1].split('.')[0]; // Extract filename without extension
+        
+        return {
+            // Thumbnail versions for gallery (400x400)
+            thumbWebP: `pictures/thumbs/${baseName}.webp`,
+            thumbJpeg: `pictures/thumbs/${baseName}.jpg`,
+            // Full-size versions for modal (1200x1200 max)
+            fullWebP: `pictures/optimized/${baseName}.webp`,
+            fullJpeg: `pictures/optimized/${baseName}.jpg`,
+            // Fallback to original if optimized versions don't exist
+            original: originalSrc
+        };
+    }
+
+    // Function to create responsive picture element with WebP support
+    function createResponsivePicture(imageSources, alt, isThumb = true, isEager = false) {
+        const picture = document.createElement('picture');
+        
+        // WebP source (modern browsers)
+        const webpSource = document.createElement('source');
+        webpSource.type = 'image/webp';
+        webpSource.srcset = isThumb ? imageSources.thumbWebP : imageSources.fullWebP;
+        
+        // JPEG fallback source
+        const jpegSource = document.createElement('source');
+        jpegSource.type = 'image/jpeg';
+        jpegSource.srcset = isThumb ? imageSources.thumbJpeg : imageSources.fullJpeg;
+        
+        // Fallback img element
+        const img = document.createElement('img');
+        img.className = isThumb ? 'photo-main' : 'modal-image';
+        img.alt = alt;
+        img.loading = isEager ? 'eager' : 'lazy';
+        img.src = isThumb ? imageSources.thumbJpeg : imageSources.fullJpeg; // Fallback
+        
+        // For lazy loading, store sources in data attributes
+        if (!isEager && isThumb) {
+            img.dataset.webpSrc = imageSources.thumbWebP;
+            img.dataset.jpegSrc = imageSources.thumbJpeg;
+        }
+        
+        picture.appendChild(webpSource);
+        picture.appendChild(jpegSource);
+        picture.appendChild(img);
+        
+        return { picture, img };
     }
 
     // Create optimized photo cards using sorted data
@@ -93,16 +165,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const photoCard = document.createElement('div');
         photoCard.className = 'photo-card loading';
 
+        const imageSources = getOptimizedImageSources(image.src);
+        
         // Create a low-quality placeholder for blur-up effect
-        const placeholderSrc = createPlaceholder(200, 150); // Low-res placeholder
+        const placeholderSrc = createPlaceholder(200, 150);
+
+        // Create responsive picture element for thumbnail
+        const { picture, img: mainImg } = createResponsivePicture(
+            imageSources, 
+            image.caption, 
+            true, // isThumb
+            index < 6 // isEager for first 6 images
+        );
 
         photoCard.innerHTML = `
             <div class="image-wrapper">
                 <img class="photo-placeholder" src="${placeholderSrc}" alt="">
-                <img class="photo-main" 
-                     data-src="${image.src}" 
-                     alt="${image.caption}"
-                     ${index < 6 ? 'loading="eager"' : 'loading="lazy"'}>
             </div>
             <div class="photo-caption">
                 <div class="photo-date">${image.date}</div>
@@ -110,28 +188,43 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
 
-        const mainImg = photoCard.querySelector('.photo-main');
+        // Insert the picture element
+        const imageWrapper = photoCard.querySelector('.image-wrapper');
+        imageWrapper.appendChild(picture);
         
         // If it's one of the first 6 images, load immediately
         if (index < 6) {
-            loadImage(mainImg, image.src).then(() => {
+            loadImage(mainImg, imageSources.thumbWebP).then(() => {
                 photoCard.classList.remove('loading');
                 photoCard.classList.add('loaded');
             }).catch(() => {
-                photoCard.classList.remove('loading');
-                photoCard.classList.add('error');
+                // Fallback to JPEG if WebP fails
+                loadImage(mainImg, imageSources.thumbJpeg).then(() => {
+                    photoCard.classList.remove('loading');
+                    photoCard.classList.add('loaded');
+                }).catch(() => {
+                    photoCard.classList.remove('loading');
+                    photoCard.classList.add('error');
+                });
             });
         } else {
             // Use intersection observer for others
             imageObserver.observe(mainImg);
         }
 
-        // Add click event to open modal
+        // Add click event to open modal with full-size optimized image
         photoCard.addEventListener('click', function() {
-            modalImage.src = image.src;
+            // Load full-size optimized image in modal
+            modalImage.src = imageSources.fullWebP;
             modalImage.alt = image.caption;
             modalDate.textContent = image.date;
             modalCaption.textContent = image.caption;
+            
+            // Fallback to JPEG if WebP is not supported
+            modalImage.onerror = function() {
+                modalImage.src = imageSources.fullJpeg;
+            };
+            
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
         });

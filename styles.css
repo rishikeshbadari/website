@@ -225,6 +225,9 @@ main {
     position: relative;
     display: flex;
     flex-direction: column;
+    /* Performance optimizations */
+    will-change: transform;
+    transform: translateZ(0); /* Enable hardware acceleration */
 }
 
 .photo-card:hover {

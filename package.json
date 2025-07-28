@@ -1,0 +1,16 @@
+{
+  "name": "personal-website-optimizer",
+  "version": "1.0.0",
+  "description": "Image optimization tools for personal website",
+  "main": "optimize-images.js",
+  "scripts": {
+    "optimize": "node optimize-images.js",
+    "install-deps": "npm install"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  },
+  "keywords": ["image", "optimization", "webp", "compression"],
+  "author": "Rishikesh Badari",
+  "license": "MIT"
+} 
