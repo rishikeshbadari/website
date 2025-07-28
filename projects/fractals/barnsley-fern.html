@@ -25,6 +25,12 @@
             display: flex;
             gap: 15px;
             align-items: center;
+            justify-content: flex-start;
+            width: 600px;
+        }
+        .point-counter {
+            min-width: 120px;
+            text-align: left;
         }
         button {
             padding: 10px 20px;
@@ -52,7 +58,7 @@
         <button onclick="startAnimation()">Start</button>
         <button onclick="stopAnimation()">Stop</button>
         <button onclick="clearCanvas()">Clear</button>
-        <span>Points: <span id="pointCount">0</span></span>
+        <span class="point-counter">Points: <span id="pointCount">0</span></span>
     </div>
 
     <script>
