@@ -615,8 +615,12 @@ main {
     overflow: hidden;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
     animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: flex;
-    flex-direction: column;
+}
+
+.project-modal-scroll {
+    height: 90vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 /* Close button */
@@ -648,8 +652,7 @@ main {
 
 /* Modal README Section */
 .project-modal-readme {
-    padding: 40px;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 40px 40px 20px 40px;
     background: #ffffff;
 }
 
@@ -695,11 +698,9 @@ main {
 
 /* Modal Demo Section */
 .project-modal-demo {
-    padding: 40px;
-    background: #fafafa;
-    flex-grow: 1;
-    overflow-y: auto;
-    min-height: 0;
+    padding: 20px 40px 40px 40px;
+    background: #ffffff;
+    min-height: calc(90vh - 200px);
 }
 
 .project-modal-demo h3 {
@@ -866,11 +867,11 @@ main {
     }
     
     .project-modal-readme {
-        padding: 24px;
+        padding: 24px 24px 16px 24px;
     }
     
     .project-modal-demo {
-        padding: 24px;
+        padding: 16px 24px 24px 24px;
     }
     
     .readme-content h1 {
@@ -953,11 +954,11 @@ main {
     }
     
     .project-modal-readme {
-        padding: 20px;
+        padding: 20px 20px 16px 20px;
     }
     
     .project-modal-demo {
-        padding: 20px;
+        padding: 16px 20px 20px 20px;
     }
     
     .readme-content h1 {
