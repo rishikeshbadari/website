@@ -689,11 +689,31 @@ main {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.025em;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .project-links a:hover {
     color: #666666;
+}
+
+.github-link {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.github-link:hover {
+    transform: scale(1.1);
+}
+
+.github-logo {
+    width: 32px;
+    height: 32px;
+    filter: grayscale(0.2);
+    transition: filter 0.2s ease;
+}
+
+.github-logo:hover {
+    filter: grayscale(0);
 }
 
 /* Modal Demo Section */

@@ -50,8 +50,8 @@ projects/
            <p>Additional paragraphs as needed.</p>
        `,
        links: `
-           <a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener noreferrer">
-               View on GitHub →
+           <a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener noreferrer" class="github-link">
+               <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
            </a>
        `,
        demo: `
