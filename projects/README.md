@@ -45,15 +45,16 @@ projects/
    // Add this to the projectData object in the JavaScript
    'your-project-id': {
        readme: `
-           <h1>Your Project Name</h1>
+           <div class="project-title-header">
+               <h1>Your Project Name</h1>
+               <a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener noreferrer" class="github-link">
+                   <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
+               </a>
+           </div>
            <p>Your README content with proper markdown formatting...</p>
            <p>Additional paragraphs as needed.</p>
        `,
-       links: `
-           <a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener noreferrer" class="github-link">
-               <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
-           </a>
-       `,
+       links: ``,
        demo: `
            <h3>Try it out:</h3>
            <div class="game-container">

@@ -656,11 +656,18 @@ main {
     background: #ffffff;
 }
 
+.project-title-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
 .readme-content h1 {
     color: #1a1a1a;
     font-size: 28px;
     font-weight: 700;
-    margin: 0 0 16px 0;
+    margin: 0;
     letter-spacing: -0.02em;
 }
 
@@ -898,6 +905,10 @@ main {
         font-size: 24px;
     }
     
+    .project-title-header {
+        gap: 12px;
+    }
+    
     .project-modal-close {
         top: 15px;
         right: 20px;
@@ -983,5 +994,11 @@ main {
     
     .readme-content h1 {
         font-size: 22px;
+    }
+    
+    .project-title-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 }

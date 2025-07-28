@@ -94,9 +94,9 @@
                             <div class="readme-content" id="modalReadmeContent">
                                 <!-- README content will be inserted here -->
                             </div>
-                            <div class="project-links" id="modalProjectLinks">
-                                <!-- Project links will be inserted here -->
-                            </div>
+                                                    <div class="project-links" id="modalProjectLinks" style="display: none;">
+                            <!-- Project links will be inserted here -->
+                        </div>
                         </div>
                         
                         <div class="project-modal-demo" id="modalProjectDemo">
@@ -126,15 +126,16 @@
             const projectData = {
                 'snake-game': {
                     readme: `
-                        <h1>Snake Game</h1>
+                        <div class="project-title-header">
+                            <h1>Snake Game</h1>
+                            <a href="https://github.com/rishikeshbadari/snake" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
+                            </a>
+                        </div>
                         <p>A new UI I made for Snake.</p>
                         <p>Originally created with Python in the Processing IDE. Converted into JavaScript & HTML.</p>
                     `,
-                    links: `
-                        <a href="https://github.com/rishikeshbadari/snake" target="_blank" rel="noopener noreferrer" class="github-link">
-                            <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
-                        </a>
-                    `,
+                    links: ``,
                     demo: `
                         <h3>Try it out:</h3>
                         <div class="game-container">
