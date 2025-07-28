@@ -1,0 +1,29 @@
+{
+  "rewrites": [
+    {
+      "source": "/pictures",
+      "destination": "/pictures.html"
+    },
+    {
+      "source": "/projects", 
+      "destination": "/projects.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pictures.html",
+      "destination": "/pictures",
+      "permanent": true
+    },
+    {
+      "source": "/projects.html", 
+      "destination": "/projects",
+      "permanent": true
+    }
+  ]
+} 
