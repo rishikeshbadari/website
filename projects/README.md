@@ -27,37 +27,45 @@ projects/
    - Create a `README.md` with your project description
 
 3. **Update projects.html:**
-   - Add a new `project-card` section
-   - Include your README content in the `readme-content` div
-   - Add an iframe or demo section pointing to your project files
+   - Add a new `project-card` section in the HTML
+   - Add your project data to the `projectData` object in the JavaScript
 
 4. **Example Project Card Structure:**
    ```html
-   <article class="project-card" data-project="your-project">
-       <div class="project-preview">
-           <h3>Your Project Name</h3>
-           <p>Brief description...</p>
-           <button class="project-toggle">View Project ↓</button>
-       </div>
-       <div class="project-details" id="project-your-project">
-           <div class="project-readme">
-               <div class="readme-content">
-                   <!-- Your README content here -->
-               </div>
-               <div class="project-links">
-                   <a href="https://github.com/your-username/your-repo" target="_blank">
-                       View on GitHub →
-                   </a>
-               </div>
-           </div>
-           <div class="project-demo">
-               <h3>Try it out:</h3>
-               <div class="demo-container">
-                   <!-- Your project demo/iframe here -->
-               </div>
-           </div>
-       </div>
+   <!-- Add this in the projects-container -->
+   <article class="project-card" data-project="your-project-id">
+       <h3>Your Project Name</h3>
+       <p>Brief description of your project...</p>
+       <a href="#" class="project-link">View Project</a>
    </article>
+   ```
+
+5. **Example Project Data:**
+   ```javascript
+   // Add this to the projectData object in the JavaScript
+   'your-project-id': {
+       readme: `
+           <h1>Your Project Name</h1>
+           <p>Your README content with proper markdown formatting...</p>
+           <p>Additional paragraphs as needed.</p>
+       `,
+       links: `
+           <a href="https://github.com/your-username/your-repo" target="_blank" rel="noopener noreferrer">
+               View on GitHub →
+           </a>
+       `,
+       demo: `
+           <h3>Try it out:</h3>
+           <div class="game-container">
+               <iframe src="projects/your-project/your-file.html" 
+                       title="Your Project" 
+                       width="100%" 
+                       height="520">
+               </iframe>
+           </div>
+           <p class="game-instructions">Instructions for using your project.</p>
+       `
+   }
    ```
 
 ## Current Projects

@@ -71,46 +71,37 @@
             <div class="projects-container">
                 <!-- Snake Game Project -->
                 <article class="project-card" data-project="snake-game">
-                    <div class="project-preview">
-                        <h3>Snake Game</h3>
-                        <p>A modern take on the classic Snake game with fluid animations and clean UI. Originally created in Python/Processing, converted to JavaScript/HTML5.</p>
-                        <button class="project-toggle">View Project ↓</button>
-                    </div>
-                    <div class="project-details" id="project-snake-game">
-                        <div class="project-readme">
-                            <div class="readme-content">
-                                <h1>Snake Game</h1>
-                                <p>A new UI I made for Snake.</p>
-                                <p>Originally created with Python in the Processing IDE. Converted into JavaScript & HTML.</p>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/rishikeshbadari/snake" target="_blank" rel="noopener noreferrer">
-                                    View on GitHub →
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-demo">
-                            <h3>Try it out:</h3>
-                            <div class="game-container">
-                                <iframe src="projects/snake-game/game.html" 
-                                        title="Snake Game" 
-                                        width="100%" 
-                                        height="520">
-                                </iframe>
-                            </div>
-                            <p class="game-instructions">Use arrow keys to control the snake. Eat the white food to grow!</p>
-                        </div>
-                    </div>
+                    <h3>Snake Game</h3>
+                    <p>A modern take on the classic Snake game with fluid animations and clean UI. Originally created in Python/Processing, converted to JavaScript/HTML5.</p>
+                    <a href="#" class="project-link">View Project</a>
                 </article>
 
                 <!-- Template for future projects -->
                 <article class="project-card" data-project="coming-soon">
-                    <div class="project-preview">
-                        <h3>More Projects Coming Soon</h3>
-                        <p>I'm always working on new and exciting projects. Check back soon for updates!</p>
-                        <button class="project-toggle disabled">Coming Soon</button>
-                    </div>
+                    <h3>More Projects Coming Soon</h3>
+                    <p>I'm always working on new and exciting projects. Check back soon for updates!</p>
+                    <a href="#" class="project-link disabled">Coming Soon</a>
                 </article>
+            </div>
+
+            <!-- Project Modal -->
+            <div class="project-modal" id="projectModal">
+                <div class="project-modal-content">
+                    <button class="project-modal-close" id="projectModalClose">&times;</button>
+                    
+                    <div class="project-modal-readme">
+                        <div class="readme-content" id="modalReadmeContent">
+                            <!-- README content will be inserted here -->
+                        </div>
+                        <div class="project-links" id="modalProjectLinks">
+                            <!-- Project links will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <div class="project-modal-demo" id="modalProjectDemo">
+                        <!-- Demo content will be inserted here -->
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -123,41 +114,82 @@
     <!-- Projects functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const projectModal = document.getElementById('projectModal');
+            const modalClose = document.getElementById('projectModalClose');
+            const modalReadmeContent = document.getElementById('modalReadmeContent');
+            const modalProjectLinks = document.getElementById('modalProjectLinks');
+            const modalProjectDemo = document.getElementById('modalProjectDemo');
+
+            // Project data
+            const projectData = {
+                'snake-game': {
+                    readme: `
+                        <h1>Snake Game</h1>
+                        <p>A new UI I made for Snake.</p>
+                        <p>Originally created with Python in the Processing IDE. Converted into JavaScript & HTML.</p>
+                    `,
+                    links: `
+                        <a href="https://github.com/rishikeshbadari/snake" target="_blank" rel="noopener noreferrer">
+                            View on GitHub →
+                        </a>
+                    `,
+                    demo: `
+                        <h3>Try it out:</h3>
+                        <div class="game-container">
+                            <iframe src="projects/snake-game/game.html" 
+                                    title="Snake Game" 
+                                    width="100%" 
+                                    height="520">
+                            </iframe>
+                        </div>
+                        <p class="game-instructions">Use arrow keys to control the snake. Eat the white food to grow!</p>
+                    `
+                }
+            };
+
+            // Handle project clicks
             const projectCards = document.querySelectorAll('.project-card');
-            
             projectCards.forEach(card => {
-                const toggle = card.querySelector('.project-toggle');
-                const details = card.querySelector('.project-details');
-                
-                if (toggle && !toggle.classList.contains('disabled')) {
-                    toggle.addEventListener('click', function() {
-                        const isExpanded = details.classList.contains('expanded');
+                const projectLink = card.querySelector('.project-link');
+                if (projectLink && !projectLink.classList.contains('disabled')) {
+                    projectLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const projectId = card.dataset.project;
+                        const project = projectData[projectId];
                         
-                        // Close all other expanded projects
-                        document.querySelectorAll('.project-details.expanded').forEach(detail => {
-                            if (detail !== details) {
-                                detail.classList.remove('expanded');
-                                detail.parentNode.querySelector('.project-toggle').textContent = 'View Project ↓';
-                            }
-                        });
-                        
-                        // Toggle current project
-                        if (isExpanded) {
-                            details.classList.remove('expanded');
-                            toggle.textContent = 'View Project ↓';
-                        } else {
-                            details.classList.add('expanded');
-                            toggle.textContent = 'Hide Project ↑';
+                        if (project) {
+                            // Populate modal content
+                            modalReadmeContent.innerHTML = project.readme;
+                            modalProjectLinks.innerHTML = project.links;
+                            modalProjectDemo.innerHTML = project.demo;
                             
-                            // Scroll to the project details
-                            setTimeout(() => {
-                                details.scrollIntoView({ 
-                                    behavior: 'smooth', 
-                                    block: 'start' 
-                                });
-                            }, 100);
+                            // Show modal
+                            projectModal.classList.add('show');
+                            document.body.style.overflow = 'hidden';
                         }
                     });
+                }
+            });
+
+            // Close modal
+            function closeModal() {
+                projectModal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+
+            modalClose.addEventListener('click', closeModal);
+
+            // Close on background click
+            projectModal.addEventListener('click', function(e) {
+                if (e.target === projectModal) {
+                    closeModal();
+                }
+            });
+
+            // Close on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && projectModal.classList.contains('show')) {
+                    closeModal();
                 }
             });
         });
