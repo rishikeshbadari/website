@@ -699,6 +699,7 @@ main {
     background: #fafafa;
     flex-grow: 1;
     overflow-y: auto;
+    min-height: 0;
 }
 
 .project-modal-demo h3 {
@@ -714,6 +715,9 @@ main {
     overflow: hidden;
     margin-bottom: 12px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    max-width: 740px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .game-container iframe {
@@ -721,6 +725,7 @@ main {
     border: none;
     width: 100%;
     border-radius: 12px;
+    height: 540px;
 }
 
 .game-instructions {
