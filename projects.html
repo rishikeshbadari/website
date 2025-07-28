@@ -324,15 +324,19 @@
                 'main': {
                     content: `
                         <h2>my notes</h2>
+                        
                         <p>I took a class at GHP some years ago where we wrote some basic stuff to visualize the Mandelbrot set.</p>
+                        
                         <p>I was bored this summer and couldn't remember how it was constructed, so these are just some notes.</p>
                         
                         <h3>definition</h3>
+                        
                         <p>Back when I took the class, I thought fractals were just self-similar shapes. You zoom in enough and eventually see the same thing. Apparently, that's not the case, and according to <a href="https://www.youtube.com/watch?v=gB9n2gHsHN4" target="_blank">3Blue1Brown</a>, we can define fractals more rigorously.</p>
                         
                         <p>Some other definitions help with defining fractals.</p>
                         
                         <p><strong>Scaling Factor:</strong> I was actually having trouble defining this well. I'm sure one of these will suffice:</p>
+                        
                         <p>Given two similar shapes (similar as in the math definition of the word):</p>
                         <ol>
                             <li>Choose the same curve/side on both shapes and take its length. Divide the larger length by the smaller length to find the factor to scale from the smaller to the larger shape. 1 over that to scale down.</li>
@@ -345,9 +349,9 @@
                         
                         <p>Easier to observe in practice:</p>
                         <ol>
-                            <li>If we scale a line segment by ½, its mass scales by (½)¹.</li>
-                            <li>If we scale a square by ½, its mass scales by (½)².</li>
-                            <li>If we scale a cube by ½, its mass scales by (½)³.</li>
+                            <li>If we scale a line segment by <code>1/2</code>, its mass scales by <code>(1/2)¹</code>.</li>
+                            <li>If we scale a square by <code>1/2</code>, its mass scales by <code>(1/2)²</code>.</li>
+                            <li>If we scale a cube by <code>1/2</code>, its mass scales by <code>(1/2)³</code>.</li>
                         </ol>
                         
                         <p>Therefore, it seems to follow that if we scale a shape by <em>s</em> and its mass scales by <em>s<sup>d</sup></em>, the shape's dimension is <em>d</em>.</p>
@@ -355,6 +359,7 @@
                         <p>Given all that, a <strong>Fractal</strong> is a shape with non-integer dimension.</p>
                         
                         <h3>fractals</h3>
+                        
                         <p>visit each branch</p>
                     `,
                     demo: ''
@@ -362,6 +367,7 @@
                 'barnsley-fern': {
                     content: `
                         <h2>barnsley fern</h2>
+                        
                         <p>coming soon</p>
                     `,
                     demo: `
@@ -376,37 +382,43 @@
                 'mandelbrot': {
                     content: `
                         <h2>mandelbrot</h2>
+                        
                         <p>The Mandelbrot Set is a set of complex numbers that, when plotted, create an interesting fractal structure.</p>
                         
                         <p>The test to determine if a complex number <em>c</em> is part of the Mandelbrot Set:</p>
                         <ol>
-                            <li>Start with z₀=0 and recursively apply z<sub>i+1</sub>=z<sub>i</sub>²+c.</li>
+                            <li>Start with <code>z₀ = 0</code> and recursively apply <code>z<sub>i+1</sub> = z<sub>i</sub>² + c</code>.</li>
                             <li>If you converge to a finite point or fluctuate between points, <em>c</em> is in the set. If you tend towards infinity, <em>c</em> isn't in the set.</li>
                         </ol>
                         
-                        <p>So how do we test if z<sub>n</sub> converges or diverges?</p>
+                        <p>So how do we test if <code>z<sub>n</sub></code> converges or diverges?</p>
                         
-                        <p>Essentialy, if |z<sub>i</sub>| >2 at any point in the recursion, you'll tend towards infinity. This is what we wrote in our code way back when, but we didn't go through any proof if I remember correctly.</p>
+                        <p>Essentially, if <code>|z<sub>i</sub>| > 2</code> at any point in the recursion, you'll tend towards infinity. This is what we wrote in our code way back when, but we didn't go through any proof if I remember correctly.</p>
                         
                         <h3>proof:</h3>
+                        
                         <p>Shoutout Sid for the help with this.</p>
                         
-                        <h4>Claim 1: Once you leave 2, the ratio of consecutive terms is greater than 1. With this, we can at least prove that z is strictly increasing.</h4>
-                        <p>|z<sub>i</sub>|>2 and |z<sub>i</sub>| >= |c|, then |z<sub>i+1</sub>|/|z<sub>i</sub>| > 1</p>
+                        <h4>Claim 1: Once you leave 2, the ratio of consecutive terms is greater than 1. With this, we can at least prove that <em>z</em> is strictly increasing.</h4>
                         
-                        <p>Why do we care about this? In general, if we're tending towards infinity, z<sub>i</sub> will go further away from the origin than <em>c</em>. At some point, it should pass 2 if it's on the way to infinity.</p>
+                        <p><code>|z<sub>i</sub>| > 2</code> and <code>|z<sub>i</sub>| ≥ |c|</code>, then <code>|z<sub>i+1</sub>| / |z<sub>i</sub>| > 1</code></p>
                         
-                        <p>At first I bashed my way to prove this, but there's an easier way to think about it: Let |z<sub>i</sub>| be <em>x</em> away from the origin, where <em>x</em> is a positive number. |z<sub>i</sub>²| is <em>x</em>² away. We want <em>c</em> to bring z<sub>i</sub>² back to the origin as much as possible. This is done when <em>c</em> is directly opposite z<sub>i</sub>² and is as far away from the origin as possible. So, let's assume it's directly across and has maximum distance, which is also |z<sub>i</sub>| or <em>x</em>. Therefore, |z<sub>i</sub>²+c| is at least <em>x</em>²-<em>x</em>. Is this greater than |z<sub>i</sub>| = <em>x</em>?. Solving <em>x</em>²-<em>x</em>><em>x</em> leads to <em>x</em>(<em>x</em>-2) > 0. This has solutions for <em>x</em> < 0 and <em>x</em> > 2. We assumed <em>x</em> is positive, so the only solution is <em>x</em> > 2.</p>
+                        <p>Why do we care about this? In general, if we're tending towards infinity, <code>z<sub>i</sub></code> will go further away from the origin than <em>c</em>. At some point, it should pass 2 if it's on the way to infinity.</p>
                         
-                        <p>Therefore, when <em>x</em> > 2, |z<sub>i</sub>²+c| > |z<sub>i</sub>| is true.</p>
+                        <p>At first I bashed my way to prove this, but there's an easier way to think about it: Let <code>|z<sub>i</sub>|</code> be <em>x</em> away from the origin, where <em>x</em> is a positive number. <code>|z<sub>i</sub>²|</code> is <em>x</em>² away. We want <em>c</em> to bring <code>z<sub>i</sub>²</code> back to the origin as much as possible. This is done when <em>c</em> is directly opposite <code>z<sub>i</sub>²</code> and is as far away from the origin as possible. So, let's assume it's directly across and has maximum distance, which is also <code>|z<sub>i</sub>|</code> or <em>x</em>. Therefore, <code>|z<sub>i</sub>² + c|</code> is at least <em>x</em>² − <em>x</em>. Is this greater than <code>|z<sub>i</sub>| = x</code>? Solving <em>x</em>² − <em>x</em> > <em>x</em> leads to <em>x</em>(<em>x</em> − 2) > 0. This has solutions for <em>x</em> < 0 and <em>x</em> > 2. We assumed <em>x</em> is positive, so the only solution is <em>x</em> > 2.</p>
                         
-                        <p>However, there is a possibility of asymptotically approaching some value, like 3, where consecutive terms are getting closer to 3, but are bounded above by some value. This is still convergence. To get around this, we can prove that the difference between consecutive terms is >= 0.</p>
+                        <p>Therefore, when <em>x</em> > 2, <code>|z<sub>i</sub>² + c| > |z<sub>i</sub>|</code> is true.</p>
+                        
+                        <p>However, there is a possibility of asymptotically approaching some value, like 3, where consecutive terms are getting closer to 3, but are bounded above by some value. This is still convergence. To get around this, we can prove that the difference between consecutive terms is ≥ 0.</p>
                         
                         <h4>Claim 2: The difference between consecutive terms is either constant or increasing.</h4>
-                        <p>If |z<sub>i</sub>| is <em>x</em>, then |z<sub>i</sub>²| is <em>x</em>². Let |c| be <em>y</em> and let it, in the worst case, be exactly opposite |z<sub>i</sub>²|. Therefore, |z<sub>i</sub>² + c| = <em>x</em>²-<em>y</em>. Since <em>x</em> > 2, we know that <em>x</em>²>4 → <em>x</em>² > 2<em>x</em> > 4. Therefore, |z<sub>i</sub>² + c| can be viewed as always being bounded below by, or at least as big, as 2<em>x</em>-<em>y</em>. Now, the difference between this and |z<sub>i</sub>| is (2<em>x</em>-<em>y</em>)-<em>x</em> = <em>x</em>-<em>y</em>. Since |z<sub>i</sub>| > |c|, this value is guaranteed to be positive. Now, since <em>x</em> is increasing, <em>x</em>-<em>y</em> as a term is always increasing. With that, the difference between consecutive terms is always increasing.</p>
+                        
+                        <p>If <code>|z<sub>i</sub>|</code> is <em>x</em>, then <code>|z<sub>i</sub>²|</code> is <em>x</em>². Let <code>|c|</code> be <em>y</em> and let it, in the worst case, be exactly opposite <code>|z<sub>i</sub>²|</code>. Therefore, <code>|z<sub>i</sub>² + c| = x² − y</code>. Since <em>x</em> > 2, we know that <em>x</em>² > 4 → <em>x</em>² > 2<em>x</em> > 4. Therefore, <code>|z<sub>i</sub>² + c|</code> can be viewed as always being bounded below by, or at least as big, as 2<em>x</em> − <em>y</em>. Now, the difference between this and <code>|z<sub>i</sub>|</code> is (2<em>x</em> − <em>y</em>) − <em>x</em> = <em>x</em> − <em>y</em>. Since <code>|z<sub>i</sub>| > |c|</code>, this value is guaranteed to be positive. Now, since <em>x</em> is increasing, <em>x</em> − <em>y</em> as a term is always increasing. With that, the difference between consecutive terms is always increasing.</p>
                         
                         <h3>coloring:</h3>
+                        
                         <p>In terms of processing, we give the sequence a certain number of opportunities to hit 2 (maxIter). We decide to color each point based on the number of steps it takes to hit 2. So, naturally everything outside of 2 is one color. Everything near 2 is another (since it probably takes 1 step), everything a little closer to the origin is another, ...</p>
+                        
                         <p>If we get to maxIter, we assume that the sequence will never leave 2.</p>
                     `,
                     demo: `
@@ -421,17 +433,18 @@
                 'julia': {
                     content: `
                         <h2>julia</h2>
-                        <p>The Julia Set is another family of fractal structures. In Mandelbrot, we'd start at z₀=0 and for every <em>c</em> in the plane, if we recursed out of 2, then our point <em>c</em> isn't in the set. In Julia, we choose some <em>c</em> and for every z₀ in the plane, if we recurse out of 2, then our point z₀ isn't in the set.</p>
                         
-                        <p>Since we can choose any <em>c</em> and then go over every point z₀, we have infinitely many julia sets. Some of which look more interesting than the others.</p>
+                        <p>The Julia Set is another family of fractal structures. In Mandelbrot, we'd start at <code>z₀ = 0</code> and for every <em>c</em> in the plane, if we recursed out of 2, then our point <em>c</em> isn't in the set. In Julia, we choose some <em>c</em> and for every <code>z₀</code> in the plane, if we recurse out of 2, then our point <code>z₀</code> isn't in the set.</p>
                         
-                        <p>The test to determine if a complex number z₀ is part of the Julia Set grounded at some <em>c</em>:</p>
+                        <p>Since we can choose any <em>c</em> and then go over every point <code>z₀</code>, we have infinitely many julia sets. Some of which look more interesting than the others.</p>
+                        
+                        <p>The test to determine if a complex number <code>z₀</code> is part of the Julia Set grounded at some <em>c</em>:</p>
                         <ol>
-                            <li>Recursively apply z<sub>i+1</sub>=z<sub>i</sub>²+c.</li>
-                            <li>If you converge to a finite point or fluctuate between points, z₀ is in the set. If you tend towards infinity, z₀ isn't in the set.</li>
+                            <li>Recursively apply <code>z<sub>i+1</sub> = z<sub>i</sub>² + c</code>.</li>
+                            <li>If you converge to a finite point or fluctuate between points, <code>z₀</code> is in the set. If you tend towards infinity, <code>z₀</code> isn't in the set.</li>
                         </ol>
                         
-                        <p>So how do we test if z<sub>n</sub> converges or diverges? This is the same proof as Mandelbrot - all we did is change what we choose for <em>z</em> and <em>c</em>. Same coloring as well.</p>
+                        <p>So how do we test if <code>z<sub>n</sub></code> converges or diverges? This is the same proof as Mandelbrot - all we did is change what we choose for <em>z</em> and <em>c</em>. Same coloring as well.</p>
                     `,
                     demo: `
                         <iframe src="projects/fractals/julia.html" 
