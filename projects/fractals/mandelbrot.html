@@ -19,30 +19,6 @@
             border: 1px solid #333;
             background: #000;
             border-radius: 8px;
-            cursor: crosshair;
-        }
-        .controls {
-            margin-top: 20px;
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        button {
-            padding: 10px 20px;
-            background: #2196F3;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        button:hover {
-            background: #1976D2;
-        }
-        input[type="range"] {
-            width: 100px;
         }
         .info {
             max-width: 600px;
@@ -53,46 +29,43 @@
         .status {
             margin-top: 10px;
             color: #FFD700;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <h1>Mandelbrot Set Fractal</h1>
     <canvas id="canvas" width="600" height="600"></canvas>
-    <div class="controls">
-        <button onclick="render()">Render</button>
-        <button onclick="reset()">Reset</button>
-        <label>Max Iterations: <input type="range" id="maxIter" min="50" max="500" value="100" onchange="updateMaxIter()"></label>
-        <span id="maxIterValue">100</span>
-        <button onclick="zoomIn()">Zoom In</button>
-        <button onclick="zoomOut()">Zoom Out</button>
-    </div>
-    <div class="status" id="status">Click on the fractal to zoom into that point</div>
+    <div class="status" id="status">Generating Mandelbrot Set...</div>
     <div class="info">
-        <p>The Mandelbrot Set is the set of complex numbers c for which the sequence z₀ = 0, z_{n+1} = z_n² + c does not diverge. Points are colored based on how quickly they diverge, creating the characteristic fractal boundary.</p>
-        <p>Zoom: <span id="zoomLevel">1x</span> | Center: <span id="centerCoords">(-0.5, 0)</span></p>
+        <p>The Mandelbrot Set is the set of complex numbers c for which the sequence z₀ = 0, z_{n+1} = z_n² + c does not diverge. Watch as the algorithm automatically explores interesting regions of infinite complexity.</p>
+        <p>Current view: <span id="viewInfo">Overview</span></p>
     </div>
 
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const statusElement = document.getElementById('status');
-        const zoomLevelElement = document.getElementById('zoomLevel');
-        const centerCoordsElement = document.getElementById('centerCoords');
-        const maxIterElement = document.getElementById('maxIter');
-        const maxIterValueElement = document.getElementById('maxIterValue');
+        const viewInfoElement = document.getElementById('viewInfo');
         
-        let centerX = -0.5;
-        let centerY = 0;
-        let zoom = 1;
-        let maxIterations = 100;
+        let animationPhase = 0;
         let isRendering = false;
         
-        function mandelbrot(cx, cy) {
+        // Interesting zoom locations
+        const zoomSequence = [
+            { centerX: -0.5, centerY: 0, zoom: 1, name: "Full Overview", duration: 3000 },
+            { centerX: -0.8, centerY: 0.156, zoom: 50, name: "Lightning bolts", duration: 4000 },
+            { centerX: -0.74529, centerY: 0.11307, zoom: 200, name: "Spiral detail", duration: 4000 },
+            { centerX: -0.16, centerY: 1.0405, zoom: 100, name: "Seahorse valley", duration: 4000 },
+            { centerX: -1.25066, centerY: 0.02012, zoom: 300, name: "Mini mandelbrot", duration: 4000 },
+            { centerX: -0.7269, centerY: 0.1889, zoom: 400, name: "Feather detail", duration: 4000 }
+        ];
+        
+        function mandelbrot(cx, cy, maxIter = 100) {
             let x = 0, y = 0;
             let iteration = 0;
             
-            while (x*x + y*y <= 4 && iteration < maxIterations) {
+            while (x*x + y*y <= 4 && iteration < maxIter) {
                 const xtemp = x*x - y*y + cx;
                 y = 2*x*y + cy;
                 x = xtemp;
@@ -102,12 +75,12 @@
             return iteration;
         }
         
-        function getColor(iteration) {
-            if (iteration === maxIterations) {
+        function getColor(iteration, maxIter) {
+            if (iteration === maxIter) {
                 return [0, 0, 0]; // Black for points in the set
             }
             
-            const t = iteration / maxIterations;
+            const t = iteration / maxIter;
             const r = Math.floor(255 * (0.5 + 0.5 * Math.cos(3.0 + t * 12.0)));
             const g = Math.floor(255 * (0.5 + 0.5 * Math.cos(3.0 + t * 12.0 + 2.0)));
             const b = Math.floor(255 * (0.5 + 0.5 * Math.cos(3.0 + t * 12.0 + 4.0)));
@@ -115,7 +88,7 @@
             return [r, g, b];
         }
         
-        async function render() {
+        async function render(centerX, centerY, zoom) {
             if (isRendering) return;
             isRendering = true;
             statusElement.textContent = 'Rendering...';
@@ -128,89 +101,52 @@
             const left = centerX - width / 2;
             const top = centerY - height / 2;
             
-            let pixelCount = 0;
-            const totalPixels = canvas.width * canvas.height;
+            const maxIter = Math.min(50 + Math.floor(zoom / 10), 150);
             
             for (let py = 0; py < canvas.height; py++) {
                 for (let px = 0; px < canvas.width; px++) {
                     const x = left + (px / canvas.width) * width;
                     const y = top + (py / canvas.height) * height;
                     
-                    const iteration = mandelbrot(x, y);
-                    const [r, g, b] = getColor(iteration);
+                    const iteration = mandelbrot(x, y, maxIter);
+                    const [r, g, b] = getColor(iteration, maxIter);
                     
                     const index = (py * canvas.width + px) * 4;
                     data[index] = r;
                     data[index + 1] = g;
                     data[index + 2] = b;
                     data[index + 3] = 255;
-                    
-                    pixelCount++;
                 }
                 
                 // Update progress occasionally
-                if (py % 50 === 0) {
-                    const progress = Math.floor((pixelCount / totalPixels) * 100);
+                if (py % 25 === 0) {
+                    const progress = Math.floor((py / canvas.height) * 100);
                     statusElement.textContent = `Rendering... ${progress}%`;
                     await new Promise(resolve => setTimeout(resolve, 1));
                 }
             }
             
             ctx.putImageData(imageData, 0, 0);
-            statusElement.textContent = 'Click on the fractal to zoom into that point';
+            statusElement.textContent = 'Exploring the infinite complexity of the Mandelbrot Set';
             isRendering = false;
+        }
+        
+        async function animateSequence() {
+            const currentZoom = zoomSequence[animationPhase];
+            viewInfoElement.textContent = currentZoom.name;
             
-            updateDisplay();
-        }
-        
-        function updateDisplay() {
-            zoomLevelElement.textContent = `${zoom.toFixed(1)}x`;
-            centerCoordsElement.textContent = `(${centerX.toFixed(6)}, ${centerY.toFixed(6)})`;
-        }
-        
-        function updateMaxIter() {
-            maxIterations = parseInt(maxIterElement.value);
-            maxIterValueElement.textContent = maxIterations;
-        }
-        
-        function reset() {
-            centerX = -0.5;
-            centerY = 0;
-            zoom = 1;
-            render();
-        }
-        
-        function zoomIn() {
-            zoom *= 2;
-            render();
-        }
-        
-        function zoomOut() {
-            zoom /= 2;
-            render();
-        }
-        
-        canvas.addEventListener('click', function(e) {
-            if (isRendering) return;
+            await render(currentZoom.centerX, currentZoom.centerY, currentZoom.zoom);
             
-            const rect = canvas.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / canvas.width;
-            const y = (e.clientY - rect.top) / canvas.height;
-            
-            const width = 3.0 / zoom;
-            const height = 3.0 / zoom;
-            const left = centerX - width / 2;
-            const top = centerY - height / 2;
-            
-            centerX = left + x * width;
-            centerY = top + y * height;
-            zoom *= 2;
-            
-            render();
-        });
+            setTimeout(() => {
+                animationPhase = (animationPhase + 1) % zoomSequence.length;
+                animateSequence();
+            }, currentZoom.duration);
+        }
         
-        // Initial render
-        render();
+        // Start the animation sequence
+        setTimeout(() => {
+            animateSequence();
+        }, 1000);
     </script>
 </body>
 </html> 
