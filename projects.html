@@ -69,17 +69,48 @@
                 <h1 class="landing-intro-bio">Projects</h1>
             </section>
             <div class="projects-container">
-                <article class="project">
-                    <h3>Project 1</h3>
-                    <p>Description of project 1: In Progress</p>
-                    <a href="#">Learn More</a>
+                <!-- Snake Game Project -->
+                <article class="project-card" data-project="snake-game">
+                    <div class="project-preview">
+                        <h3>Snake Game</h3>
+                        <p>A modern take on the classic Snake game with fluid animations and clean UI. Originally created in Python/Processing, converted to JavaScript/HTML5.</p>
+                        <button class="project-toggle">View Project ↓</button>
+                    </div>
+                    <div class="project-details" id="project-snake-game">
+                        <div class="project-readme">
+                            <div class="readme-content">
+                                <h1>Snake Game</h1>
+                                <p>A new UI I made for Snake.</p>
+                                <p>Originally created with Python in the Processing IDE. Converted into JavaScript & HTML.</p>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/rishikeshbadari/snake" target="_blank" rel="noopener noreferrer">
+                                    View on GitHub →
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-demo">
+                            <h3>Try it out:</h3>
+                            <div class="game-container">
+                                <iframe src="projects/snake-game/game.html" 
+                                        title="Snake Game" 
+                                        width="100%" 
+                                        height="520">
+                                </iframe>
+                            </div>
+                            <p class="game-instructions">Use arrow keys to control the snake. Eat the white food to grow!</p>
+                        </div>
+                    </div>
                 </article>
-                <article class="project">
-                    <h3>Project 2</h3>
-                    <p>Description of project 2: In Progress</p>
-                    <a href="#">Learn More</a>
+
+                <!-- Template for future projects -->
+                <article class="project-card" data-project="coming-soon">
+                    <div class="project-preview">
+                        <h3>More Projects Coming Soon</h3>
+                        <p>I'm always working on new and exciting projects. Check back soon for updates!</p>
+                        <button class="project-toggle disabled">Coming Soon</button>
+                    </div>
                 </article>
-                <!-- Add more project articles as needed -->
             </div>
         </main>
     </div>
@@ -88,5 +119,48 @@
     
     <!-- Page transition optimization -->
     <script src="page-transitions.js"></script>
+    
+    <!-- Projects functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            projectCards.forEach(card => {
+                const toggle = card.querySelector('.project-toggle');
+                const details = card.querySelector('.project-details');
+                
+                if (toggle && !toggle.classList.contains('disabled')) {
+                    toggle.addEventListener('click', function() {
+                        const isExpanded = details.classList.contains('expanded');
+                        
+                        // Close all other expanded projects
+                        document.querySelectorAll('.project-details.expanded').forEach(detail => {
+                            if (detail !== details) {
+                                detail.classList.remove('expanded');
+                                detail.parentNode.querySelector('.project-toggle').textContent = 'View Project ↓';
+                            }
+                        });
+                        
+                        // Toggle current project
+                        if (isExpanded) {
+                            details.classList.remove('expanded');
+                            toggle.textContent = 'View Project ↓';
+                        } else {
+                            details.classList.add('expanded');
+                            toggle.textContent = 'Hide Project ↑';
+                            
+                            // Scroll to the project details
+                            setTimeout(() => {
+                                details.scrollIntoView({ 
+                                    behavior: 'smooth', 
+                                    block: 'start' 
+                                });
+                            }, 100);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

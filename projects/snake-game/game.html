@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake Game</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    body { 
+      margin: 0; 
+      padding: 0; 
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 500px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    canvas { 
+      display: block; 
+      border: 3px solid #fff; 
+      border-radius: 12px; 
+    }
+    .button {
+      padding: 12px 36px;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+      color: #000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    }
+    .button:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    }
+    #startButton {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    #startButton:hover {
+      transform: translate(-50%, calc(-50% - 2px));
+    }
+    .game-over {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+    .game-over h1 {
+      font-size: 48px;
+      color: #fff;
+      margin: 0;
+      font-family: inherit;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    .game-over.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+  </style>
+</head>
+<body>
+<button id="startButton" class="button">Play</button>
+<div id="gameOver" class="game-over">
+  <h1>GAME OVER</h1>
+  <button id="restartButton" class="button">Play Again</button>
+</div>
+<script>
+let snake = [];
+let nBubbles = 10;
+let score = 1;
+let food = [];
+let currentDirection = { x: 0, y: 0 };
+let speed = 3;
+let started = false;
+let moveCount = 0;
+let gameStarted = false;
+
+function startGame() {
+  document.getElementById('startButton').style.display = 'none';
+  document.getElementById('gameOver').classList.remove('show');
+  gameStarted = true;
+  started = false;
+  resetGame();
+}
+
+function resetGame() {
+  snake = [];
+  nBubbles = 10;
+  score = 1;
+  food = [];
+  currentDirection = { x: 0, y: 0 };
+  moveCount = 0;
+  
+  let startX = width/2;
+  let startY = height/2;
+  for (let i = 0; i < nBubbles; i++) {
+    snake.push(new Bubble(startX - i * 25, startY));
+  }
+  food.push(new Food());
+  loop();
+}
+
+function gameOver() {
+  document.getElementById('gameOver').classList.add('show');
+  noLoop();
+}
+
+function normalize(vector) {
+  const magnitude = sqrt(vector.x * vector.x + vector.y * vector.y);
+  if (magnitude === 0) return vector;
+  return {
+    x: vector.x / magnitude,
+    y: vector.y / magnitude
+  };
+}
+
+function getFrontPoint(head, secondSegment) {
+  let dirVector = {
+    x: head.xcor - secondSegment.xcor,
+    y: head.ycor - secondSegment.ycor
+  };
+  
+  dirVector = normalize(dirVector);
+  
+  return {
+    x: head.xcor + dirVector.x * head.r/2,
+    y: head.ycor + dirVector.y * head.r/2
+  };
+}
+
+function checkCollision(head, segment) {
+  if (snake.length < 2) return false;
+  
+  const frontPoint = getFrontPoint(head, snake[1]);
+  
+  let dx = frontPoint.x - segment.xcor;
+  let dy = frontPoint.y - segment.ycor;
+  let distance = sqrt(dx*dx + dy*dy);
+  
+  return distance <= segment.r/2;
+}
+
+function checkBoundaryCollision(head) {
+  if (snake.length < 2) return false;
+  
+  const frontPoint = getFrontPoint(head, snake[1]);
+  
+  return (
+    frontPoint.x <= 0 || 
+    frontPoint.x >= width || 
+    frontPoint.y <= 0 || 
+    frontPoint.y >= height - 50
+  );
+}
+
+class Bubble {
+  constructor(x, y, color = null) {
+    this.xcor = x;
+    this.ycor = y;
+    this.r = 25;
+    this.col = color || [random(0,256), random(0,256), random(0,256)];
+    this.fromEdge = false;
+  }
+  
+  display() {
+    fill(this.col[0], this.col[1], this.col[2]);
+    noStroke();
+    ellipse(this.xcor, this.ycor, this.r, this.r);
+  }
+}
+
+class Food {
+  constructor() {
+    this.r = 25;
+    this.xcor = random(this.r, width - this.r);
+    this.ycor = random(this.r, height - 50 - this.r);
+    this.xcor = Math.round(this.xcor);
+    this.ycor = Math.round(this.ycor);
+  }
+  
+  display() {
+    fill(255);
+    noStroke();
+    ellipse(this.xcor, this.ycor, this.r, this.r);
+  }
+}
+
+function getRandomEdgePosition() {
+  const side = Math.floor(random(4));
+  let x, y;
+  
+  switch(side) {
+    case 0:
+      x = random(width);
+      y = -25;
+      break;
+    case 1:
+      x = width + 25;
+      y = random(height - 50);
+      break;
+    case 2:
+      x = random(width);
+      y = height + 25;
+      break;
+    case 3:
+      x = -25;
+      y = random(height - 50);
+      break;
+  }
+  return { x, y };
+}
+
+function setup() {
+  let cnv = createCanvas(600, 500);
+  cnv.elt.tabIndex = 1;
+  cnv.elt.focus();
+  frameRate(60);
+  noLoop();
+  
+  document.getElementById('startButton').addEventListener('click', startGame);
+  document.getElementById('restartButton').addEventListener('click', startGame);
+}
+
+function draw() {
+  if (!gameStarted) return;
+  
+  background(0);
+  food[0].display();
+  
+  if (started) {
+    moveCount++;
+    let newX = snake[0].xcor + currentDirection.x * speed;
+    let newY = snake[0].ycor + currentDirection.y * speed;
+    
+    snake[0].xcor = newX;
+    snake[0].ycor = newY;
+    
+    if (moveCount > 20 && checkBoundaryCollision(snake[0])) {
+      gameOver();
+      return;
+    }
+  }
+  
+  for (let i = snake.length - 1; i >= 0; i--) {
+    snake[i].display();
+    if (i > 0) {
+      let dx = snake[i-1].xcor - snake[i].xcor;
+      let dy = snake[i-1].ycor - snake[i].ycor;
+      let speed = snake[i].fromEdge ? 0.2 : 0.15;
+      snake[i].xcor += dx * speed;
+      snake[i].ycor += dy * speed;
+      
+      if (snake[i].fromEdge && 
+          abs(dx) < 1 && abs(dy) < 1) {
+        snake[i].fromEdge = false;
+      }
+    }
+  }
+  
+  if (started && moveCount > 30) {
+    for (let i = 3; i < snake.length; i++) {
+      if (checkCollision(snake[0], snake[i])) {
+        gameOver();
+        return;
+      }
+    }
+  }
+  
+  if (started && dist(snake[0].xcor, snake[0].ycor, food[0].xcor, food[0].ycor) <= snake[0].r) {
+    food[0] = new Food();
+    score++;
+    const edgePos = getRandomEdgePosition();
+    const newBubble = new Bubble(edgePos.x, edgePos.y);
+    newBubble.fromEdge = true;
+    snake.push(newBubble);
+  }
+  
+  noStroke();
+  fill(30,30,30,220);
+  rect(10, height - 50, width - 20, 40, 10);
+  fill(255);
+  textSize(20);
+  textAlign(CENTER, CENTER);
+  text("Score: " + score, width/2, height - 30);
+}
+
+function keyPressed() {
+  if (!started && gameStarted) {
+    if ([UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW].includes(keyCode)) {
+      if (keyCode === UP_ARROW) currentDirection = { x: 0, y: -1 };
+      else if (keyCode === DOWN_ARROW) currentDirection = { x: 0, y: 1 };
+      else if (keyCode === RIGHT_ARROW) currentDirection = { x: 1, y: 0 };
+      else if (keyCode === LEFT_ARROW) currentDirection = { x: -1, y: 0 };
+      started = true;
+      moveCount = 0;
+    }
+  } else if (started) {
+    if (keyCode === UP_ARROW && currentDirection.y !== 1) { 
+      currentDirection = { x: 0, y: -1 }; 
+    }
+    else if (keyCode === DOWN_ARROW && currentDirection.y !== -1) { 
+      currentDirection = { x: 0, y: 1 }; 
+    }
+    else if (keyCode === RIGHT_ARROW && currentDirection.x !== -1) { 
+      currentDirection = { x: 1, y: 0 }; 
+    }
+    else if (keyCode === LEFT_ARROW && currentDirection.x !== 1) { 
+      currentDirection = { x: -1, y: 0 }; 
+    }
+  }
+  
+  return false;
+}
+</script>
+</body>
+</html> 

@@ -521,27 +521,34 @@ main {
 
 /* Projects grid */
 .projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 24px;
     padding: 48px 0;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
-.project {
+/* Project Card Styles */
+.project-card {
     background-color: #fafafa;
     border-radius: 12px;
-    padding: 24px;
     border: 1px solid #f0f0f0;
-    transition: border-color 0.2s ease;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-.project:hover {
+.project-card:hover {
     border-color: #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.project h3 {
+/* Project Preview (always visible) */
+.project-preview {
+    padding: 24px;
+}
+
+.project-preview h3 {
     margin: 0 0 12px 0;
     color: #1a1a1a;
     font-size: 20px;
@@ -549,13 +556,84 @@ main {
     letter-spacing: -0.01em;
 }
 
-.project p {
+.project-preview p {
     color: #666666;
     margin-bottom: 16px;
     line-height: 1.5;
 }
 
-.project a {
+/* Project Toggle Button */
+.project-toggle {
+    background: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.project-toggle:hover:not(.disabled) {
+    background: #333333;
+    transform: translateY(-1px);
+}
+
+.project-toggle.disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    color: #666666;
+}
+
+/* Project Details (expandable) */
+.project-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: #ffffff;
+    border-top: 1px solid #f0f0f0;
+}
+
+.project-details.expanded {
+    max-height: 1000px;
+    transition: max-height 0.6s ease-in;
+}
+
+/* README Section */
+.project-readme {
+    padding: 32px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.readme-content h1 {
+    color: #1a1a1a;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+}
+
+.readme-content p {
+    color: #666666;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.readme-content p:last-child {
+    margin-bottom: 0;
+}
+
+.project-links {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.project-links a {
     display: inline-block;
     color: #1a1a1a;
     text-decoration: none;
@@ -566,8 +644,43 @@ main {
     transition: color 0.2s ease;
 }
 
-.project a:hover {
+.project-links a:hover {
     color: #666666;
+}
+
+/* Project Demo Section */
+.project-demo {
+    padding: 32px;
+}
+
+.project-demo h3 {
+    color: #1a1a1a;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.game-container {
+    background: #000000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.game-container iframe {
+    display: block;
+    border: none;
+    width: 100%;
+    border-radius: 12px;
+}
+
+.game-instructions {
+    color: #666666;
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+    font-style: italic;
 }
 
 /* Responsive breakpoints */
@@ -689,8 +802,16 @@ main {
         font-size: 16px;
     }
     
-    .projects-container {
-        grid-template-columns: 1fr;
+    .project-readme {
+        padding: 24px;
+    }
+    
+    .project-demo {
+        padding: 24px;
+    }
+    
+    .readme-content h1 {
+        font-size: 24px;
     }
 }
 
@@ -758,5 +879,17 @@ main {
     
     .modal-caption {
         font-size: 16px;
+    }
+    
+    .project-readme {
+        padding: 20px;
+    }
+    
+    .project-demo {
+        padding: 20px;
+    }
+    
+    .readme-content h1 {
+        font-size: 22px;
     }
 }
