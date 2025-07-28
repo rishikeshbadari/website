@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to get optimized image sources with WebP support
-    function getOptimizedImageSources(originalSrc) {
-        const baseName = originalSrc.split('/')[1].split('.')[0]; // Extract filename without extension
+    function getOptimizedImageSources(optimizedSrc) {
+        const baseName = optimizedSrc.split('/')[2].split('.')[0]; // Extract filename from optimized path
         
         return {
             // Thumbnail versions for gallery (400x400)
@@ -121,8 +121,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Full-size versions for modal (1200x1200 max)
             fullWebP: `pictures/optimized/${baseName}.webp`,
             fullJpeg: `pictures/optimized/${baseName}.jpg`,
-            // Fallback to original if optimized versions don't exist
-            original: originalSrc
+            // Use optimized version as fallback
+            original: optimizedSrc
         };
     }
 
