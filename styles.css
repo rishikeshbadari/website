@@ -416,12 +416,35 @@ main {
     animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.modal-media {
+    background: #000000;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .modal-image {
-    width: 100%;
-    height: auto;
     display: block;
-    max-height: 75vh;
+    width: auto;
+    max-width: calc(100% - 48px);
+    height: auto;
+    max-height: calc(75vh - 48px);
+    margin: 12px auto;
     object-fit: contain;
+    background: #000000;
+    padding: 16px 24px;
+    box-sizing: border-box;
+}
+
+/* Fallback for older modal structure where image is a direct child of modal-content */
+.modal-content > .modal-image {
+    background: #000000;
+    padding: 16px 20px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 .modal-info {
@@ -876,6 +899,12 @@ main {
         max-width: 95vw;
         max-height: 95vh;
         border-radius: 16px;
+    }
+    .modal-media {
+        padding: 12px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .modal-info {

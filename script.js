@@ -28,7 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.innerHTML = `
         <button class="modal-close">×</button>
         <div class="modal-content">
-            <img class="modal-image" src="" alt="">
+            <div class="modal-media">
+                <img class="modal-image" src="" alt="">
+            </div>
             <div class="modal-info">
                 <div class="modal-date"></div>
                 <div class="modal-caption"></div>
