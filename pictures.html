@@ -41,6 +41,47 @@
             color: #1a1a1a; 
             font-weight: 600; 
         }
+        .top-banner {
+            margin: 24px 0 8px 0;
+            padding: 14px 18px;
+            background: linear-gradient(180deg, #fafafa, #f4f6f8);
+            border: 1px solid #ededed;
+            border-radius: 12px;
+            text-align: center;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .top-banner a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .top-banner a:hover {
+            text-decoration: underline;
+        }
+        .top-banner .banner-text {
+            color: #444444;
+            font-weight: 500;
+        }
+        .top-banner .ig-handle {
+            display: inline-block;
+            padding: 8px 14px;
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #ffffff;
+            border-radius: 999px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            box-shadow: 0 2px 8px rgba(220, 39, 67, 0.25);
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .top-banner .ig-handle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(220, 39, 67, 0.35);
+            text-decoration: none;
+        }
         /* Critical gallery CSS */
         .image-gallery {
             display: grid;
@@ -76,6 +117,11 @@
             </nav>
         </header>
         
+        <div class="top-banner">
+            <span class="banner-text">Hosting the rest of my pictures here:</span>
+            <a class="ig-handle" href="https://www.instagram.com/bonelessorb/" target="_blank" rel="noopener noreferrer" aria-label="Instagram handle bonelessorb">@bonelessorb</a>
+        </div>
+
         <main class="pictures-page">
             <div id="image-gallery" class="image-gallery">
                 <!-- Images will be dynamically inserted here -->
