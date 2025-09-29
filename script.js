@@ -86,20 +86,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Preload critical images (first 6 images after sorting) with optimized versions
+    // Preload critical images (first 6 images after sorting) with best-fit versions
     function preloadCriticalImages() {
         const criticalImages = displayedGalleryData.slice(0, 6);
         criticalImages.forEach(imageData => {
             const imageSources = getOptimizedImageSources(imageData.src);
-            
-            // Preload WebP thumbnail first (priority)
+            const bestThumb = getBestThumbSources(imageSources);
+
+            // Preload WebP thumbnail (or full on high-DPI) first (priority)
             const webpImg = new Image();
-            webpImg.src = imageSources.thumbWebP;
-            
+            webpImg.src = bestThumb.webp;
+
             // Preload JPEG fallback
             const jpegImg = new Image();
-            jpegImg.src = imageSources.thumbJpeg;
-            
+            jpegImg.src = bestThumb.jpeg;
+
             // Preload full-size WebP for modal (lower priority)
             setTimeout(() => {
                 const fullWebpImg = new Image();
@@ -126,6 +127,25 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    // Prefer sharper sources on high-DPI screens to avoid blurry thumbnails
+    function isHighDpi() {
+        return (window.devicePixelRatio || 1) >= 2;
+    }
+
+    function getBestThumbSources(imageSources) {
+        if (isHighDpi()) {
+            // Use optimized full-size assets for retina to keep thumbnails crisp
+            return {
+                webp: imageSources.fullWebP,
+                jpeg: imageSources.fullJpeg
+            };
+        }
+        return {
+            webp: imageSources.thumbWebP,
+            jpeg: imageSources.thumbJpeg
+        };
+    }
+
     // Function to create responsive picture element with WebP support
     function createResponsivePicture(imageSources, alt, isThumb = true, isEager = false) {
         const picture = document.createElement('picture');
@@ -133,24 +153,25 @@ document.addEventListener('DOMContentLoaded', function() {
         // WebP source (modern browsers)
         const webpSource = document.createElement('source');
         webpSource.type = 'image/webp';
-        webpSource.srcset = isThumb ? imageSources.thumbWebP : imageSources.fullWebP;
+        const bestThumb = getBestThumbSources(imageSources);
+        webpSource.srcset = isThumb ? bestThumb.webp : imageSources.fullWebP;
         
         // JPEG fallback source
         const jpegSource = document.createElement('source');
         jpegSource.type = 'image/jpeg';
-        jpegSource.srcset = isThumb ? imageSources.thumbJpeg : imageSources.fullJpeg;
+        jpegSource.srcset = isThumb ? bestThumb.jpeg : imageSources.fullJpeg;
         
         // Fallback img element
         const img = document.createElement('img');
         img.className = isThumb ? 'photo-main' : 'modal-image';
         img.alt = alt;
         img.loading = isEager ? 'eager' : 'lazy';
-        img.src = isThumb ? imageSources.thumbJpeg : imageSources.fullJpeg; // Fallback
+        img.src = isThumb ? bestThumb.jpeg : imageSources.fullJpeg; // Fallback
         
         // For lazy loading, store sources in data attributes
         if (!isEager && isThumb) {
-            img.dataset.webpSrc = imageSources.thumbWebP;
-            img.dataset.jpegSrc = imageSources.thumbJpeg;
+            img.dataset.webpSrc = bestThumb.webp;
+            img.dataset.jpegSrc = bestThumb.jpeg;
         }
         
         picture.appendChild(webpSource);
@@ -192,12 +213,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // If it's one of the first 6 images, load immediately
         if (index < 6) {
-            loadImage(mainImg, imageSources.thumbWebP).then(() => {
+            const bestThumb = getBestThumbSources(imageSources);
+            loadImage(mainImg, bestThumb.webp).then(() => {
                 photoCard.classList.remove('loading');
                 photoCard.classList.add('loaded');
             }).catch(() => {
                 // Fallback to JPEG if WebP fails
-                loadImage(mainImg, imageSources.thumbJpeg).then(() => {
+                loadImage(mainImg, bestThumb.jpeg).then(() => {
                     photoCard.classList.remove('loading');
                     photoCard.classList.add('loaded');
                 }).catch(() => {
@@ -210,11 +232,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if ('IntersectionObserver' in window) {
                 imageObserver.observe(mainImg);
             } else {
-                loadImage(mainImg, imageSources.thumbWebP).then(() => {
+                const bestThumb = getBestThumbSources(imageSources);
+                loadImage(mainImg, bestThumb.webp).then(() => {
                     photoCard.classList.remove('loading');
                     photoCard.classList.add('loaded');
                 }).catch(() => {
-                    loadImage(mainImg, imageSources.thumbJpeg).then(() => {
+                    loadImage(mainImg, bestThumb.jpeg).then(() => {
                         photoCard.classList.remove('loading');
                         photoCard.classList.add('loaded');
                     }).catch(() => {
