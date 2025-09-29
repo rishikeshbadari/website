@@ -57,7 +57,7 @@
     </style>
 </head>
 <body>
-    <canvas id="canvas" width="600" height="600"></canvas>
+    <canvas id="canvas" width="600" height="720"></canvas>
     <div class="status" id="status"></div>
     <button id="startRender">Render</button>
 
@@ -68,6 +68,11 @@
         const startBtn = document.getElementById('startRender');
         
         let isRendering = false;
+        // Random color palette seed (set each render)
+        let colorPhase0 = 0;
+        let colorPhase1 = 2.0;
+        let colorPhase2 = 4.0;
+        let colorFreq = 12.0;
         
         function julia(x, y, cReal, cImag) {
             let zReal = x;
@@ -91,9 +96,9 @@
                 return [0, 0, 0];
             }
             const t = iteration / maxIterations;
-            const r = Math.floor(255 * (0.5 + 0.5 * Math.cos(3.0 + t * 12.0)));
-            const g = Math.floor(255 * (0.5 + 0.5 * Math.cos(3.0 + t * 12.0 + 2.0)));
-            const b = Math.floor(255 * (0.5 + 0.5 * Math.cos(3.0 + t * 12.0 + 4.0)));
+            const r = Math.floor(255 * (0.5 + 0.5 * Math.cos(colorPhase0 + t * colorFreq)));
+            const g = Math.floor(255 * (0.5 + 0.5 * Math.cos(colorPhase1 + t * colorFreq)));
+            const b = Math.floor(255 * (0.5 + 0.5 * Math.cos(colorPhase2 + t * colorFreq)));
             return [r, g, b];
         }
         
@@ -105,6 +110,12 @@
             if (startBtn) {
                 startBtn.disabled = true;
             }
+
+            // Randomize color palette for this render
+            colorPhase0 = Math.random() * Math.PI * 2;
+            colorPhase1 = Math.random() * Math.PI * 2;
+            colorPhase2 = Math.random() * Math.PI * 2;
+            colorFreq = 8 + Math.random() * 16;
 
             abortController = new AbortController();
             const { signal } = abortController;

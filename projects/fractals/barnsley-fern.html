@@ -75,11 +75,17 @@
             return transforms[transforms.length - 1];
         }
         
+        // Random color parameters (set each Start Render)
+        let hueBase = 120;
+        let hueScale = 10;
+        let sat = 70;
+        let light = 50;
+
         function drawPoint(x, y) {
             const screenX = (x + 3) * canvas.width / 6;
             const screenY = canvas.height - (y * canvas.height / 10);
             
-            ctx.fillStyle = `hsl(${120 + y * 10}, 70%, 50%)`;
+            ctx.fillStyle = `hsl(${(hueBase + y * hueScale) % 360}, ${sat}%, ${light}%)`;
             ctx.fillRect(screenX, screenY, 1, 1);
         }
         
@@ -119,6 +125,11 @@
                     animationId = null;
                     toggleBtn.textContent = 'Start Render';
                 } else {
+                    // Randomize color parameters for this render
+                    hueBase = Math.floor(Math.random() * 360);
+                    hueScale = 5 + Math.random() * 25;
+                    sat = 60 + Math.random() * 30;
+                    light = 45 + Math.random() * 20;
                     clearCanvas();
                     animate();
                     toggleBtn.textContent = 'Stop Render';
