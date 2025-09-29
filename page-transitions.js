@@ -71,8 +71,8 @@ class PageTransitions {
         setTimeout(() => {
             const criticalPages = [
                 window.location.origin + '/',
-                window.location.origin + '/pictures',
-                window.location.origin + '/projects'
+                window.location.origin + '/pictures.html',
+                window.location.origin + '/projects.html'
             ];
             
             criticalPages.forEach(page => {

@@ -141,8 +141,8 @@
         <header>
             <nav class="nav-v3">
                 <a href="/" class="landing-link-about">Home</a>
-                <a href="/pictures" class="landing-link-about">Pictures</a>
-                <a href="/projects" class="landing-link-about w--current">Projects</a>
+                <a href="/pictures.html" class="landing-link-about">Pictures</a>
+                <a href="/projects.html" class="landing-link-about w--current">Projects</a>
             </nav>
         </header>
         
@@ -154,25 +154,15 @@
                 <!-- Snake Game Project -->
                 <article class="project-card" data-project="snake-game">
                     <h3>Snake Game</h3>
-                    <p>A new UI I made for Snake.</p>
-                    <p>Originally created with Python in the Processing IDE. Converted into JavaScript & HTML.</p>
                     <a href="#" class="project-link">View Project</a>
                 </article>
 
                 <!-- Fractals Project -->
                 <article class="project-card" data-project="fractals">
                     <h3>Fractals</h3>
-                    <p>Interactive visualizations of mathematical fractals including Mandelbrot Set, Julia Sets, and Barnsley Fern.</p>
-                    <p>Explore the infinite complexity that emerges from simple recursive mathematical rules.</p>
                     <a href="#" class="project-link">View Project</a>
                 </article>
-
-                <!-- Template for future projects -->
-                <article class="project-card" data-project="coming-soon">
-                    <h3>More Projects Coming Soon</h3>
-                    <p>I'm always working on new and exciting projects. Check back soon for updates!</p>
-                    <a href="#" class="project-link disabled">Coming Soon</a>
-                </article>
+            
             </div>
 
             <!-- Project Modal -->
@@ -223,8 +213,7 @@
                                 <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
                             </a>
                         </div>
-                        <p>A new UI I made for Snake.</p>
-                        <p>Originally created with Python in the Processing IDE. Converted into JavaScript & HTML.</p>
+                        <p>One of my first CS projects.</p>
                         <hr>
                     `,
                     links: ``,
@@ -236,7 +225,6 @@
                                     height="540">
                             </iframe>
                         </div>
-                        <p class="game-instructions">Use arrow keys to control the snake.</p>
                     `
                 },
                 'fractals': {
@@ -250,9 +238,9 @@
                         <div class="branch-selector">
                             <div class="branch-buttons">
                                 <button class="branch-btn active" onclick="showFractal('main')">Overview</button>
-                                <button class="branch-btn" onclick="showFractal('barnsley-fern')">Barnsley Fern</button>
                                 <button class="branch-btn" onclick="showFractal('mandelbrot')">Mandelbrot Set</button>
                                 <button class="branch-btn" onclick="showFractal('julia')">Julia Sets</button>
+                                <button class="branch-btn" onclick="showFractal('barnsley-fern')">Barnsley Fern</button>
                             </div>
                         </div>
                         <div id="fractal-content">
@@ -321,7 +309,7 @@
                     content: `
                         <p>I took a class at GHP some years ago where we wrote some basic stuff to visualize the Mandelbrot set.</p>
                         
-                        <p>I was bored this summer and couldn't remember how it was constructed, so these are just some notes.</p>
+                        <p>I was bored this summer (2024) and couldn't remember how it was constructed, so these are just some notes.</p>
                         
                         <hr>
                         <h3>definition</h3>

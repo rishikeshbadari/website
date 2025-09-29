@@ -9,16 +9,18 @@
             margin: 0;
             padding: 20px;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a1a;
-            color: #ffffff;
+            background: #ffffff;
+            color: #1a1a1a;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         canvas {
-            border: 1px solid #333;
+            border: none;
             background: #000;
-            border-radius: 8px;
+            border-radius: 0;
+            outline: none;
+            box-shadow: none;
         }
         .info {
             max-width: 600px;
@@ -31,35 +33,44 @@
             color: #FFD700;
             font-size: 14px;
         }
+        #startRender {
+            margin-top: 12px;
+            padding: 10px 18px;
+            background: #1f2937; /* gray-800 */
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: none;
+            transition: transform 0.15s ease, opacity 0.2s ease;
+        }
+        #startRender:hover {
+            transform: translateY(-1px);
+            background: #374151; /* gray-700 */
+        }
+        #startRender:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <h1>Mandelbrot Set Fractal</h1>
     <canvas id="canvas" width="600" height="600"></canvas>
-    <div class="status" id="status">Generating Mandelbrot Set...</div>
-    <div class="info">
-        <p>The Mandelbrot Set is the set of complex numbers c for which the sequence z₀ = 0, z_{n+1} = z_n² + c does not diverge. Watch as the algorithm automatically explores interesting regions of infinite complexity.</p>
-        <p>Current view: <span id="viewInfo">Overview</span></p>
-    </div>
+    <div class="status" id="status"></div>
+    <button id="startRender">Render</button>
+    
 
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const statusElement = document.getElementById('status');
-        const viewInfoElement = document.getElementById('viewInfo');
+        const startBtn = document.getElementById('startRender');
         
-        let animationPhase = 0;
         let isRendering = false;
         
-        // Interesting zoom locations
-        const zoomSequence = [
-            { centerX: -0.5, centerY: 0, zoom: 1, name: "Full Overview", duration: 3000 },
-            { centerX: -0.8, centerY: 0.156, zoom: 50, name: "Lightning bolts", duration: 4000 },
-            { centerX: -0.74529, centerY: 0.11307, zoom: 200, name: "Spiral detail", duration: 4000 },
-            { centerX: -0.16, centerY: 1.0405, zoom: 100, name: "Seahorse valley", duration: 4000 },
-            { centerX: -1.25066, centerY: 0.02012, zoom: 300, name: "Mini mandelbrot", duration: 4000 },
-            { centerX: -0.7269, centerY: 0.1889, zoom: 400, name: "Feather detail", duration: 4000 }
-        ];
+        // Single static view parameters
+        const defaultView = { centerX: -0.5, centerY: 0, zoom: 1 };
         
         function mandelbrot(cx, cy, maxIter = 100) {
             let x = 0, y = 0;
@@ -88,65 +99,74 @@
             return [r, g, b];
         }
         
+        let abortController = null;
+
         async function render(centerX, centerY, zoom) {
             if (isRendering) return;
             isRendering = true;
-            statusElement.textContent = 'Rendering...';
-            
-            const imageData = ctx.createImageData(canvas.width, canvas.height);
-            const data = imageData.data;
-            
+            if (startBtn) {
+                startBtn.disabled = true;
+            }
+
+            // Allow render to be aborted and restarted
+            abortController = new AbortController();
+            const { signal } = abortController;
+
             const width = 3.0 / zoom;
             const height = 3.0 / zoom;
             const left = centerX - width / 2;
             const top = centerY - height / 2;
-            
+
             const maxIter = Math.min(50 + Math.floor(zoom / 10), 150);
-            
+
             for (let py = 0; py < canvas.height; py++) {
+                if (signal.aborted) {
+                    break;
+                }
+                const rowImage = ctx.createImageData(canvas.width, 1);
+                const rowData = rowImage.data;
+
                 for (let px = 0; px < canvas.width; px++) {
+                    if (signal.aborted) break;
                     const x = left + (px / canvas.width) * width;
                     const y = top + (py / canvas.height) * height;
-                    
+
                     const iteration = mandelbrot(x, y, maxIter);
                     const [r, g, b] = getColor(iteration, maxIter);
-                    
-                    const index = (py * canvas.width + px) * 4;
-                    data[index] = r;
-                    data[index + 1] = g;
-                    data[index + 2] = b;
-                    data[index + 3] = 255;
+
+                    const idx = px * 4;
+                    rowData[idx] = r;
+                    rowData[idx + 1] = g;
+                    rowData[idx + 2] = b;
+                    rowData[idx + 3] = 255;
                 }
-                
-                // Update progress occasionally
-                if (py % 25 === 0) {
-                    const progress = Math.floor((py / canvas.height) * 100);
-                    statusElement.textContent = `Rendering... ${progress}%`;
-                    await new Promise(resolve => setTimeout(resolve, 1));
+
+                ctx.putImageData(rowImage, 0, py);
+
+                if (py % 8 === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 16));
                 }
             }
             
-            ctx.putImageData(imageData, 0, 0);
-            statusElement.textContent = 'Exploring the infinite complexity of the Mandelbrot Set';
             isRendering = false;
+            if (startBtn) {
+                startBtn.disabled = false;
+                startBtn.textContent = 'Render';
+            }
         }
         
-        async function animateSequence() {
-            const currentZoom = zoomSequence[animationPhase];
-            viewInfoElement.textContent = currentZoom.name;
-            
-            await render(currentZoom.centerX, currentZoom.centerY, currentZoom.zoom);
-            
-            setTimeout(() => {
-                animationPhase = (animationPhase + 1) % zoomSequence.length;
-                animateSequence();
-            }, currentZoom.duration);
+        // Attach start button handler; do not auto-render
+        if (startBtn) {
+            startBtn.addEventListener('click', () => {
+                // If currently rendering, abort and clear canvas to reset
+                if (isRendering && abortController) {
+                    abortController.abort();
+                }
+                // Reset canvas and status, then start fresh
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                render(defaultView.centerX, defaultView.centerY, defaultView.zoom);
+            });
         }
-        
-        // Start the animation sequence
-        setTimeout(() => {
-            animateSequence();
-        }, 1000);
     </script>
 </body>
 </html> 

@@ -22,7 +22,7 @@
     },
     {
       "source": "/projects.html", 
-      "destination": "/projects",
+      "destination": "/projects.html",
       "permanent": true
     }
   ]
