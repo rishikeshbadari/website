@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const gallery = document.getElementById('image-gallery');
     
-    // Sort gallery data by date (newest first)
-    const sortedGalleryData = [...galleryData].sort((a, b) => {
-        const dateA = parseImageDate(a.date);
-        const dateB = parseImageDate(b.date);
-        return dateB - dateA; // Newest first (descending order)
-    });
+    // Use gallery data in the defined order as provided in gallery-data.js
+    const displayedGalleryData = galleryData;
 
     // Function to parse the date strings from gallery data
     function parseImageDate(dateString) {
@@ -92,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Preload critical images (first 6 images after sorting) with optimized versions
     function preloadCriticalImages() {
-        const criticalImages = sortedGalleryData.slice(0, 6);
+        const criticalImages = displayedGalleryData.slice(0, 6);
         criticalImages.forEach(imageData => {
             const imageSources = getOptimizedImageSources(imageData.src);
             
@@ -114,7 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Function to get optimized image sources with WebP support
     function getOptimizedImageSources(optimizedSrc) {
-        const baseName = optimizedSrc.split('/')[2].split('.')[0]; // Extract filename from optimized path
+        const parts = (optimizedSrc || '').split('/');
+        const file = parts[parts.length - 1] || '';
+        const baseName = file.split('.')[0];
         
         return {
             // Thumbnail versions for gallery (400x400)
@@ -162,8 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return { picture, img };
     }
 
-    // Create optimized photo cards using sorted data
-    sortedGalleryData.forEach((image, index) => {
+    // Create optimized photo cards using defined order
+    displayedGalleryData.forEach((image, index) => {
         const photoCard = document.createElement('div');
         photoCard.className = 'photo-card loading';
 
@@ -174,20 +172,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Create responsive picture element for thumbnail
         const { picture, img: mainImg } = createResponsivePicture(
-            imageSources, 
-            image.caption, 
-            true, // isThumb
-            index < 6 // isEager for first 6 images
+            imageSources,
+            '',
+            true,
+            index < 6
         );
 
         photoCard.innerHTML = `
             <div class="image-wrapper">
                 <img class="photo-placeholder" src="${placeholderSrc}" alt="">
             </div>
-            <div class="photo-caption">
-                <div class="photo-date">${image.date}</div>
-                <div class="photo-title">${image.caption}</div>
-            </div>
+            <div class="photo-caption"></div>
         `;
 
         // Insert the picture element
@@ -218,9 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         photoCard.addEventListener('click', function() {
             // Load full-size optimized image in modal
             modalImage.src = imageSources.fullWebP;
-            modalImage.alt = image.caption;
-            modalDate.textContent = image.date;
-            modalCaption.textContent = image.caption;
+            modalImage.alt = '';
             
             // Fallback to JPEG if WebP is not supported
             modalImage.onerror = function() {
@@ -285,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('load', () => {
             const loadTime = window.performance.now();
             console.log(`Gallery loaded in ${loadTime.toFixed(2)}ms`);
-            console.log(`Displaying ${sortedGalleryData.length} photos sorted by date`);
+            console.log(`Displaying ${displayedGalleryData.length} photos in defined order`);
         });
     }
 
