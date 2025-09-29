@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.innerHTML = `
-        <button class="modal-close">×</button>
+        <button class="modal-close" aria-label="Close">×</button>
+        <button class="modal-nav modal-prev" aria-label="Previous">‹</button>
+        <button class="modal-nav modal-next" aria-label="Next">›</button>
         <div class="modal-content">
             <div class="modal-media">
                 <img class="modal-image" src="" alt="">
@@ -40,6 +42,41 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalDate = modal.querySelector('.modal-date');
     const modalCaption = modal.querySelector('.modal-caption');
     const closeBtn = modal.querySelector('.modal-close');
+    const prevBtn = modal.querySelector('.modal-prev');
+    const nextBtn = modal.querySelector('.modal-next');
+    let currentIndex = -1;
+
+    function updateNavButtons() {
+        const atStart = currentIndex <= 0;
+        const atEnd = currentIndex >= (displayedGalleryData.length - 1);
+        if (prevBtn) {
+            prevBtn.classList.toggle('disabled', atStart);
+            prevBtn.disabled = atStart;
+        }
+        if (nextBtn) {
+            nextBtn.classList.toggle('disabled', atEnd);
+            nextBtn.disabled = atEnd;
+        }
+    }
+
+    function loadModalImageByIndex(index) {
+        const item = displayedGalleryData[index];
+        if (!item) return;
+        const sources = getOptimizedImageSources(item.src);
+        modalImage.onerror = function() {
+            modalImage.src = sources.fullJpeg;
+        };
+        modalImage.src = sources.fullWebP;
+        modalImage.alt = '';
+        updateNavButtons();
+    }
+
+    function openModal(index) {
+        currentIndex = index;
+        loadModalImageByIndex(currentIndex);
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
 
     // Intersection Observer for lazy loading
     const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -248,19 +285,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Add click event to open modal with full-size optimized image
+        // Add click event to open modal at this index
         photoCard.addEventListener('click', function() {
-            // Load full-size optimized image in modal
-            modalImage.src = imageSources.fullWebP;
-            modalImage.alt = '';
-            
-            // Fallback to JPEG if WebP is not supported
-            modalImage.onerror = function() {
-                modalImage.src = imageSources.fullJpeg;
-            };
-            
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
+            openModal(index);
         });
 
         gallery.appendChild(photoCard);
@@ -297,6 +324,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     closeBtn.addEventListener('click', closeModal);
+
+    // Modal navigation events
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                loadModalImageByIndex(currentIndex);
+            }
+        });
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (currentIndex < displayedGalleryData.length - 1) {
+                currentIndex += 1;
+                loadModalImageByIndex(currentIndex);
+            }
+        });
+    }
     
     // Close modal when clicking outside the content
     modal.addEventListener('click', function(e) {
@@ -307,8 +354,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close modal with Escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
+        if (!modal.classList.contains('show')) return;
+        if (e.key === 'Escape') {
             closeModal();
+        } else if (e.key === 'ArrowLeft') {
+            if (currentIndex > 0) {
+                currentIndex -= 1;
+                loadModalImageByIndex(currentIndex);
+            }
+        } else if (e.key === 'ArrowRight') {
+            if (currentIndex < displayedGalleryData.length - 1) {
+                currentIndex += 1;
+                loadModalImageByIndex(currentIndex);
+            }
         }
     });
 

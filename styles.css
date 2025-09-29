@@ -497,6 +497,51 @@ main {
     transform: scale(1.1);
 }
 
+/* Modal navigation arrows */
+.modal-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 22px;
+    color: #2a2a2a;
+    font-weight: 300;
+    z-index: 1001;
+}
+
+.modal-nav:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.modal-prev { left: 24px; }
+.modal-next { right: 24px; }
+
+.modal-nav.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+    .modal-nav {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+    .modal-prev { left: 12px; }
+    .modal-next { right: 12px; }
+}
+
 /* Loading animation */
 @keyframes loading {
     0% { transform: translateX(-100%); }
