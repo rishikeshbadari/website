@@ -19,11 +19,6 @@
       "source": "/pictures.html",
       "destination": "/pictures",
       "permanent": true
-    },
-    {
-      "source": "/projects.html", 
-      "destination": "/projects.html",
-      "permanent": true
     }
   ]
 } 
