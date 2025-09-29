@@ -151,15 +151,21 @@
                 <h1 class="landing-intro-bio">Projects</h1>
             </section>
             <div class="projects-container">
-                <!-- Snake Game Project -->
-                <article class="project-card" data-project="snake-game">
-                    <h3>Snake Game</h3>
+                <!-- Fine-tuning LLMs Project -->
+                <article class="project-card" data-project="llm-classification">
+                    <h3>Fine-tuning LLMs for Classification Tasks</h3>
                     <a href="#" class="project-link">View Project</a>
                 </article>
 
                 <!-- Fractals Project -->
                 <article class="project-card" data-project="fractals">
                     <h3>Fractals</h3>
+                    <a href="#" class="project-link">View Project</a>
+                </article>
+
+                <!-- Snake Project -->
+                <article class="project-card" data-project="snake-game">
+                    <h3>Snake</h3>
                     <a href="#" class="project-link">View Project</a>
                 </article>
             
@@ -208,7 +214,7 @@
                 'snake-game': {
                     readme: `
                         <div class="project-title-header">
-                            <h1>Snake Game</h1>
+                            <h1>Snake</h1>
                             <a href="https://github.com/rishikeshbadari/snake" target="_blank" rel="noopener noreferrer" class="github-link">
                                 <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
                             </a>
@@ -220,7 +226,7 @@
                     demo: `
                         <div class="game-container">
                             <iframe src="projects/snake-game/game.html" 
-                                    title="Snake Game" 
+                                    title="Snake" 
                                     width="100%" 
                                     height="540">
                             </iframe>
@@ -249,36 +255,57 @@
                     `,
                     links: ``,
                     demo: `<div id="fractal-demo"></div>`
+                },
+                'llm-classification': {
+                    readme: `
+                        <div class="project-title-header">
+                            <h1>Fine-tuning LLMs for Classification Tasks</h1>
+                        </div>
+                    `,
+                    links: `
+                        <a href="projects/Fine-tuning LLMs for Classification Tasks/Poster.pdf" target="_blank" rel="noopener noreferrer">DOWNLOAD POSTER (PDF)</a>
+                    `,
+                    demo: `
+                        <iframe src="projects/Fine-tuning LLMs for Classification Tasks/Final_Paper.pdf"
+                                title="Fine-tuning LLMs for Classification Tasks - Paper"
+                                width="100%"
+                                height="900"
+                                style="border: none; border-radius: 0;">
+                        </iframe>
+                    `
                 }
             };
 
-            // Handle project clicks
+            // Handle project clicks (click anywhere on the card)
             const projectCards = document.querySelectorAll('.project-card');
             projectCards.forEach(card => {
-                const projectLink = card.querySelector('.project-link');
-                if (projectLink && !projectLink.classList.contains('disabled')) {
-                    projectLink.addEventListener('click', function(e) {
+                card.addEventListener('click', function(e) {
+                    const linkClicked = e.target.closest && e.target.closest('a.project-link');
+                    if (linkClicked) {
                         e.preventDefault();
-                        const projectId = card.dataset.project;
-                        const project = projectData[projectId];
-                        
-                        if (project) {
-                            // Populate modal content
-                            modalReadmeContent.innerHTML = project.readme;
-                            modalProjectLinks.innerHTML = project.links;
-                            modalProjectDemo.innerHTML = project.demo;
-                            
-                            // Initialize fractal content if it's the fractals project
-                            if (projectId === 'fractals') {
-                                setTimeout(initializeFractalContent, 50);
-                            }
-                            
-                            // Show modal
-                            projectModal.classList.add('show');
-                            document.body.style.overflow = 'hidden';
+                    }
+                    const projectId = card.dataset.project;
+                    const project = projectData[projectId];
+
+                    if (project) {
+                        // Populate modal content
+                        modalReadmeContent.innerHTML = project.readme;
+                        modalProjectLinks.innerHTML = project.links;
+                        modalProjectDemo.innerHTML = project.demo;
+                        if (modalProjectLinks) {
+                            modalProjectLinks.style.display = (project.links && project.links.trim().length > 0) ? 'block' : 'none';
                         }
-                    });
-                }
+
+                        // Initialize fractal content if it's the fractals project
+                        if (projectId === 'fractals') {
+                            setTimeout(initializeFractalContent, 50);
+                        }
+
+                        // Show modal
+                        projectModal.classList.add('show');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
             });
 
             // Close modal
