@@ -123,6 +123,12 @@
             font-family: 'Monaco', 'Menlo', monospace;
             font-size: 0.9em;
         }
+        /* Olympic project modal spacing tweaks */
+        .olympic-nav { margin: 8px 0 6px 0; }
+        .olympic-nav .branch-buttons { margin-top: 6px; }
+        /* Reduce vertical spacing between readme and demo globally */
+        .project-modal-readme { padding: 32px 40px 12px 40px; }
+        .project-modal-demo { padding: 0 40px 32px 40px; }
     </style>
     
     <!-- Optimized font loading -->
@@ -157,6 +163,12 @@
                     <a href="#" class="project-link">View Project</a>
                 </article>
 
+                <!-- Olympic Wins Project -->
+                <article class="project-card" data-project="olympic-wins">
+                    <h3>Predictive Analysis for Olympic Wins</h3>
+                    <a href="#" class="project-link">View Project</a>
+                </article>
+
                 <!-- Fractals Project -->
                 <article class="project-card" data-project="fractals">
                     <h3>Fractals</h3>
@@ -168,7 +180,7 @@
                     <h3>Snake</h3>
                     <a href="#" class="project-link">View Project</a>
                 </article>
-            
+                
             </div>
 
             <!-- Project Modal -->
@@ -260,7 +272,11 @@
                     readme: `
                         <div class="project-title-header">
                             <h1>Fine-tuning LLMs for Classification Tasks</h1>
+                            <a href="https://github.com/rishikeshbadari/cs7643" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
+                            </a>
                         </div>
+                        <p>Semester Project for CS 7637: Deep Learning</p>
                     `,
                     links: `
                         <a href="projects/Fine-tuning LLMs for Classification Tasks/Poster.pdf" target="_blank" rel="noopener noreferrer">DOWNLOAD POSTER (PDF)</a>
@@ -268,6 +284,35 @@
                     demo: `
                         <iframe src="projects/Fine-tuning LLMs for Classification Tasks/Final_Paper.pdf"
                                 title="Fine-tuning LLMs for Classification Tasks - Paper"
+                                width="100%"
+                                height="900"
+                                style="border: none; border-radius: 0;">
+                        </iframe>
+                    `
+                }
+                ,
+                'olympic-wins': {
+                    readme: `
+                        <div class="project-title-header">
+                            <h1>Predictive Analysis for Olympic Wins</h1>
+                            <a href="https://github.com/rishikeshbadari/cs7641" target="_blank" rel="noopener noreferrer" class="github-link">
+                                <img src="projects/github-logo.png" alt="View on GitHub" class="github-logo">
+                            </a>
+                        </div>
+                        <p>Graduate ML project (CS 7641). Includes proposal, midterm, and final report.</p>
+                    `,
+                    links: ``,
+                    demo: `
+                        <div class="branch-selector olympic-nav">
+                            <div class="branch-buttons">
+                                <button class="branch-btn" data-report="proposal" onclick="showOlympicReport('proposal')">Project Proposal</button>
+                                <button class="branch-btn" data-report="midterm" onclick="showOlympicReport('midterm')">Midterm Checkpoint</button>
+                                <button class="branch-btn active" data-report="final" onclick="showOlympicReport('final')">Final Report</button>
+                            </div>
+                        </div>
+                        <iframe id="olympic-iframe"
+                                src="projects/Predictive Analysis for Olympic Wins/final_report.html"
+                                title="Predictive Analysis for Olympic Wins"
                                 width="100%"
                                 height="900"
                                 style="border: none; border-radius: 0;">
@@ -487,6 +532,28 @@
                     }
                 }
             }
+
+            // Olympic Wins pages switching
+            const olympicPages = {
+                proposal: 'projects/Predictive Analysis for Olympic Wins/project_proposal.html',
+                midterm: 'projects/Predictive Analysis for Olympic Wins/midterm_checkpoint.html',
+                final: 'projects/Predictive Analysis for Olympic Wins/final_report.html'
+            };
+
+            window.showOlympicReport = function(which) {
+                const iframe = document.getElementById('olympic-iframe');
+                if (iframe && olympicPages[which]) {
+                    iframe.src = olympicPages[which];
+                }
+                const buttons = document.querySelectorAll('.branch-buttons [data-report]');
+                buttons.forEach(btn => {
+                    if (btn.getAttribute('data-report') === which) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            };
         });
     </script>
 </body>
