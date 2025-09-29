@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishikesh Badari</title>
+    
+    <!-- Prevent flash by setting background immediately -->
+    <style>
+        html, body { 
+            background-color: #ffffff; 
+            margin: 0; 
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        /* Critical CSS for immediate render */
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 24px; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header { 
+            padding: 32px 0; 
+            border-bottom: 1px solid #f0f0f0; 
+        }
+        .nav-v3 { 
+            display: flex; 
+            justify-content: center; 
+            gap: 40px; 
+        }
+        .landing-link-about { 
+            color: #666666; 
+            text-decoration: none; 
+            font-weight: 500; 
+        }
+        .landing-link-about.w--current { 
+            color: #1a1a1a; 
+            font-weight: 600; 
+        }
+    </style>
+    
+    <!-- Optimized font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Load full CSS after critical rendering -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Preload page transition script -->
+    <link rel="preload" href="page-transitions.js" as="script">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav class="nav-v3">
+                <a href="/" class="landing-link-about w--current">Home</a>
+                <a href="/pictures.html" class="landing-link-about">Pictures</a>
+                <a href="/projects.html" class="landing-link-about">Projects</a>
+            </nav>
+        </header>
+        
+        <main>
+            <section class="intro">
+                <div class="headshot-container" id="headshot-container">
+                    <picture>
+                        <source srcset="headshot-optimized.webp" type="image/webp">
+                        <img src="headshot-optimized.jpg" alt="Rishikesh Badari" class="headshot" id="headshot">
+                    </picture>
+                </div>
+                <h1 class="landing-intro-bio">Rishikesh Badari</h1>
+            </section>
+            
+            <section class="contact">
+                <div class="contact-info">
+                    <p class="contact-title">San Francisco, California</p>
+                    <p class="contact-email">badari.rishikesh@gmail.com</p>
+                    <p class="contact-social">
+                        <a href="https://www.linkedin.com/in/rbadari/" target="_blank">LinkedIn</a>, <a href="https://letterboxd.com/rbadari/" target="_blank">LetterBoxd</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Page transition optimization -->
+    <script src="page-transitions.js"></script>
+</body>
+</html>
