@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Create optimized photo cards using defined order
     displayedGalleryData.forEach((image, index) => {
+        try {
         const photoCard = document.createElement('div');
         photoCard.className = 'photo-card loading';
 
@@ -205,8 +206,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         } else {
-            // Use intersection observer for others
-            imageObserver.observe(mainImg);
+            // Use intersection observer for others; fallback if unsupported
+            if ('IntersectionObserver' in window) {
+                imageObserver.observe(mainImg);
+            } else {
+                loadImage(mainImg, imageSources.thumbWebP).then(() => {
+                    photoCard.classList.remove('loading');
+                    photoCard.classList.add('loaded');
+                }).catch(() => {
+                    loadImage(mainImg, imageSources.thumbJpeg).then(() => {
+                        photoCard.classList.remove('loading');
+                        photoCard.classList.add('loaded');
+                    }).catch(() => {
+                        photoCard.classList.remove('loading');
+                        photoCard.classList.add('error');
+                    });
+                });
+            }
         }
 
         // Add click event to open modal with full-size optimized image
@@ -225,6 +241,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         gallery.appendChild(photoCard);
+        } catch (err) {
+            console.error('Failed to render photo card', { index, image, err });
+        }
     });
 
     // Create placeholder function
