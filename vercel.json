@@ -5,7 +5,7 @@
       "destination": "/pictures.html"
     },
     {
-      "source": "/projects", 
+      "source": "/projects",
       "destination": "/projects.html"
     }
   ],
@@ -14,11 +14,32 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/pictures/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
     },
     {
-      "source": "/pictures.html",
-      "destination": "/pictures",
-      "permanent": true
+      "source": "/headshot-optimized.(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*).css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    },
+    {
+      "source": "/(.*).js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
     }
   ]
-} 
+}

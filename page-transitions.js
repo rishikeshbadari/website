@@ -45,8 +45,6 @@ class PageTransitions {
         
         document.head.appendChild(prefetchLink);
         this.prefetchedPages.add(fullUrl);
-        
-        console.log(`Preloaded: ${fullUrl}`);
     }
 
     addExitAnimations() {

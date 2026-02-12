@@ -1,11 +1,3 @@
-/* Font face optimization for faster loading */
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap; /* Prevent invisible text during font swap */
-}
-
 /* General reset */
 * {
     margin: 0;
@@ -260,9 +252,6 @@ main {
     position: relative;
     display: flex;
     flex-direction: column;
-    /* Performance optimizations */
-    will-change: transform;
-    transform: translateZ(0); /* Enable hardware acceleration */
 }
 
 .photo-card:hover {
@@ -573,14 +562,19 @@ main {
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
+    body {
+        opacity: 1;
+        animation: none;
+    }
+
     .photo-card {
         transition: none;
     }
-    
+
     .photo-main {
         transition: opacity 0.1s ease;
     }
-    
+
     @keyframes loading {
         0%, 100% { opacity: 0.5; }
         50% { opacity: 1; }
