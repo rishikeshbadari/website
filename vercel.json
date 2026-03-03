@@ -11,6 +11,10 @@
     {
       "source": "/blog",
       "destination": "/blog.html"
+    },
+    {
+      "source": "/art",
+      "destination": "/art.html"
     }
   ],
   "redirects": [
