@@ -3,11 +3,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Gallery code — only runs on the pictures page
     if (gallery) {
-        // Use gallery data in the defined order as provided in gallery-data.js
         const displayedGalleryData = galleryData;
 
-        // Create placeholder once and reuse for all cards
-        const placeholderSrc = createPlaceholder(200, 150);
+        // Responsive sizes matching the CSS grid breakpoints:
+        // <=479px: 1 column, 16px padding each side
+        // <=767px: 2 columns, 20px padding, 16px gap
+        // <=991px: auto-fill ~240px min, 25px padding, 20px gap
+        // <=1200px: auto-fill ~280px min, 30px padding, 25px gap
+        // default: auto-fill ~320px min, 40px padding, 30px gap
+        const gallerySizes = [
+            '(max-width: 479px) calc(100vw - 32px)',
+            '(max-width: 767px) calc(50vw - 28px)',
+            '(max-width: 1200px) calc(33vw - 40px)',
+            '350px'
+        ].join(', ');
 
         // Create modal element
         const modal = document.createElement('div');
@@ -16,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.setAttribute('aria-modal', 'true');
         modal.setAttribute('aria-label', 'Photo viewer');
         modal.innerHTML = `
-            <button class="modal-close" aria-label="Close">×</button>
-            <button class="modal-nav modal-prev" aria-label="Previous photo">‹</button>
-            <button class="modal-nav modal-next" aria-label="Next photo">›</button>
+            <button class="modal-close" aria-label="Close">\u00d7</button>
+            <button class="modal-nav modal-prev" aria-label="Previous photo">\u2039</button>
+            <button class="modal-nav modal-next" aria-label="Next photo">\u203a</button>
             <div class="modal-content">
                 <div class="modal-media">
                     <img class="modal-image" src="" alt="Full size photo">
@@ -31,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         document.body.appendChild(modal);
 
-        // Get modal elements
         const modalImage = modal.querySelector('.modal-image');
         const closeBtn = modal.querySelector('.modal-close');
         const prevBtn = modal.querySelector('.modal-prev');
@@ -39,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let currentIndex = -1;
 
         function updateNavButtons() {
-            const atStart = currentIndex <= 0;
-            const atEnd = currentIndex >= (displayedGalleryData.length - 1);
+            var atStart = currentIndex <= 0;
+            var atEnd = currentIndex >= (displayedGalleryData.length - 1);
             if (prevBtn) {
                 prevBtn.classList.toggle('disabled', atStart);
                 prevBtn.disabled = atStart;
@@ -52,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function loadModalImageByIndex(index) {
-            const item = displayedGalleryData[index];
+            var item = displayedGalleryData[index];
             if (!item) return;
-            const sources = getOptimizedImageSources(item.src);
+            var sources = getImageSources(item.src);
             modalImage.onerror = function() {
                 modalImage.src = sources.fullJpeg;
             };
@@ -71,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
             closeBtn.focus();
         }
 
-        // Close modal functionality
         function closeModal() {
             modal.classList.remove('show');
             document.body.style.overflow = 'auto';
@@ -79,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         closeBtn.addEventListener('click', closeModal);
 
-        // Modal navigation events
         if (prevBtn) {
             prevBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
@@ -99,14 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Close modal when clicking outside the content
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
                 closeModal();
             }
         });
 
-        // Keyboard navigation for modal
         document.addEventListener('keydown', function(e) {
             if (!modal.classList.contains('show')) return;
             if (e.key === 'Escape') {
@@ -124,153 +128,55 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Intersection Observer for lazy loading
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    const photoCard = img.closest('.photo-card');
-
-                    // Try WebP first, fallback to JPEG
-                    const webpSrc = img.dataset.webpSrc;
-                    const jpegSrc = img.dataset.jpegSrc;
-
-                    loadImage(img, webpSrc).then(() => {
-                        photoCard.classList.remove('loading');
-                        photoCard.classList.add('loaded');
-                    }).catch(() => {
-                        loadImage(img, jpegSrc).then(() => {
-                            photoCard.classList.remove('loading');
-                            photoCard.classList.add('loaded');
-                        }).catch(() => {
-                            photoCard.classList.remove('loading');
-                            photoCard.classList.add('error');
-                        });
-                    });
-
-                    observer.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '100px'
-        });
-
-        // Function to load image with better error handling
-        function loadImage(imgElement, src) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                img.onload = () => {
-                    imgElement.src = src;
-                    resolve();
-                };
-                img.onerror = reject;
-                img.src = src;
-            });
-        }
-
-        // Preload critical images (first 6) with best-fit versions
-        function preloadCriticalImages() {
-            const criticalImages = displayedGalleryData.slice(0, 6);
-            criticalImages.forEach(imageData => {
-                const imageSources = getOptimizedImageSources(imageData.src);
-                const bestThumb = getBestThumbSources(imageSources);
-
-                const webpImg = new Image();
-                webpImg.src = bestThumb.webp;
-
-                const jpegImg = new Image();
-                jpegImg.src = bestThumb.jpeg;
-
-                setTimeout(() => {
-                    const fullWebpImg = new Image();
-                    fullWebpImg.src = imageSources.fullWebP;
-                }, 1000);
-            });
-        }
-
-        // Function to get optimized image sources with WebP support
-        function getOptimizedImageSources(optimizedSrc) {
-            const parts = (optimizedSrc || '').split('/');
-            const file = parts[parts.length - 1] || '';
-            const baseName = file.split('.')[0];
+        // Get thumb (400w) and full (1200w) paths for an image
+        function getImageSources(optimizedSrc) {
+            var parts = (optimizedSrc || '').split('/');
+            var file = parts[parts.length - 1] || '';
+            var baseName = file.split('.')[0];
 
             return {
                 thumbWebP: 'pictures/thumbs/' + baseName + '.webp',
                 thumbJpeg: 'pictures/thumbs/' + baseName + '.jpg',
                 fullWebP: 'pictures/optimized/' + baseName + '.webp',
-                fullJpeg: 'pictures/optimized/' + baseName + '.jpg',
-                original: optimizedSrc
+                fullJpeg: 'pictures/optimized/' + baseName + '.jpg'
             };
         }
 
-        // Prefer sharper sources on high-DPI screens
-        function isHighDpi() {
-            return (window.devicePixelRatio || 1) >= 2;
-        }
+        // Build a <picture> element with srcset width descriptors + sizes.
+        // The browser chooses the best resolution for the device automatically.
+        function createResponsivePicture(sources, alt, isEager) {
+            var picture = document.createElement('picture');
 
-        function getBestThumbSources(imageSources) {
-            if (isHighDpi()) {
-                return {
-                    webp: imageSources.fullWebP,
-                    jpeg: imageSources.fullJpeg
-                };
-            }
-            return {
-                webp: imageSources.thumbWebP,
-                jpeg: imageSources.thumbJpeg
-            };
-        }
-
-        // Function to create responsive picture element with WebP support
-        function createResponsivePicture(imageSources, alt, isThumb, isEager) {
-            const picture = document.createElement('picture');
-
-            const webpSource = document.createElement('source');
+            // WebP source with both resolutions
+            var webpSource = document.createElement('source');
             webpSource.type = 'image/webp';
-            const bestThumb = getBestThumbSources(imageSources);
-            webpSource.srcset = isThumb ? bestThumb.webp : imageSources.fullWebP;
+            webpSource.srcset = sources.thumbWebP + ' 600w,' + sources.fullWebP + ' 1600w';
+            webpSource.sizes = gallerySizes;
 
-            const jpegSource = document.createElement('source');
+            // JPEG fallback with both resolutions
+            var jpegSource = document.createElement('source');
             jpegSource.type = 'image/jpeg';
-            jpegSource.srcset = isThumb ? bestThumb.jpeg : imageSources.fullJpeg;
+            jpegSource.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
+            jpegSource.sizes = gallerySizes;
 
-            const img = document.createElement('img');
-            img.className = isThumb ? 'photo-main' : 'modal-image';
+            // Fallback img — also gets srcset so the browser can choose
+            var img = document.createElement('img');
+            img.className = 'photo-main';
             img.alt = alt;
             img.loading = isEager ? 'eager' : 'lazy';
-            img.src = isThumb ? bestThumb.jpeg : imageSources.fullJpeg;
-
-            if (!isEager && isThumb) {
-                img.dataset.webpSrc = bestThumb.webp;
-                img.dataset.jpegSrc = bestThumb.jpeg;
-            }
+            img.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
+            img.sizes = gallerySizes;
+            img.src = sources.thumbJpeg; // ultimate fallback for very old browsers
 
             picture.appendChild(webpSource);
             picture.appendChild(jpegSource);
             picture.appendChild(img);
 
-            return { picture, img };
+            return { picture: picture, img: img };
         }
 
-        // Create placeholder function (called once, reused for all cards)
-        function createPlaceholder(width, height) {
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
-            canvas.width = width;
-            canvas.height = height;
-
-            var gradient = ctx.createLinearGradient(0, 0, width, height);
-            gradient.addColorStop(0, '#f0f0f0');
-            gradient.addColorStop(1, '#e0e0e0');
-
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, width, height);
-
-            return canvas.toDataURL();
-        }
-
-        // Create optimized photo cards using defined order
-        displayedGalleryData.forEach((image, index) => {
+        // Build gallery cards
+        displayedGalleryData.forEach(function(image, index) {
             try {
                 var photoCard = document.createElement('div');
                 photoCard.className = 'photo-card loading';
@@ -278,66 +184,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 photoCard.setAttribute('tabindex', '0');
                 photoCard.setAttribute('aria-label', 'View photo ' + (index + 1));
 
-                var imageSources = getOptimizedImageSources(image.src);
-
-                var result = createResponsivePicture(
-                    imageSources,
-                    'Photo ' + (index + 1),
-                    true,
-                    index < 6
-                );
+                var sources = getImageSources(image.src);
+                var result = createResponsivePicture(sources, 'Photo ' + (index + 1), index < 6);
                 var picture = result.picture;
                 var mainImg = result.img;
 
                 photoCard.innerHTML =
-                    '<div class="image-wrapper">' +
-                        '<img class="photo-placeholder" src="' + placeholderSrc + '" alt="">' +
-                    '</div>' +
+                    '<div class="image-wrapper"></div>' +
                     '<div class="photo-caption"></div>';
 
                 var imageWrapper = photoCard.querySelector('.image-wrapper');
                 imageWrapper.appendChild(picture);
 
-                if (index < 6) {
-                    var bestThumb = getBestThumbSources(imageSources);
-                    loadImage(mainImg, bestThumb.webp).then(function() {
-                        photoCard.classList.remove('loading');
-                        photoCard.classList.add('loaded');
-                    }).catch(function() {
-                        loadImage(mainImg, bestThumb.jpeg).then(function() {
-                            photoCard.classList.remove('loading');
-                            photoCard.classList.add('loaded');
-                        }).catch(function() {
-                            photoCard.classList.remove('loading');
-                            photoCard.classList.add('error');
-                        });
-                    });
-                } else {
-                    if ('IntersectionObserver' in window) {
-                        imageObserver.observe(mainImg);
-                    } else {
-                        var bestThumb = getBestThumbSources(imageSources);
-                        loadImage(mainImg, bestThumb.webp).then(function() {
-                            photoCard.classList.remove('loading');
-                            photoCard.classList.add('loaded');
-                        }).catch(function() {
-                            loadImage(mainImg, bestThumb.jpeg).then(function() {
-                                photoCard.classList.remove('loading');
-                                photoCard.classList.add('loaded');
-                            }).catch(function() {
-                                photoCard.classList.remove('loading');
-                                photoCard.classList.add('error');
-                            });
-                        });
-                    }
-                }
+                mainImg.onload = function() {
+                    photoCard.classList.remove('loading');
+                };
+                mainImg.onerror = function() {
+                    photoCard.classList.remove('loading');
+                    photoCard.classList.add('error');
+                };
 
-                // Click handler to open modal
                 photoCard.addEventListener('click', function() {
                     openModal(index);
                 });
 
-                // Keyboard handler for accessibility
                 photoCard.addEventListener('keydown', function(e) {
                     if (e.key === 'Enter' || e.key === ' ') {
                         e.preventDefault();
@@ -350,9 +220,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Failed to render photo card', { index: index, image: image, err: err });
             }
         });
-
-        // Preload critical images
-        preloadCriticalImages();
     }
 
     // Headshot loading animation (runs on home page)
