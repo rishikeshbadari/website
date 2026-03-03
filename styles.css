@@ -1434,8 +1434,12 @@ body.home .contact {
     }
 
     .art-card {
-        flex: 0 0 100%;
-        width: 100%;
+        flex: 0 0 180px;
+        width: 180px;
+    }
+
+    .art-carousel-window {
+        width: 180px;
     }
 
     .art-carousel-track {
