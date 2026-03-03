@@ -1410,6 +1410,10 @@ body.home .contact {
         gap: 8px;
     }
 
+    .project-modal.show {
+        align-items: flex-start;
+    }
+
     .project-modal-content {
         max-width: 100vw;
         max-height: 100%;
