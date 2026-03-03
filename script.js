@@ -142,38 +142,40 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
 
-        // Build a <picture> element with srcset width descriptors + sizes.
-        // The browser chooses the best resolution for the device automatically.
+        // Build a <picture> element. If eager, sets srcset immediately.
+        // Otherwise leaves srcset empty for the IntersectionObserver to fill.
         function createResponsivePicture(sources, alt, isEager) {
             var picture = document.createElement('picture');
 
-            // WebP source with both resolutions
             var webpSource = document.createElement('source');
             webpSource.type = 'image/webp';
-            webpSource.srcset = sources.thumbWebP + ' 600w,' + sources.fullWebP + ' 1600w';
             webpSource.sizes = gallerySizes;
 
-            // JPEG fallback with both resolutions
             var jpegSource = document.createElement('source');
             jpegSource.type = 'image/jpeg';
-            jpegSource.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
             jpegSource.sizes = gallerySizes;
 
-            // Fallback img — also gets srcset so the browser can choose
             var img = document.createElement('img');
             img.className = 'photo-main';
             img.alt = alt;
-            img.loading = isEager ? 'eager' : 'lazy';
-            img.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
             img.sizes = gallerySizes;
-            img.src = sources.thumbJpeg; // ultimate fallback for very old browsers
+
+            if (isEager) {
+                webpSource.srcset = sources.thumbWebP + ' 600w,' + sources.fullWebP + ' 1600w';
+                jpegSource.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
+                img.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
+                img.src = sources.thumbJpeg;
+            }
 
             picture.appendChild(webpSource);
             picture.appendChild(jpegSource);
             picture.appendChild(img);
 
-            return { picture: picture, img: img };
+            return { picture: picture, img: img, webpSource: webpSource, jpegSource: jpegSource };
         }
+
+        // Deferred cards to load after the first batch
+        var deferredCards = [];
 
         // Build gallery cards
         displayedGalleryData.forEach(function(image, index) {
@@ -184,25 +186,33 @@ document.addEventListener('DOMContentLoaded', function() {
                 photoCard.setAttribute('tabindex', '0');
                 photoCard.setAttribute('aria-label', 'View photo ' + (index + 1));
 
+                var isEager = index < 6;
                 var sources = getImageSources(image.src);
-                var result = createResponsivePicture(sources, 'Photo ' + (index + 1), index < 6);
-                var picture = result.picture;
-                var mainImg = result.img;
+                var result = createResponsivePicture(sources, 'Photo ' + (index + 1), isEager);
 
                 photoCard.innerHTML =
                     '<div class="image-wrapper"></div>' +
                     '<div class="photo-caption"></div>';
 
                 var imageWrapper = photoCard.querySelector('.image-wrapper');
-                imageWrapper.appendChild(picture);
+                imageWrapper.appendChild(result.picture);
 
-                mainImg.onload = function() {
+                result.img.onload = function() {
                     photoCard.classList.remove('loading');
                 };
-                mainImg.onerror = function() {
+                result.img.onerror = function() {
                     photoCard.classList.remove('loading');
                     photoCard.classList.add('error');
                 };
+
+                if (!isEager) {
+                    deferredCards.push({
+                        sources: sources,
+                        img: result.img,
+                        webpSource: result.webpSource,
+                        jpegSource: result.jpegSource
+                    });
+                }
 
                 photoCard.addEventListener('click', function() {
                     openModal(index);
@@ -220,6 +230,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Failed to render photo card', { index: index, image: image, err: err });
             }
         });
+
+        // Load remaining images after a short delay so the page renders first
+        setTimeout(function() {
+            deferredCards.forEach(function(data) {
+                data.webpSource.srcset = data.sources.thumbWebP + ' 600w,' + data.sources.fullWebP + ' 1600w';
+                data.jpegSource.srcset = data.sources.thumbJpeg + ' 600w,' + data.sources.fullJpeg + ' 1600w';
+                data.img.srcset = data.sources.thumbJpeg + ' 600w,' + data.sources.fullJpeg + ' 1600w';
+                data.img.src = data.sources.thumbJpeg;
+            });
+        }, 100);
     }
 
     // Headshot loading animation (runs on home page)
