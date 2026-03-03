@@ -43,8 +43,9 @@ body {
 
 /* Header and navigation */
 header {
-    padding: 32px 0;
+    padding: clamp(16px, 3vh, 32px) 0;
     border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
 }
 
 .nav-v3 {
@@ -99,6 +100,32 @@ main {
     justify-content: center;
 }
 
+/* Home page — fill viewport exactly, no scroll */
+body.home {
+    height: 100dvh;
+    height: 100vh; /* fallback */
+    overflow: hidden;
+}
+
+body.home .container {
+    height: 100%;
+}
+
+body.home main {
+    justify-content: center;
+    gap: 0;
+    min-height: 0;
+}
+
+body.home .intro {
+    padding: 0;
+}
+
+body.home .contact {
+    margin-top: clamp(16px, 3vh, 40px);
+    padding: clamp(12px, 2vh, 40px) 0;
+}
+
 .intro {
     text-align: center;
     width: 100%;
@@ -106,11 +133,11 @@ main {
 }
 
 .headshot {
-    width: 200px;
-    height: 200px;
+    width: clamp(100px, 20vh, 200px);
+    height: clamp(100px, 20vh, 200px);
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 32px;
+    margin-bottom: clamp(12px, 2vh, 32px);
     border: 3px solid #f0f0f0;
     transition: border-color 0.2s ease;
 }
@@ -123,7 +150,7 @@ main {
 .headshot-container {
     position: relative;
     display: inline-block;
-    margin-bottom: 32px;
+    margin-bottom: 0;
 }
 
 .headshot-container.loading::before {
@@ -153,7 +180,7 @@ main {
 
 .landing-intro-bio {
     color: #1a1a1a;
-    font-size: 48px;
+    font-size: clamp(28px, 5vw, 48px);
     font-weight: 700;
     line-height: 1.1;
     margin: 0;
@@ -801,20 +828,6 @@ main {
 }
 
 @media screen and (max-width: 991px) {
-    .landing-intro-bio {
-        font-size: 40px;
-    }
-    
-    .intro {
-        padding: 60px 0;
-    }
-    
-    .headshot {
-        width: 160px;
-        height: 160px;
-        margin-bottom: 24px;
-    }
-
     .subtitle {
         font-size: 16px;
     }
@@ -952,20 +965,6 @@ main {
 }
 
 @media screen and (max-width: 479px) {
-    .landing-intro-bio {
-        font-size: 32px;
-    }
-    
-    .intro {
-        padding: 40px 0;
-    }
-    
-    .headshot {
-        width: 120px;
-        height: 120px;
-        margin-bottom: 20px;
-    }
-
     .subtitle {
         font-size: 15px;
     }
