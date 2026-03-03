@@ -9,6 +9,12 @@
     <meta property="og:description" content="Photography by Rishikesh Badari.">
     <meta property="og:type" content="website">
 
+    <!-- Preload the first (LCP) image for instant display -->
+    <link rel="preload" as="image" type="image/webp"
+          href="pictures/thumbs/1.webp"
+          imagesrcset="pictures/thumbs/1.webp 600w, pictures/optimized/1.webp 1600w"
+          imagesizes="(max-width: 479px) calc(100vw - 32px), (max-width: 767px) calc(50vw - 28px), (max-width: 1200px) calc(33vw - 40px), 350px">
+
     <!-- Prevent flash by setting background immediately -->
     <style>
         html, body { 

@@ -142,9 +142,15 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
 
-        // Build a <picture> element. If eager, sets srcset immediately.
-        // Otherwise leaves srcset empty for the IntersectionObserver to fill.
-        function createResponsivePicture(sources, alt, isEager) {
+        function loadPictureSources(data) {
+            data.webpSource.srcset = data.sources.thumbWebP + ' 600w,' + data.sources.fullWebP + ' 1600w';
+            data.jpegSource.srcset = data.sources.thumbJpeg + ' 600w,' + data.sources.fullJpeg + ' 1600w';
+            data.img.srcset = data.sources.thumbJpeg + ' 600w,' + data.sources.fullJpeg + ' 1600w';
+            data.img.src = data.sources.thumbJpeg;
+        }
+
+        // Build a <picture> element with empty srcset (populated on load trigger)
+        function createResponsivePicture(alt) {
             var picture = document.createElement('picture');
 
             var webpSource = document.createElement('source');
@@ -160,13 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
             img.alt = alt;
             img.sizes = gallerySizes;
 
-            if (isEager) {
-                webpSource.srcset = sources.thumbWebP + ' 600w,' + sources.fullWebP + ' 1600w';
-                jpegSource.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
-                img.srcset = sources.thumbJpeg + ' 600w,' + sources.fullJpeg + ' 1600w';
-                img.src = sources.thumbJpeg;
-            }
-
             picture.appendChild(webpSource);
             picture.appendChild(jpegSource);
             picture.appendChild(img);
@@ -174,44 +173,62 @@ document.addEventListener('DOMContentLoaded', function() {
             return { picture: picture, img: img, webpSource: webpSource, jpegSource: jpegSource };
         }
 
-        // Deferred cards to load after the first batch
-        var deferredCards = [];
+        // Lazy-load images when they approach the viewport
+        var lazyObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (!entry.isIntersecting) return;
+                var card = entry.target;
+                var data = card._lazyData;
+                if (!data) return;
+                loadPictureSources(data);
+                delete card._lazyData;
+                lazyObserver.unobserve(card);
+            });
+        }, { rootMargin: '400px 0px' });
 
         // Build gallery cards
         displayedGalleryData.forEach(function(image, index) {
             try {
                 var photoCard = document.createElement('div');
-                photoCard.className = 'photo-card loading';
                 photoCard.setAttribute('role', 'button');
                 photoCard.setAttribute('tabindex', '0');
                 photoCard.setAttribute('aria-label', 'View photo ' + (index + 1));
+                photoCard.className = 'photo-card';
 
                 var isEager = index < 6;
                 var sources = getImageSources(image.src);
-                var result = createResponsivePicture(sources, 'Photo ' + (index + 1), isEager);
+                var result = createResponsivePicture('Photo ' + (index + 1));
 
                 photoCard.innerHTML =
                     '<div class="image-wrapper"></div>' +
                     '<div class="photo-caption"></div>';
 
                 var imageWrapper = photoCard.querySelector('.image-wrapper');
+                imageWrapper.style.backgroundColor = image.color || '#f5f5f5';
                 imageWrapper.appendChild(result.picture);
 
+                // Fade in on load; handle cached images with img.complete
                 result.img.onload = function() {
-                    photoCard.classList.remove('loading');
+                    result.img.classList.add('loaded');
                 };
                 result.img.onerror = function() {
-                    photoCard.classList.remove('loading');
                     photoCard.classList.add('error');
                 };
 
-                if (!isEager) {
-                    deferredCards.push({
-                        sources: sources,
-                        img: result.img,
-                        webpSource: result.webpSource,
-                        jpegSource: result.jpegSource
-                    });
+                var pictureData = {
+                    sources: sources,
+                    img: result.img,
+                    webpSource: result.webpSource,
+                    jpegSource: result.jpegSource
+                };
+
+                if (isEager) {
+                    if (index === 0) result.img.fetchPriority = 'high';
+                    loadPictureSources(pictureData);
+                    if (result.img.complete) result.img.classList.add('loaded');
+                } else {
+                    photoCard._lazyData = pictureData;
+                    lazyObserver.observe(photoCard);
                 }
 
                 photoCard.addEventListener('click', function() {
@@ -230,16 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Failed to render photo card', { index: index, image: image, err: err });
             }
         });
-
-        // Load remaining images after a short delay so the page renders first
-        setTimeout(function() {
-            deferredCards.forEach(function(data) {
-                data.webpSource.srcset = data.sources.thumbWebP + ' 600w,' + data.sources.fullWebP + ' 1600w';
-                data.jpegSource.srcset = data.sources.thumbJpeg + ' 600w,' + data.sources.fullJpeg + ' 1600w';
-                data.img.srcset = data.sources.thumbJpeg + ' 600w,' + data.sources.fullJpeg + ' 1600w';
-                data.img.src = data.sources.thumbJpeg;
-            });
-        }, 100);
     }
 
     // Headshot loading animation (runs on home page)
