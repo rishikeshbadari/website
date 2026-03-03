@@ -1410,12 +1410,49 @@ body.home .contact {
         gap: 8px;
     }
 
+    .project-modal-content {
+        max-width: 100vw;
+        max-height: 100vh;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .project-modal-scroll {
+        height: 100vh;
+    }
+
+    .project-modal-close {
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
     .blog-modal-body {
-        padding: 20px 20px;
+        padding: 16px 16px;
     }
 
     .blog-post-body h1 {
-        font-size: 24px;
+        font-size: 22px;
+    }
+
+    .blog-post-date {
+        font-size: 12px;
+    }
+
+    .blog-post-body p {
+        font-size: 15px;
+    }
+
+    .blog-post-body pre {
+        padding: 16px;
+        overflow-x: auto;
+    }
+
+    .blog-post-body pre code {
+        font-size: 12px;
     }
 
     .art-page {
