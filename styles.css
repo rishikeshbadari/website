@@ -97,7 +97,6 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 /* Home page — content fits viewport without needing to scroll */
@@ -125,7 +124,7 @@ body.home .contact {
 .intro {
     text-align: center;
     width: 100%;
-    padding: 80px 0;
+    padding: 24px 0 0;
 }
 
 .headshot {
@@ -564,11 +563,12 @@ body.home .contact {
 .projects-container {
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding: 48px 0;
+    gap: 16px;
     width: 100%;
     max-width: 1040px;
     margin: 0 auto;
+    flex-grow: 1;
+    justify-content: center;
 }
 
 /* Project Card Styles */
