@@ -6,4 +6,4 @@ For a while I thought this was due to fresh air or the walking that would usuall
 
 After a few trips to the beach, I've become more confident in this theory. Something to the opposite effect of claustrophobia happens - you feel freer and more relaxed. 
 
-Maybe this should be called "aperiphoria": *aperi-* (open) + *-phoria* (the state of being) - the state of being open.
+This should be called "aperiphoria": *aperi-* (open) + *-phoria* (the state of being) - the state of being open.
