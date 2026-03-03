@@ -1269,22 +1269,23 @@ body.home .contact {
     }
     
     .project-modal.show {
-        align-items: flex-start;
+        align-items: stretch;
+        justify-content: stretch;
     }
 
     .project-modal-content {
-        max-width: 100vw;
-        max-height: 100%;
+        max-width: none;
+        max-height: none;
         width: 100%;
         height: 100%;
         border-radius: 0;
-        overflow-y: auto;
+        box-shadow: none;
+        animation: none;
     }
 
     .project-modal-scroll {
-        height: auto;
-        max-height: none;
-        overflow-y: visible;
+        height: 100%;
+        overflow-y: auto;
     }
 
     .project-modal-readme {
