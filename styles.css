@@ -100,22 +100,17 @@ main {
     justify-content: center;
 }
 
-/* Home page — fill viewport exactly, no scroll */
-body.home {
-    height: 100dvh;
-    height: 100vh; /* fallback */
-    overflow: hidden;
-}
-
+/* Home page — content fits viewport without needing to scroll */
 body.home .container {
-    height: 100%;
+    min-height: 100dvh;
+    min-height: 100vh;
 }
 
 body.home main {
     justify-content: center;
     gap: 0;
     min-height: 0;
-    padding-bottom: 5vh;
+    padding-bottom: 8vh;
 }
 
 body.home .intro {
