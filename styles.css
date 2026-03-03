@@ -1412,17 +1412,21 @@ body.home .contact {
 
     .project-modal-content {
         max-width: 100vw;
-        max-height: 100vh;
+        max-height: 100%;
         width: 100%;
         height: 100%;
         border-radius: 0;
+        overflow-y: auto;
     }
 
     .project-modal-scroll {
-        height: 100vh;
+        height: auto;
+        max-height: none;
+        overflow-y: visible;
     }
 
     .project-modal-close {
+        position: fixed;
         top: 12px;
         right: 12px;
         width: 32px;
