@@ -1,0 +1,138 @@
+/* ========================================
+   Home page — headshot, intro, contact
+   ======================================== */
+
+body.home .container {
+    min-height: 100dvh;
+    min-height: 100vh;
+}
+
+body.home main {
+    justify-content: center;
+    gap: 0;
+    min-height: 0;
+    padding-bottom: 8vh;
+}
+
+body.home .intro {
+    padding: 0;
+}
+
+body.home .contact {
+    margin-top: clamp(28px, 4vh, 48px);
+    padding: 0;
+}
+
+.intro {
+    text-align: center;
+    width: 100%;
+    padding: 24px 0 0;
+}
+
+/* Headshot image */
+.headshot {
+    width: clamp(100px, 20vh, 200px);
+    height: clamp(100px, 20vh, 200px);
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: clamp(12px, 2vh, 32px);
+    border: 3px solid #f0f0f0;
+    transition: border-color 0.2s ease;
+}
+
+.headshot:hover {
+    border-color: #e0e0e0;
+}
+
+.headshot-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.landing-intro-bio {
+    color: #1a1a1a;
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: #666666;
+    font-size: 18px;
+    line-height: 1.5;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Contact section */
+.contact {
+    text-align: center;
+    padding: 40px 0;
+    margin-top: 40px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-title {
+    color: #666666;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.contact-email {
+    color: #1a1a1a;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.contact-social {
+    color: #666666;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.contact-social a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.contact-social a:hover {
+    color: #666666;
+}
+
+/* ----------------------------------------
+   Home responsive
+   ---------------------------------------- */
+
+@media screen and (max-width: 991px) {
+    .subtitle {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .contact {
+        padding: 32px 0;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .subtitle {
+        font-size: 15px;
+    }
+}

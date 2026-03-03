@@ -1,0 +1,202 @@
+/* ========================================
+   Layout — container, header, nav, main
+   ======================================== */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: clamp(16px, 3vh, 32px) 0;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.nav-v3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.landing-link-about {
+    color: #666666;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    letter-spacing: -0.01em;
+    position: relative;
+}
+
+.landing-link-about::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 50%;
+    background-color: #1a1a1a;
+    transition: all 0.3s ease;
+}
+
+.landing-link-about:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.landing-link-about:hover {
+    color: #1a1a1a;
+}
+
+.landing-link-about.w--current {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ========================================
+   Shared modal — used by projects & blog
+   ======================================== */
+
+.project-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+}
+
+.project-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.project-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 100%;
+    max-width: 1000px;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+    animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.project-modal-scroll {
+    height: 90vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.project-modal-close {
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 18px;
+    color: #2a2a2a;
+    font-weight: 300;
+    z-index: 1001;
+}
+
+.project-modal-close:hover {
+    background: rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ----------------------------------------
+   Layout responsive
+   ---------------------------------------- */
+
+@media screen and (max-width: 767px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .nav-v3 {
+        gap: 24px;
+    }
+
+    .project-modal.show {
+        align-items: stretch;
+        justify-content: stretch;
+    }
+
+    .project-modal-content {
+        max-width: none;
+        max-height: none;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        box-shadow: none;
+        animation: none;
+    }
+
+    .project-modal-scroll {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .project-modal-close {
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .nav-v3 {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+}

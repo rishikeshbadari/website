@@ -9,42 +9,10 @@
     <meta property="og:description" content="Favorite music and movies by Rishikesh Badari.">
     <meta property="og:type" content="website">
 
-    <!-- Prevent flash by setting background immediately -->
+    <!-- Prevent flash -->
     <style>
-        html, body {
-            background-color: #ffffff;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        /* Critical CSS for immediate render */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        header {
-            padding: 32px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .nav-v3 {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
-        .landing-link-about {
-            color: #666666;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .landing-link-about.w--current {
-            color: #1a1a1a;
-            font-weight: 600;
-        }
+        html { background-color: #ffffff; }
+        body { opacity: 0; }
     </style>
 
     <!-- Optimized font loading -->
@@ -52,11 +20,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Load full CSS after critical rendering -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- API preconnects -->
+    <link rel="preconnect" href="https://itunes.apple.com">
+    <link rel="preconnect" href="https://image.tmdb.org">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/art.css">
 
     <!-- Preload page transition script -->
-    <link rel="preload" href="page-transitions.js" as="script">
+    <link rel="preload" href="js/page-transitions.js" as="script">
 </head>
 <body>
     <div class="container">
@@ -101,11 +75,8 @@
         </main>
     </div>
 
-    <!-- Art data and functionality -->
-    <script src="art-data.js"></script>
-    <script src="art.js"></script>
-
-    <!-- Page transition optimization -->
-    <script src="page-transitions.js"></script>
+    <script src="data/art-data.js"></script>
+    <script src="js/art.js"></script>
+    <script src="js/page-transitions.js"></script>
 </body>
 </html>

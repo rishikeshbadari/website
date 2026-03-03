@@ -1,6 +1,3 @@
-// TMDB API key — get yours free at https://www.themoviedb.org/settings/api
-var TMDB_API_KEY = '38a9f63304ce81381bd2eb0d75d5c0c9';
-
 var artData = {
     music: [
         {

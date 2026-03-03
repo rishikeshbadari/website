@@ -9,130 +9,10 @@
     <meta property="og:description" content="Projects by Rishikesh Badari. Machine learning, fractals, and more.">
     <meta property="og:type" content="website">
 
-    <!-- Prevent flash by setting background immediately -->
+    <!-- Prevent flash -->
     <style>
-        html, body {
-            background-color: #ffffff;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-        /* Critical CSS for immediate render */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        header {
-            padding: 32px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .nav-v3 {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
-        .landing-link-about {
-            color: #666666;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .landing-link-about.w--current {
-            color: #1a1a1a;
-            font-weight: 600;
-        }
-        /* Branch selector styles */
-        .branch-selector {
-            margin: 20px 0;
-        }
-        .branch-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-            justify-content: center;
-        }
-        .branch-btn {
-            padding: 10px 20px;
-            background: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        .branch-btn:hover {
-            background: #5a6268;
-            transform: translateY(-1px);
-        }
-        .branch-btn.active {
-            background: #007bff;
-        }
-        .branch-btn.active:hover {
-            background: #0056b3;
-        }
-        /* Better formatting for fractal content */
-        #fractal-content {
-            line-height: 1.6;
-            max-width: none;
-        }
-        #fractal-content h2 {
-            color: #1a1a1a;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        #fractal-content h3 {
-            color: #1a1a1a;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        #fractal-content h4 {
-            color: #1a1a1a;
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
-        #fractal-content p {
-            margin-bottom: 15px;
-            text-align: justify;
-            color: #1a1a1a;
-        }
-        #fractal-content ol, #fractal-content ul {
-            margin-bottom: 20px;
-            padding-left: 25px;
-        }
-        #fractal-content li {
-            margin-bottom: 8px;
-            color: #1a1a1a;
-        }
-        #fractal-content em {
-            font-style: italic;
-            color: #555;
-        }
-        #fractal-content sub {
-            font-size: 0.8em;
-        }
-        #fractal-content sup {
-            font-size: 0.8em;
-        }
-        #fractal-content code {
-            background: #f8f9fa;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Monaco', 'Menlo', monospace;
-            font-size: 0.9em;
-        }
-        /* Olympic project modal spacing tweaks */
-        .olympic-nav { margin: 8px 0 6px 0; }
-        .olympic-nav .branch-buttons { margin-top: 6px; }
-        /* Reduce vertical spacing between readme and demo globally */
-        .project-modal-readme { padding: 32px 40px 12px 40px; }
-        .project-modal-demo { padding: 0 40px 32px 40px; }
+        html { background-color: #ffffff; }
+        body { opacity: 0; }
     </style>
 
     <!-- Optimized font loading -->
@@ -140,11 +20,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Load full CSS after critical rendering -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/projects.css">
 
     <!-- Preload page transition script -->
-    <link rel="preload" href="page-transitions.js" as="script">
+    <link rel="preload" href="js/page-transitions.js" as="script">
 </head>
 <body>
     <div class="container">
@@ -210,10 +92,8 @@
         </main>
     </div>
 
-    <!-- Projects functionality -->
-    <script src="projects.js"></script>
-
-    <!-- Page transition optimization -->
-    <script src="page-transitions.js"></script>
+    <script src="data/projects-data.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="js/page-transitions.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+/* Blog — card rendering, modal, markdown */
 document.addEventListener('DOMContentLoaded', function() {
     var container = document.getElementById('blog-container');
     var modal = document.getElementById('blogModal');
