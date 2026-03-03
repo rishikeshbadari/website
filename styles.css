@@ -1313,8 +1313,12 @@ body.home .contact {
     }
 
     .art-card {
-        flex: 0 0 160px;
-        width: 160px;
+        flex: 0 0 calc(50% - 8px);
+        width: calc(50% - 8px);
+    }
+
+    .art-carousel-window {
+        width: 100%;
     }
 
     .art-carousel-track {
@@ -1420,11 +1424,18 @@ body.home .contact {
 
     .art-section {
         margin-bottom: 40px;
+        padding: 20px 16px;
+        border-radius: 12px;
     }
 
     .art-section h2 {
         font-size: 20px;
         margin-bottom: 16px;
+    }
+
+    .art-card {
+        flex: 0 0 100%;
+        width: 100%;
     }
 
     .art-carousel-track {
