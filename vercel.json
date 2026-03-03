@@ -7,6 +7,10 @@
     {
       "source": "/projects",
       "destination": "/projects.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
     }
   ],
   "redirects": [

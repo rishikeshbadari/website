@@ -17,13 +17,13 @@ class PageTransitions {
     }
 
     addHoverPreloading() {
-        const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="index.html"], a[href^="pictures.html"], a[href^="projects.html"]');
-        
+        const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="index.html"], a[href^="pictures.html"], a[href^="projects.html"], a[href^="blog.html"]');
+
         links.forEach(link => {
             link.addEventListener('mouseenter', () => {
                 this.preloadPage(link.href);
             });
-            
+
             link.addEventListener('touchstart', () => {
                 this.preloadPage(link.href);
             }, { passive: true });
@@ -48,8 +48,8 @@ class PageTransitions {
     }
 
     addExitAnimations() {
-        const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="index.html"], a[href^="pictures.html"], a[href^="projects.html"]');
-        
+        const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="index.html"], a[href^="pictures.html"], a[href^="projects.html"], a[href^="blog.html"]');
+
         links.forEach(link => {
             link.addEventListener('click', (e) => {
                 // Don't animate external links or if opening in new tab
@@ -70,7 +70,8 @@ class PageTransitions {
             const criticalPages = [
                 window.location.origin + '/',
                 window.location.origin + '/pictures.html',
-                window.location.origin + '/projects.html'
+                window.location.origin + '/projects.html',
+                window.location.origin + '/blog.html'
             ];
             
             criticalPages.forEach(page => {
