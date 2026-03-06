@@ -1,6 +1,6 @@
 # Aperiphoria
 
-I'm coining this term as the opposite of feeling claustrophoibic.
+I'm coining this term as the opposite of feeling claustrophobic.
 
 *aperi-* (open) + *-phoria* (the state of being): the state of being open.
 
