@@ -49,9 +49,12 @@
                 window.location.origin + '/',
                 window.location.origin + '/pictures.html',
                 window.location.origin + '/projects.html',
-                window.location.origin + '/blog.html',
                 window.location.origin + '/art.html'
             ];
+
+            if (typeof blogData !== 'undefined' && blogData.length > 0) {
+                criticalPages.push(window.location.origin + '/blog.html');
+            }
 
             criticalPages.forEach(function(page) {
                 if (page !== window.location.href) {
@@ -61,7 +64,15 @@
         }, 1000);
     }
 
+    function showBlogLinkIfNeeded() {
+        if (typeof blogData !== 'undefined' && blogData.length > 0) {
+            var blogLink = document.querySelector('.landing-link-about[href="/blog.html"]');
+            if (blogLink) blogLink.style.display = '';
+        }
+    }
+
     function init() {
+        showBlogLinkIfNeeded();
         addHoverPreloading();
         addExitAnimations();
         preloadCriticalPages();

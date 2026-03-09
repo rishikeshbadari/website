@@ -60,6 +60,11 @@ header {
     font-weight: 600;
 }
 
+/* Blog link hidden by default — shown by JS when blogData has entries */
+.landing-link-about[href="/blog.html"] {
+    display: none;
+}
+
 main {
     flex-grow: 1;
     display: flex;
