@@ -11,9 +11,12 @@
 
 .art-section {
     margin-bottom: 56px;
-    background: #f5f5f5;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-radius: 16px;
     padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .art-section:last-child {
@@ -57,8 +60,8 @@
     color: inherit;
     border-radius: 12px;
     overflow: hidden;
-    background: #fafafa;
-    border: 1px solid #f0f0f0;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -132,8 +135,10 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 1px solid #e0e0e0;
-    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: #1a1a1a;
     font-size: 22px;
     cursor: pointer;
