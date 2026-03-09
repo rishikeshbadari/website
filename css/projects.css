@@ -305,6 +305,12 @@
    Projects responsive
    ---------------------------------------- */
 
+@media screen and (max-width: 1024px) {
+    .projects-container {
+        justify-content: flex-start;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .projects-container {
         grid-template-columns: 1fr;
