@@ -9,7 +9,6 @@ const galleryData = [
     { src: "pictures/optimized/8.jpg", color: "#698088" },
     { src: "pictures/optimized/9.jpg", color: "#80928C" },
     { src: "pictures/optimized/10.jpg", color: "#7F8C78" },
-    { src: "pictures/optimized/11.jpg", color: "#484947" },
     { src: "pictures/optimized/12.jpg", color: "#424546" },
     { src: "pictures/optimized/13.jpg", color: "#3C4345" },
     { src: "pictures/optimized/14.jpg", color: "#645F5A" },
