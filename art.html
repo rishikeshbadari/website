@@ -15,6 +15,9 @@
         body { opacity: 0; }
     </style>
 
+    <!-- Video CDN preconnect -->
+    <link rel="preconnect" href="https://rdhmdr9zonkdtknk.public.blob.vercel-storage.com" crossorigin>
+
     <!-- Optimized font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,8 +36,8 @@
     <link rel="preload" href="js/page-transitions.js" as="script">
 </head>
 <body>
-    <video class="bg-video" id="bg-video" autoplay loop muted playsinline preload="auto" aria-hidden="true">
-        <source src="https://rdhmdr9zonkdtknk.public.blob.vercel-storage.com/clip_optimized.mp4" type="video/mp4">
+    <video class="bg-video" id="bg-video" autoplay loop muted playsinline preload="auto" aria-hidden="true" poster="https://rdhmdr9zonkdtknk.public.blob.vercel-storage.com/video-poster.jpg">
+        <source src="https://rdhmdr9zonkdtknk.public.blob.vercel-storage.com/clip_optimized_v2.mp4" type="video/mp4">
     </video>
     <div class="container">
         <header>
