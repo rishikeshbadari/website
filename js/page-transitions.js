@@ -9,11 +9,27 @@
 
         var savedTime = sessionStorage.getItem(VIDEO_TIME_KEY);
 
+        video.removeAttribute('poster');
+
+        video.addEventListener('playing', function() {
+            video.classList.add('playing');
+        });
+
         function restoreAndPlay() {
+            video.muted = true;
             if (savedTime !== null) {
                 video.currentTime = parseFloat(savedTime);
             }
-            video.play().catch(function() {});
+            video.play().catch(function() {
+                // Autoplay blocked — retry on first user interaction
+                var resume = function() {
+                    video.play().catch(function() {});
+                    document.removeEventListener('click', resume);
+                    document.removeEventListener('touchstart', resume);
+                };
+                document.addEventListener('click', resume, { once: true });
+                document.addEventListener('touchstart', resume, { once: true });
+            });
         }
 
         if (video.readyState >= 1) {
@@ -27,6 +43,11 @@
                 sessionStorage.setItem(VIDEO_TIME_KEY, video.currentTime);
             }
         }, 500);
+
+        // Register service worker to cache video for instant loads
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(function() {});
+        }
     }
 
     function saveVideoTime() {
