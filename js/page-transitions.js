@@ -11,9 +11,14 @@
 
         video.removeAttribute('poster');
 
-        video.addEventListener('playing', function() {
+        function showVideo() {
             video.classList.add('playing');
-        });
+        }
+
+        if (!video.paused) {
+            showVideo();
+        }
+        video.addEventListener('playing', showVideo);
 
         function restoreAndPlay() {
             video.muted = true;
