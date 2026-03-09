@@ -308,6 +308,7 @@
 @media screen and (max-width: 1024px) {
     .projects-container {
         justify-content: flex-start;
+        padding-top: 32px;
     }
 }
 
