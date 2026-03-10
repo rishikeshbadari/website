@@ -13,14 +13,9 @@
 }
 
 header {
-    padding: clamp(16px, 3vh, 32px) 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: clamp(16px, 3vh, 32px) 0;
+    border-bottom: 1px solid #f0f0f0;
     flex-shrink: 0;
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    margin: 0 -24px;
-    border-radius: 0 0 12px 12px;
 }
 
 .nav-v3 {
@@ -168,12 +163,6 @@ main {
 @media screen and (max-width: 767px) {
     .container {
         padding: 0 20px;
-    }
-
-    header {
-        margin: 0 -20px;
-        padding-left: 20px;
-        padding-right: 20px;
     }
 
     .nav-v3 {

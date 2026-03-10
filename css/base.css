@@ -14,7 +14,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: transparent;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -30,30 +30,10 @@ body {
     to { opacity: 1; }
 }
 
-/* ========================================
-   Background video
-   ======================================== */
-
-.bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: -1;
-    pointer-events: none;
-}
-
 /* Accessibility — reduce motion */
 @media (prefers-reduced-motion: reduce) {
     body {
         opacity: 1;
         animation: none;
-        background-color: #ffffff;
-    }
-
-    .bg-video {
-        display: none;
     }
 }
