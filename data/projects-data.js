@@ -1,6 +1,25 @@
 /* Project content — HTML templates and data */
 
 var projectData = {
+    'quizbowl': {
+        readme: '\
+            <div class="project-title-header">\
+                <h1>QuizBowl</h1>\
+            </div>\
+            <p>An iOS app for practicing quiz bowl tossups. Powered by the QBReader API, it reveals questions word-by-word and lets you buzz in whenever you think you know the answer. Filter by difficulty (middle school, high school, college) and category, or play with friends in multiplayer.</p>\
+            <p>Built with React Native and Expo.</p>\
+            <hr>\
+            <p class="testflight-notice">Currently available on <strong>TestFlight</strong> only. Email <a href="mailto:badari.rishikesh@gmail.com">badari.rishikesh@gmail.com</a> to get access.</p>\
+        ',
+        links: '',
+        demo: '\
+            <div class="quizbowl-screenshots">\
+                <img src="projects/QuizBowl/2.PNG" alt="QuizBowl — Answer result" loading="lazy">\
+                <img src="projects/QuizBowl/3.PNG" alt="QuizBowl — Settings" loading="lazy">\
+                <img src="projects/QuizBowl/4.PNG" alt="QuizBowl — Multiplayer" loading="lazy">\
+            </div>\
+        '
+    },
     'snake-game': {
         readme: '\
             <div class="project-title-header">\

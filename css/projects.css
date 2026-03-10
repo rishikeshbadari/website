@@ -301,6 +301,38 @@
 .project-modal-readme { padding: 32px 40px 12px 40px; }
 .project-modal-demo { padding: 0 40px 32px 40px; }
 
+/* TestFlight notice */
+.testflight-notice {
+    margin-top: 16px;
+    color: #1a1a1a;
+    font-size: 15px;
+}
+
+.testflight-notice a {
+    color: #1a1a1a;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.testflight-notice a:hover {
+    color: #666666;
+}
+
+/* QuizBowl screenshot gallery */
+.quizbowl-screenshots {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.quizbowl-screenshots img {
+    height: 520px;
+    width: auto;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
 /* ----------------------------------------
    Projects responsive
    ---------------------------------------- */
@@ -332,6 +364,10 @@
     .project-title-header {
         gap: 12px;
     }
+
+    .quizbowl-screenshots img {
+        height: 420px;
+    }
 }
 
 @media screen and (max-width: 479px) {
@@ -351,5 +387,13 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+    }
+
+    .quizbowl-screenshots {
+        gap: 12px;
+    }
+
+    .quizbowl-screenshots img {
+        height: 360px;
     }
 }
