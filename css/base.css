@@ -34,19 +34,6 @@ body {
    Background video
    ======================================== */
 
-.bg-video-poster {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
-    background: url('../assets/video-poster.jpg') center/cover no-repeat;
-    pointer-events: none;
-    filter: blur(10px);
-    transform: scale(1.05);
-}
-
 .bg-video {
     position: fixed;
     top: 0;
@@ -56,14 +43,6 @@ body {
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.bg-video.playing {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 0.3s ease;
 }
 
 /* Accessibility — reduce motion */
