@@ -30,6 +30,12 @@ body {
     to { opacity: 1; }
 }
 
+/* Skip fade-in on internal page-to-page navigation */
+html.internal-nav body {
+    opacity: 1;
+    animation: none;
+}
+
 /* Accessibility — reduce motion */
 @media (prefers-reduced-motion: reduce) {
     body {

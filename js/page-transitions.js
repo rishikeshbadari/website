@@ -82,11 +82,30 @@
         }
     }
 
+    function addSpeculationRules() {
+        if (typeof HTMLScriptElement === 'undefined' ||
+            !HTMLScriptElement.supports ||
+            !HTMLScriptElement.supports('speculationrules')) return;
+
+        var urls = ['/', '/pictures.html', '/projects.html', '/art.html'];
+        if (typeof blogData !== 'undefined' && blogData.length > 0) {
+            urls.push('/blog.html');
+        }
+
+        var script = document.createElement('script');
+        script.type = 'speculationrules';
+        script.textContent = JSON.stringify({
+            prerender: [{ urls: urls }]
+        });
+        document.head.appendChild(script);
+    }
+
     function init() {
         showBlogLinkIfNeeded();
         addHoverPreloading();
         addExitAnimations();
         preloadCriticalPages();
+        addSpeculationRules();
     }
 
     if (document.readyState === 'loading') {
