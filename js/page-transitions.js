@@ -46,21 +46,31 @@
 
     function preloadCriticalPages() {
         setTimeout(function() {
-            var criticalPages = [
-                window.location.origin + '/',
-                window.location.origin + '/pictures.html',
-                window.location.origin + '/projects.html',
-                window.location.origin + '/art.html'
+            var origin = window.location.origin;
+
+            // HTML pages
+            var pages = [
+                '/',
+                '/pictures.html',
+                '/projects.html',
+                '/art.html'
             ];
 
             if (typeof blogData !== 'undefined' && blogData.length > 0) {
-                criticalPages.push(window.location.origin + '/blog.html');
+                pages.push('/blog.html');
             }
 
-            criticalPages.forEach(function(page) {
-                if (page !== window.location.href) {
-                    preloadPage(page);
-                }
+            // Page-specific CSS, JS, and data files
+            var resources = [
+                '/css/home.css',
+                '/css/gallery.css', '/data/gallery-data.js', '/js/gallery.js',
+                '/css/projects.css', '/data/projects-data.js', '/js/projects.js',
+                '/css/art.css', '/data/art-data.js', '/js/art.js',
+                '/css/blog.css', '/js/blog.js', '/vendor/marked.min.js'
+            ];
+
+            pages.concat(resources).forEach(function(path) {
+                preloadPage(origin + path);
             });
         }, 1000);
     }
