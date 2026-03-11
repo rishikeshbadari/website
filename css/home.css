@@ -2,99 +2,11 @@
    Home page — headshot, intro, contact
    ======================================== */
 
-/* Animated flowing lines (SVG) */
 body.home {
     overflow: hidden;
 }
 
-.home-lines {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.hline {
-    fill: none;
-    stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
-    /* Draw-in: start fully hidden */
-    stroke-dasharray: 1500;
-    stroke-dashoffset: 1500;
-}
-
-/* Left-to-top group */
-.hline-lt1 {
-    stroke: #d4854a;
-    stroke-width: 5.5;
-    opacity: 0.28;
-    animation: drawIn 1.8s ease-out 0.2s forwards, driftA 14s ease-in-out 2.0s infinite;
-}
-.hline-lt2 {
-    stroke: #c98b1d;
-    stroke-width: 4.5;
-    opacity: 0.22;
-    animation: drawIn 2.0s ease-out 0.5s forwards, driftB 18s ease-in-out 2.5s infinite;
-}
-.hline-lt3 {
-    stroke: #e09545;
-    stroke-width: 5;
-    opacity: 0.18;
-    animation: drawIn 2.2s ease-out 0.8s forwards, driftA 22s ease-in-out 3.0s infinite reverse;
-}
-
-/* Right-to-bottom group */
-.hline-rb1 {
-    stroke: #c0603a;
-    stroke-width: 5.5;
-    opacity: 0.26;
-    animation: drawIn 1.8s ease-out 0.4s forwards, driftB 16s ease-in-out 2.2s infinite;
-}
-.hline-rb2 {
-    stroke: #d4854a;
-    stroke-width: 4.5;
-    opacity: 0.20;
-    animation: drawIn 2.0s ease-out 0.7s forwards, driftA 20s ease-in-out 2.7s infinite;
-}
-.hline-rb3 {
-    stroke: #e09545;
-    stroke-width: 5;
-    opacity: 0.15;
-    animation: drawIn 2.2s ease-out 1.0s forwards, driftB 24s ease-in-out 3.2s infinite reverse;
-}
-
-/* Draw-in on page load */
-@keyframes drawIn {
-    to { stroke-dashoffset: 0; }
-}
-
-/* Gentle flowing drift */
-@keyframes driftA {
-    0%, 100% { transform: translate(0, 0); }
-    25%      { transform: translate(30px, -20px); }
-    50%      { transform: translate(-20px, 15px); }
-    75%      { transform: translate(15px, -10px); }
-}
-
-@keyframes driftB {
-    0%, 100% { transform: translate(0, 0); }
-    25%      { transform: translate(-25px, 18px); }
-    50%      { transform: translate(22px, -14px); }
-    75%      { transform: translate(-12px, 10px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .hline {
-        animation: none;
-        stroke-dashoffset: 0;
-    }
-}
-
 body.home .container {
-    position: relative;
-    z-index: 1;
     min-height: 100dvh;
     min-height: 100vh;
 }

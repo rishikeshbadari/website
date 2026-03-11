@@ -41,6 +41,13 @@
         <path class="hline hline-rb2" d="M1500,0 C1280,230 1050,530 850,1000" />
         <path class="hline hline-rb3" d="M1620,220 C1400,400 1230,660 1100,950" />
     </svg>
+    <script>
+        (function() {
+            var s = document.querySelector('.home-lines');
+            if (sessionStorage.getItem('linesDrawn')) { s.classList.add('no-draw'); }
+            else { sessionStorage.setItem('linesDrawn', '1'); }
+        })();
+    </script>
 
     <div class="container">
         <header>

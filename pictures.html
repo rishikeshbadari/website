@@ -40,6 +40,23 @@
     <link rel="preload" href="js/page-transitions.js" as="script">
 </head>
 <body>
+    <!-- Decorative flowing lines -->
+    <svg class="home-lines" aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="none">
+        <path class="hline hline-lt1" d="M-100,800 C150,620 350,320 550,-50" />
+        <path class="hline hline-lt2" d="M-50,900 C250,700 480,380 700,-80" />
+        <path class="hline hline-lt3" d="M-200,720 C80,540 280,220 420,-100" />
+        <path class="hline hline-rb1" d="M1540,100 C1320,320 1120,600 950,950" />
+        <path class="hline hline-rb2" d="M1500,0 C1280,230 1050,530 850,1000" />
+        <path class="hline hline-rb3" d="M1620,220 C1400,400 1230,660 1100,950" />
+    </svg>
+    <script>
+        (function() {
+            var s = document.querySelector('.home-lines');
+            if (sessionStorage.getItem('linesDrawn')) { s.classList.add('no-draw'); }
+            else { sessionStorage.setItem('linesDrawn', '1'); }
+        })();
+    </script>
+
     <div class="container">
         <header>
             <nav class="nav-v3">
