@@ -239,6 +239,20 @@ main {
    ---------------------------------------- */
 
 @media screen and (max-width: 767px) {
+    /* Smaller drift on mobile so lines don't overlap */
+    @keyframes driftA {
+        0%, 100% { transform: translate(0, 0); }
+        25%      { transform: translate(10px, -7px); }
+        50%      { transform: translate(-7px, 5px); }
+        75%      { transform: translate(5px, -3px); }
+    }
+    @keyframes driftB {
+        0%, 100% { transform: translate(0, 0); }
+        25%      { transform: translate(-8px, 6px); }
+        50%      { transform: translate(7px, -5px); }
+        75%      { transform: translate(-4px, 3px); }
+    }
+
     .container {
         padding: 0 20px;
     }
