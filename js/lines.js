@@ -3,9 +3,10 @@
     var svg = document.querySelector('.home-lines');
     if (!svg) return;
 
-    // Skip draw-in if this was an internal navigation (flag set by page-transitions.js).
-    // Fresh loads and reloads won't have the flag, so draw-in plays.
-    if (sessionStorage.getItem('internalNav')) {
+    // Draw-in only plays on the home page on fresh loads/reloads.
+    // All other pages always skip draw-in (lines appear instantly with drift).
+    var isHome = document.body.classList.contains('home');
+    if (!isHome || sessionStorage.getItem('internalNav')) {
         svg.classList.add('no-draw');
     }
     sessionStorage.removeItem('internalNav');
