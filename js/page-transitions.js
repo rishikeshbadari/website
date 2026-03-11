@@ -37,6 +37,7 @@
                     return;
                 }
 
+                sessionStorage.setItem('internalNav', '1');
                 document.body.style.transition = 'opacity 0.15s ease-out';
                 document.body.style.opacity = '0.7';
             });
