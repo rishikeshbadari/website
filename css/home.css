@@ -147,6 +147,29 @@
 
 .meta-value a:hover { opacity: 0.5; }
 
+.contact-icons {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.contact-icon {
+    height: 22px;
+    width: 22px;
+    object-fit: contain;
+    display: block;
+}
+
+.contact-icon--letterboxd {
+    height: 26px;
+    width: 26px;
+    margin-left: -3px;
+}
+
+.contact-icon--x {
+    margin-left: -6px;
+}
+
 /* ----------------------------------------
    Responsive
    ---------------------------------------- */
