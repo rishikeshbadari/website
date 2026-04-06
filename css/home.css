@@ -84,9 +84,9 @@
 .hero-title {
     font-family: -apple-system, 'Inter', sans-serif;
     font-size: clamp(56px, 9.5vw, 132px);
-    font-weight: 900;
+    font-weight: 700;
     line-height: 0.95;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     color: #ffffff; /* overridden by JS once photos load */
     margin: 0;
     transition: color 1.5s ease-in-out;
