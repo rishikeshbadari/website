@@ -3,48 +3,27 @@
    ======================================== */
 
 /* ----------------------------------------
-   Sticky site header
+   Fixed vertical nav — right side
    ---------------------------------------- */
 
-.site-header {
-    position: sticky;
-    top: 0;
+.side-nav {
+    position: fixed;
+    right: clamp(24px, 4vw, 56px);
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 100;
-    background-color: #141414;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.site-header-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 clamp(20px, 4vw, 48px);
-    height: 58px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-brand {
-    color: #e8e8e8;
-    font-size: 15px;
-    font-weight: 500;
-    text-decoration: none;
-    letter-spacing: -0.01em;
-    flex-shrink: 0;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 36px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
 }
 
 .nav-link {
     color: rgba(232, 232, 232, 0.5);
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 600;
     text-decoration: none;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     transition: color 0.2s ease;
 }
@@ -66,7 +45,6 @@
 .page-section {
     padding: clamp(72px, 11vh, 120px) 0;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
-    scroll-margin-top: 58px;
 }
 
 /* Section heading row */

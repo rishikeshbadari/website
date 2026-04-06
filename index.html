@@ -35,18 +35,14 @@
     <link rel="stylesheet" href="css/art.css">
 </head>
 <body>
-    <!-- Sticky site header -->
-    <header class="site-header">
-        <div class="site-header-inner">
-            <a href="/" class="nav-brand">Rishikesh Badari</a>
-            <nav class="nav-links">
-                <a href="#pictures" class="nav-link">Pictures</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#blog" class="nav-link nav-blog-link">Blog</a>
-                <a href="#favorites" class="nav-link">Favorites</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Fixed vertical nav on the right -->
+    <nav class="side-nav">
+        <a href="#hero"      class="nav-link">Home</a>
+        <a href="#pictures"  class="nav-link">Pictures</a>
+        <a href="#projects"  class="nav-link">Projects</a>
+        <a href="#blog"      class="nav-link nav-blog-link">Blog</a>
+        <a href="#favorites" class="nav-link">Favorites</a>
+    </nav>
 
     <main>
 
@@ -218,9 +214,7 @@
                 var target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     e.preventDefault();
-                    var headerH = document.querySelector('.site-header').offsetHeight;
-                    var top = target.getBoundingClientRect().top + window.scrollY - headerH;
-                    window.scrollTo({ top: top, behavior: 'smooth' });
+                    window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
                 }
             });
         });
