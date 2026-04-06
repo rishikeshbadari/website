@@ -1,5 +1,5 @@
 /* ========================================
-   Base — reset, typography, page animation
+   Base — reset, typography, dark theme
    ======================================== */
 
 * {
@@ -8,38 +8,26 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #1a1a1a;
+    color: #e8e8e8;
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background-color: #141414;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    opacity: 0;
-    animation: fadeIn 0.3s ease-in-out forwards;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+a {
+    color: inherit;
 }
 
-/* Skip fade-in on internal page-to-page navigation */
-html.internal-nav body {
-    opacity: 1;
-    animation: none;
-}
-
-/* Accessibility — reduce motion */
 @media (prefers-reduced-motion: reduce) {
-    body {
-        opacity: 1;
-        animation: none;
+    html {
+        scroll-behavior: auto;
     }
 }

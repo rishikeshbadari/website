@@ -5,96 +5,74 @@
 .projects-container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
     width: 100%;
-    max-width: 1040px;
-    margin: 0 auto;
-    flex-grow: 1;
-    justify-content: center;
 }
 
 /* Project card */
 .project-card {
-    background-color: #fafafa;
-    border-radius: 12px;
-    padding: 24px;
-    border: 1px solid #f0f0f0;
-    transition: all 0.3s ease;
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    padding: 22px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: border-color 0.25s ease, transform 0.25s ease;
     cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
 }
 
 .project-card:hover {
-    border-color: #e0e0e0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-color: rgba(255, 255, 255, 0.18);
     transform: translateY(-2px);
 }
 
 .project-card h3 {
     margin: 0;
-    color: #1a1a1a;
-    font-size: 20px;
+    color: #e8e8e8;
+    font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.01em;
-}
-
-.project-card p {
-    color: #666666;
-    margin-bottom: 16px;
-    line-height: 1.5;
-    flex-grow: 1;
 }
 
 /* Project link */
 .project-link {
     display: inline-block;
-    color: #1a1a1a;
+    color: rgba(232, 232, 232, 0.45);
     text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.07em;
+    white-space: nowrap;
     transition: color 0.2s ease;
 }
 
-.project-link:hover:not(.disabled) {
-    color: #666666;
-}
-
-.project-link.disabled {
-    color: #cccccc;
-    cursor: not-allowed;
+.project-card:hover .project-link {
+    color: rgba(232, 232, 232, 0.8);
 }
 
 /* Modal README section */
 .project-modal-readme {
-    padding: 40px 40px 20px 40px;
-    background: #ffffff;
-}
-
-.project-title-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
+    padding: 32px 40px 12px 40px;
+    background: #1a1a1a;
 }
 
 .readme-content h1 {
-    color: #1a1a1a;
-    font-size: 28px;
+    color: #e8e8e8;
+    font-size: 26px;
     font-weight: 700;
-    margin: 0;
+    margin: 0 0 12px;
     letter-spacing: -0.02em;
 }
 
 .readme-content p {
-    color: #666666;
-    line-height: 1.6;
+    color: rgba(232, 232, 232, 0.65);
+    line-height: 1.65;
     margin-bottom: 12px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .readme-content p:last-child {
@@ -104,29 +82,29 @@
 .readme-content hr {
     border: none;
     height: 1px;
-    background: #e0e0e0;
+    background: rgba(255, 255, 255, 0.08);
     margin: 20px 0 0 0;
 }
 
 .project-links {
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid #f0f0f0;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .project-links a {
     display: inline-block;
-    color: #1a1a1a;
+    color: rgba(232, 232, 232, 0.7);
     text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.025em;
-    transition: all 0.2s ease;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
 }
 
 .project-links a:hover {
-    color: #666666;
+    color: #e8e8e8;
 }
 
 .github-link {
@@ -134,42 +112,39 @@
     transition: transform 0.2s ease;
 }
 
-.github-link:hover {
-    transform: scale(1.1);
-}
+.github-link:hover { transform: scale(1.1); }
 
 .github-logo {
-    width: 32px;
-    height: 32px;
-    filter: grayscale(0.2);
+    width: 28px;
+    height: 28px;
+    filter: invert(1) brightness(0.7);
     transition: filter 0.2s ease;
 }
 
 .github-logo:hover {
-    filter: grayscale(0);
+    filter: invert(1) brightness(1);
 }
 
 /* Modal demo section */
 .project-modal-demo {
-    padding: 8px 40px 40px 40px;
-    background: #ffffff;
-    min-height: calc(90vh - 200px);
+    padding: 0 40px 32px 40px;
+    background: #1a1a1a;
+    min-height: 200px;
 }
 
 .project-modal-demo h3 {
-    color: #1a1a1a;
-    font-size: 20px;
+    color: #e8e8e8;
+    font-size: 18px;
     font-weight: 600;
-    margin: 0 0 16px 0;
+    margin: 0 0 14px;
 }
 
-/* Game container (snake) */
+/* Game container */
 .game-container {
-    background: #000000;
-    border-radius: 12px;
+    background: #000;
+    border-radius: 10px;
     overflow: hidden;
     margin-bottom: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     max-width: 740px;
     margin-left: auto;
     margin-right: auto;
@@ -179,221 +154,101 @@
     display: block;
     border: none;
     width: 100%;
-    border-radius: 12px;
+    border-radius: 10px;
     height: 540px;
 }
 
 .game-instructions {
-    color: #666666;
-    font-size: 14px;
+    color: rgba(232, 232, 232, 0.5);
+    font-size: 13px;
     text-align: center;
     margin: 0;
     font-style: italic;
 }
 
-/* ========================================
-   Branch selector — fractals & olympic
-   ======================================== */
-
-.branch-selector {
-    margin: 20px 0;
-}
+/* Branch selector */
+.branch-selector { margin: 16px 0; }
 
 .branch-buttons {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
-    margin-top: 15px;
+    margin-top: 12px;
     justify-content: center;
 }
 
 .branch-btn {
-    padding: 10px 20px;
-    background: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    padding: 9px 18px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(232, 232, 232, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
+    font-size: 13px;
+    transition: all 0.2s ease;
 }
 
 .branch-btn:hover {
-    background: #5a6268;
-    transform: translateY(-1px);
+    background: rgba(255, 255, 255, 0.14);
+    color: #e8e8e8;
 }
 
 .branch-btn.active {
-    background: #007bff;
+    background: rgba(255, 255, 255, 0.18);
+    color: #e8e8e8;
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
-.branch-btn.active:hover {
-    background: #0056b3;
-}
+/* Fractal content */
+#fractal-content { line-height: 1.6; max-width: none; }
+#fractal-content h2 { color: #e8e8e8; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 8px; margin-top: 0; }
+#fractal-content h3 { color: #e8e8e8; margin-top: 28px; margin-bottom: 12px; }
+#fractal-content h4 { color: #e8e8e8; margin-top: 20px; margin-bottom: 8px; }
+#fractal-content p  { color: rgba(232,232,232,0.7); margin-bottom: 14px; }
+#fractal-content ol, #fractal-content ul { color: rgba(232,232,232,0.7); margin-bottom: 16px; padding-left: 22px; }
+#fractal-content li { margin-bottom: 6px; }
+#fractal-content em { font-style: italic; color: rgba(232,232,232,0.6); }
+#fractal-content code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
 
-/* Fractal content formatting */
-#fractal-content {
-    line-height: 1.6;
-    max-width: none;
-}
-
-#fractal-content h2 {
-    color: #1a1a1a;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-    margin-top: 0;
-}
-
-#fractal-content h3 {
-    color: #1a1a1a;
-    margin-top: 30px;
-    margin-bottom: 15px;
-}
-
-#fractal-content h4 {
-    color: #1a1a1a;
-    margin-top: 25px;
-    margin-bottom: 10px;
-}
-
-#fractal-content p {
-    margin-bottom: 15px;
-    text-align: justify;
-    color: #1a1a1a;
-}
-
-#fractal-content ol, #fractal-content ul {
-    margin-bottom: 20px;
-    padding-left: 25px;
-}
-
-#fractal-content li {
-    margin-bottom: 8px;
-    color: #1a1a1a;
-}
-
-#fractal-content em {
-    font-style: italic;
-    color: #555;
-}
-
-#fractal-content sub {
-    font-size: 0.8em;
-}
-
-#fractal-content sup {
-    font-size: 0.8em;
-}
-
-#fractal-content code {
-    background: #f8f9fa;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: 'Monaco', 'Menlo', monospace;
-    font-size: 0.9em;
-}
-
-/* Olympic project modal spacing */
+/* Olympic nav */
 .olympic-nav { margin: 8px 0 6px 0; }
 .olympic-nav .branch-buttons { margin-top: 6px; }
 
-/* Reduced vertical spacing between readme and demo */
-.project-modal-readme { padding: 32px 40px 12px 40px; }
-.project-modal-demo { padding: 0 40px 32px 40px; }
-
 /* TestFlight notice */
-.testflight-notice {
-    margin-top: 16px;
-    color: #1a1a1a;
-    font-size: 15px;
-}
+.testflight-notice { margin-top: 14px; color: rgba(232,232,232,0.7); font-size: 14px; }
+.testflight-notice a { color: #e8e8e8; text-decoration: underline; text-underline-offset: 2px; }
+.testflight-notice a:hover { opacity: 0.6; }
 
-.testflight-notice a {
-    color: #1a1a1a;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-
-.testflight-notice a:hover {
-    color: #666666;
-}
-
-/* QuizBowl screenshot gallery */
+/* QuizBowl screenshots */
 .quizbowl-screenshots {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .quizbowl-screenshots img {
-    height: 520px;
+    height: 500px;
     width: auto;
-    border-radius: 16px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* ----------------------------------------
    Projects responsive
    ---------------------------------------- */
 
-@media screen and (max-width: 1024px) {
-    .projects-container {
-        justify-content: flex-start;
-        padding-top: 32px;
-    }
-}
-
 @media screen and (max-width: 767px) {
-    .projects-container {
-        grid-template-columns: 1fr;
-    }
-
-    .project-modal-readme {
-        padding: 24px 24px 16px 24px;
-    }
-
-    .project-modal-demo {
-        padding: 8px 24px 24px 24px;
-    }
-
-    .readme-content h1 {
-        font-size: 24px;
-    }
-
-    .project-title-header {
-        gap: 12px;
-    }
-
-    .quizbowl-screenshots img {
-        height: 420px;
-    }
+    .project-modal-readme { padding: 24px 24px 12px 24px; }
+    .project-modal-demo   { padding: 0 24px 24px 24px; }
+    .readme-content h1    { font-size: 22px; }
+    .quizbowl-screenshots img { height: 400px; }
 }
 
 @media screen and (max-width: 479px) {
-    .project-modal-readme {
-        padding: 20px 20px 16px 20px;
-    }
-
-    .project-modal-demo {
-        padding: 8px 20px 20px 20px;
-    }
-
-    .readme-content h1 {
-        font-size: 22px;
-    }
-
-    .project-title-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .quizbowl-screenshots {
-        gap: 12px;
-    }
-
-    .quizbowl-screenshots img {
-        height: 360px;
-    }
+    .project-modal-readme { padding: 20px 20px 12px 20px; }
+    .project-modal-demo   { padding: 0 20px 20px 20px; }
+    .readme-content h1    { font-size: 20px; }
+    .quizbowl-screenshots { gap: 10px; }
+    .quizbowl-screenshots img { height: 340px; }
 }

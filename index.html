@@ -10,73 +10,226 @@
     <meta property="og:image" content="/assets/headshot-optimized.jpg">
     <meta property="og:type" content="website">
 
-    <!-- Prevent flash -->
+    <!-- Prevent flash of white -->
     <style>
-        html { background-color: #ffffff; }
+        html { background-color: #141414; }
         body { opacity: 0; }
     </style>
-    <script>if(sessionStorage.getItem('internalNav'))document.documentElement.classList.add('internal-nav')</script>
 
-    <!-- Optimized font loading -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- API preconnects for art section -->
+    <link rel="preconnect" href="https://itunes.apple.com">
+    <link rel="preconnect" href="https://image.tmdb.org">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/home.css">
-
-    <!-- Preload page transition script -->
-    <link rel="preload" href="js/page-transitions.js" as="script">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/projects.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <link rel="stylesheet" href="css/art.css">
 </head>
-<body class="home">
-    <!-- Decorative flowing lines -->
-    <svg class="home-lines" aria-hidden="true">
-        <path class="hline hline-lt1" pathLength="1" />
-        <path class="hline hline-lt2" pathLength="1" />
-        <path class="hline hline-lt3" pathLength="1" />
-        <path class="hline hline-rb1" pathLength="1" />
-        <path class="hline hline-rb2" pathLength="1" />
-        <path class="hline hline-rb3" pathLength="1" />
-    </svg>
-    <script src="js/lines.js"></script>
-
-    <div class="container">
-        <header>
-            <nav class="nav-v3">
-                <a href="/" class="landing-link-about w--current">Home</a>
-                <a href="/pictures.html" class="landing-link-about">Pictures</a>
-                <a href="/projects.html" class="landing-link-about">Projects</a>
-                <a href="/blog.html" class="landing-link-about">Blog</a>
-                <a href="/art.html" class="landing-link-about">Favorite Stuff</a>
+<body>
+    <!-- Sticky site header -->
+    <header class="site-header">
+        <div class="site-header-inner">
+            <a href="/" class="nav-brand">Rishikesh Badari</a>
+            <nav class="nav-links">
+                <a href="#pictures" class="nav-link">Pictures</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#blog" class="nav-link nav-blog-link">Blog</a>
+                <a href="#favorites" class="nav-link">Favorites</a>
             </nav>
-        </header>
+        </div>
+    </header>
 
-        <main>
-            <section class="intro">
-                <div class="headshot-container" id="headshot-container">
-                    <picture>
-                        <source srcset="assets/headshot-optimized.webp" type="image/webp">
-                        <img src="assets/headshot-optimized.jpg" alt="Rishikesh Badari" class="headshot" id="headshot">
-                    </picture>
-                </div>
-                <h1 class="landing-intro-bio">Rishikesh Badari</h1>
-            </section>
+    <main>
 
-            <section class="contact">
-                <div class="contact-info">
-                    <p class="contact-title">San Francisco, California</p>
-                    <p class="contact-email">badari.rishikesh@gmail.com</p>
-                    <p class="contact-social">
-                        <a href="https://www.linkedin.com/in/rbadari/" target="_blank" rel="noopener noreferrer">LinkedIn</a>, <a href="https://letterboxd.com/rbadari/" target="_blank" rel="noopener noreferrer">Letterboxd</a>
-                    </p>
+        <!-- ── Hero ── -->
+        <section id="hero" class="section-hero">
+            <!-- Animated photo mosaic (populated by mosaic.js) -->
+            <div class="hero-mosaic" aria-hidden="true"></div>
+            <!-- Gradient overlay for text legibility -->
+            <div class="hero-overlay" aria-hidden="true"></div>
+            <!-- Text content -->
+            <div class="hero-content">
+                <div class="hero">
+                    <h1 class="hero-title">Rishikesh Badari</h1>
                 </div>
-            </section>
-        </main>
+                <div class="hero-rule"></div>
+                <div class="hero-meta">
+                    <p class="hero-meta-desc">Software Engineer in San Francisco</p>
+                    <div class="hero-meta-item">
+                        <span class="meta-label">Location</span>
+                        <span class="meta-value">San Francisco, California</span>
+                    </div>
+                    <div class="hero-meta-item">
+                        <span class="meta-label">Contact</span>
+                        <span class="meta-value">
+                            <a href="mailto:badari.rishikesh@gmail.com">Email</a>,
+                            <a href="https://www.linkedin.com/in/rbadari/" target="_blank" rel="noopener noreferrer">LinkedIn</a>,
+                            <a href="https://letterboxd.com/rbadari/" target="_blank" rel="noopener noreferrer">Letterboxd</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Pictures ── -->
+        <section id="pictures" class="page-section">
+            <div class="section-container">
+                <div class="section-head">
+                    <h2 class="section-heading">Pictures</h2>
+                </div>
+                <div id="image-gallery" class="image-gallery pictures-page"></div>
+            </div>
+        </section>
+
+        <!-- ── Projects ── -->
+        <section id="projects" class="page-section">
+            <div class="section-container">
+                <div class="section-head">
+                    <h2 class="section-heading">Projects</h2>
+                </div>
+                <div class="projects-container">
+                    <article class="project-card" data-project="quizbowl">
+                        <h3>QuizBowl</h3>
+                        <a href="#" class="project-link">View Project</a>
+                    </article>
+                    <article class="project-card" data-project="llm-classification">
+                        <h3>Fine-tuning LLMs for Classification</h3>
+                        <a href="#" class="project-link">View Project</a>
+                    </article>
+                    <article class="project-card" data-project="olympic-wins">
+                        <h3>Predictive Analysis for Olympic Wins</h3>
+                        <a href="#" class="project-link">View Project</a>
+                    </article>
+                    <article class="project-card" data-project="fractals">
+                        <h3>Fractals</h3>
+                        <a href="#" class="project-link">View Project</a>
+                    </article>
+                    <article class="project-card" data-project="snake-game">
+                        <h3>Snake</h3>
+                        <a href="#" class="project-link">View Project</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Blog (hidden until posts exist) ── -->
+        <section id="blog" class="page-section" style="display:none">
+            <div class="section-container">
+                <div class="section-head">
+                    <h2 class="section-heading">Blog</h2>
+                </div>
+                <div id="blog-container" class="blog-container"></div>
+            </div>
+        </section>
+
+        <!-- ── Favorites ── -->
+        <section id="favorites" class="page-section">
+            <div class="section-container">
+                <div class="section-head">
+                    <h2 class="section-heading">Favorites</h2>
+                </div>
+                <div class="art-page">
+                    <section class="art-section">
+                        <h3>Music</h3>
+                        <div class="art-carousel" id="music-carousel">
+                            <button class="art-nav art-nav-prev" aria-label="Previous">&#8249;</button>
+                            <div class="art-carousel-window">
+                                <div class="art-carousel-track"></div>
+                            </div>
+                            <button class="art-nav art-nav-next" aria-label="Next">&#8250;</button>
+                        </div>
+                    </section>
+                    <section class="art-section">
+                        <h3>Movies</h3>
+                        <div class="art-carousel" id="movies-carousel">
+                            <button class="art-nav art-nav-prev" aria-label="Previous">&#8249;</button>
+                            <div class="art-carousel-window">
+                                <div class="art-carousel-track"></div>
+                            </div>
+                            <button class="art-nav art-nav-next" aria-label="Next">&#8250;</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ── Project modal ── -->
+    <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Project details">
+        <div class="project-modal-content">
+            <button class="project-modal-close" id="projectModalClose" aria-label="Close">&times;</button>
+            <div class="project-modal-scroll">
+                <div class="project-modal-readme">
+                    <div class="readme-content" id="modalReadmeContent"></div>
+                    <div class="project-links" id="modalProjectLinks" style="display:none;"></div>
+                </div>
+                <div class="project-modal-demo" id="modalProjectDemo"></div>
+            </div>
+        </div>
     </div>
 
+    <!-- ── Blog modal ── -->
+    <div class="project-modal" id="blogModal" role="dialog" aria-modal="true" aria-label="Blog post">
+        <div class="project-modal-content">
+            <button class="project-modal-close" id="blogModalClose" aria-label="Close">&times;</button>
+            <div class="project-modal-scroll">
+                <div class="blog-modal-body" id="blogModalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/gallery-data.js"></script>
+    <script src="js/mosaic.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="data/projects-data.js"></script>
+    <script src="js/projects.js"></script>
+    <script src="vendor/marked.min.js"></script>
     <script src="data/blog-data.js"></script>
-    <script src="js/page-transitions.js"></script>
+    <script src="js/blog.js"></script>
+    <script src="data/art-data.js"></script>
+    <script src="js/art.js"></script>
+
+    <script>
+        // Show blog section and nav link if posts exist
+        if (typeof blogData !== 'undefined' && blogData.length > 0) {
+            var blogSection = document.getElementById('blog');
+            if (blogSection) blogSection.style.display = '';
+            var blogNavLink = document.querySelector('.nav-blog-link');
+            if (blogNavLink) blogNavLink.style.display = '';
+        } else {
+            var blogNavLink = document.querySelector('.nav-blog-link');
+            if (blogNavLink) blogNavLink.style.display = 'none';
+        }
+
+        // Smooth scroll for anchor links — offset for sticky header
+        document.querySelectorAll('a[href^="#"]').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    var headerH = document.querySelector('.site-header').offsetHeight;
+                    var top = target.getBoundingClientRect().top + window.scrollY - headerH;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Fade in
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.transition = 'opacity 0.3s ease';
+            document.body.style.opacity = '1';
+        });
+    </script>
 </body>
 </html>
