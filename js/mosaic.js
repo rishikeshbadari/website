@@ -67,10 +67,16 @@
                 img.src = photo.src;
 
                 function fadeIn() {
-                    // Update title color as new image fades in
-                    setTitleColor(textColorFromPhoto(photo.color));
-                    img.style.opacity = '1';
-                    scheduleNext();
+                    // Two rAFs guarantee the browser has painted opacity:0
+                    // before we set opacity:1 — without this, a cached image
+                    // resolves decode() in the same frame and the transition snaps.
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            setTitleColor(textColorFromPhoto(photo.color));
+                            img.style.opacity = '1';
+                            scheduleNext();
+                        });
+                    });
                 }
 
                 if (typeof img.decode === 'function') {
