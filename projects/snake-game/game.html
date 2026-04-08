@@ -88,7 +88,7 @@ let nBubbles = 10;
 let score = 1;
 let food = [];
 let currentDirection = { x: 0, y: 0 };
-let speed = 3;
+let speed = 7;
 let started = false;
 let moveCount = 0;
 let gameStarted = false;
@@ -264,7 +264,7 @@ function draw() {
     if (i > 0) {
       let dx = snake[i-1].xcor - snake[i].xcor;
       let dy = snake[i-1].ycor - snake[i].ycor;
-      let speed = snake[i].fromEdge ? 0.2 : 0.15;
+      let speed = snake[i].fromEdge ? 0.4 : 0.35;
       snake[i].xcor += dx * speed;
       snake[i].ycor += dy * speed;
       
