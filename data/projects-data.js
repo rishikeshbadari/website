@@ -211,8 +211,8 @@ var fractalBranches = {
             <iframe src="projects/fractals/mandelbrot.html" \
                     title="Mandelbrot Set Fractal" \
                     width="100%" \
-                    height="750"\
-                    style="border: none; border-radius: 0;">\
+                    height="100%"\
+                    style="border: none; border-radius: 0; display: block;">\
             </iframe>\
         '
     },
