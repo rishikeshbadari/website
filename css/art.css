@@ -185,9 +185,14 @@
    ---------------------------------------- */
 
 @media screen and (max-width: 767px) {
+    .art-section h2,
+    .art-section h3 {
+        text-align: center;
+    }
+
     .art-card {
-        flex: 0 0 calc(50vw - 56px);
-        width: calc(50vw - 56px);
+        flex: 0 0 var(--card-width, 140px);
+        width: var(--card-width, 140px);
     }
 
     .art-carousel-track { gap: 12px; }
