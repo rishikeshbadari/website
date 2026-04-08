@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Show modal and manage focus
                 projectModal.classList.add('show');
                 document.body.style.overflow = 'hidden';
+                var scrollEl = projectModal.querySelector('.project-modal-scroll');
+                if (scrollEl) scrollEl.scrollTop = 0;
                 modalClose.focus();
             }
         });

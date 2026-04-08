@@ -242,7 +242,7 @@
     .project-modal-readme { padding: 24px 24px 12px 24px; }
     .project-modal-demo   { padding: 0 24px 24px 24px; }
     .readme-content h1    { font-size: 22px; }
-    .quizbowl-screenshots img { height: 400px; }
+    .quizbowl-screenshots img { height: auto; max-height: 55dvh; }
 }
 
 @media screen and (max-width: 479px) {
@@ -250,5 +250,5 @@
     .project-modal-demo   { padding: 0 20px 20px 20px; }
     .readme-content h1    { font-size: 20px; }
     .quizbowl-screenshots { gap: 10px; }
-    .quizbowl-screenshots img { height: 340px; }
+    .quizbowl-screenshots img { height: auto; max-height: 50dvh; }
 }

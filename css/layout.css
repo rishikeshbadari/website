@@ -138,9 +138,30 @@
    Responsive
    ---------------------------------------- */
 
+@media screen and (max-width: 991px) {
+    .section-heading {
+        text-align: center;
+    }
+}
+
 @media screen and (max-width: 767px) {
-    .nav-links {
-        gap: 20px;
+
+    /* Nav moves to top bar */
+    .side-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        transform: none;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        padding: 22px 20px 14px;
+        background: transparent;
+        border-bottom: none;
+        z-index: 100;
     }
 
     .project-modal.show {
@@ -150,14 +171,17 @@
     .project-modal-content {
         width: 100%;
         max-width: none;
-        max-height: 92vh;
-        border-radius: 16px 16px 0 0;
-        border-bottom: none;
+        height: 100dvh;
+        max-height: 100dvh;
+        border-radius: 0;
+        border: none;
         animation: modalSlideUp 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     .project-modal-scroll {
-        height: 92vh;
+        height: 100dvh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     @keyframes modalSlideUp {
@@ -166,10 +190,12 @@
     }
 
     .project-modal-close {
-        position: fixed;
-        top: auto;
-        bottom: calc(92vh + 10px);
-        right: 16px;
+        position: sticky;
+        top: 12px;
+        left: calc(100% - 56px);
+        z-index: 10;
+        margin: 12px 16px 0 auto;
+        display: flex;
     }
 }
 

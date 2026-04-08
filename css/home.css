@@ -6,6 +6,7 @@
     position: relative;
     min-height: 100svh;
     min-height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -186,6 +187,15 @@
 }
 
 @media screen and (max-width: 767px) {
+    .section-hero {
+        padding-top: 52px;
+    }
+
+    .hero-content {
+        padding-bottom: clamp(24px, 5dvh, 48px);
+    }
+
+
     .hero-title {
         font-size: clamp(44px, 11vw, 72px);
     }
@@ -198,7 +208,6 @@
     .hero-meta-desc {
         grid-column: auto;
     }
-
 }
 
 @media screen and (max-width: 479px) {
