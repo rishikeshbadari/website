@@ -199,9 +199,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 jpegSource: result.jpegSource
             };
 
-            if (index === 0) result.img.fetchPriority = 'high';
-            loadPictureSources(pictureData);
-            if (result.img.complete) result.img.classList.add('loaded');
+            if (index < 6) {
+                // Load the first visible cards immediately
+                if (index === 0) result.img.fetchPriority = 'high';
+                loadPictureSources(pictureData);
+                if (result.img.complete) result.img.classList.add('loaded');
+            } else {
+                // Load the rest after the page finishes loading
+                photoCard._deferredData = pictureData;
+            }
 
             photoCard.addEventListener('click', function() {
                 openModal(index);
@@ -219,4 +225,21 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Failed to render photo card', { index: index, image: image, err: err });
         }
     });
+
+    // After the page finishes loading, fetch all remaining images in the background
+    function loadDeferred() {
+        gallery.querySelectorAll('.photo-card').forEach(function(card) {
+            var data = card._deferredData;
+            if (!data) return;
+            delete card._deferredData;
+            loadPictureSources(data);
+            if (data.img.complete) data.img.classList.add('loaded');
+        });
+    }
+
+    if (document.readyState === 'complete') {
+        loadDeferred();
+    } else {
+        window.addEventListener('load', loadDeferred);
+    }
 });
