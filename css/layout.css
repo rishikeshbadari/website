@@ -19,7 +19,7 @@
 }
 
 .nav-link {
-    color: rgba(232, 232, 232, 0.5);
+    color: rgba(var(--color-text-rgb), 0.5);
     font-size: 11px;
     font-weight: 600;
     text-decoration: none;
@@ -29,7 +29,7 @@
 }
 
 .nav-link:hover {
-    color: #e8e8e8;
+    color: var(--color-text);
 }
 
 /* ----------------------------------------
@@ -57,7 +57,7 @@
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1;
-    color: #e8e8e8;
+    color: var(--color-text);
 }
 
 /* ----------------------------------------
@@ -85,7 +85,7 @@
     width: 90vw;
     max-width: 1000px;
     max-height: 90vh;
-    background: #1a1a1a;
+    background: var(--color-surface);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     overflow: hidden;
@@ -115,7 +115,7 @@
     cursor: pointer;
     transition: all 0.2s ease;
     font-size: 18px;
-    color: #e8e8e8;
+    color: var(--color-text);
     font-weight: 300;
     z-index: 1001;
 }
@@ -132,6 +132,18 @@
 @keyframes modalSlideIn {
     from { opacity: 0; transform: scale(0.95) translateY(16px); }
     to   { opacity: 1; transform: scale(1)    translateY(0);    }
+}
+
+/* ----------------------------------------
+   Shared card hover — border lift
+   (transform overrides live in each page-specific file)
+   ---------------------------------------- */
+
+.photo-card:hover,
+.project-card:hover,
+.blog-card:hover,
+.art-card:hover {
+    border-color: var(--border-card-hover);
 }
 
 /* ----------------------------------------

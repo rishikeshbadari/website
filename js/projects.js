@@ -41,19 +41,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 // Show modal and manage focus
-                projectModal.classList.add('show');
-                document.body.style.overflow = 'hidden';
                 var scrollEl = projectModal.querySelector('.project-modal-scroll');
                 if (scrollEl) scrollEl.scrollTop = 0;
-                modalClose.focus();
+                Modal.open(projectModal, modalClose);
             }
         });
     });
 
     // Close modal
     function closeProjectModal() {
-        projectModal.classList.remove('show');
-        document.body.style.overflow = '';
+        Modal.close(projectModal);
     }
 
     modalClose.addEventListener('click', closeProjectModal);

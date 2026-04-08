@@ -68,14 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function openModal(index) {
         currentIndex = index;
         loadModalImageByIndex(currentIndex);
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-        closeBtn.focus();
+        Modal.open(modal, closeBtn);
     }
 
     function closeModal() {
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto';
+        Modal.close(modal);
     }
 
     closeBtn.addEventListener('click', closeModal);
@@ -167,19 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return { picture: picture, img: img, webpSource: webpSource, jpegSource: jpegSource };
     }
 
-    // Lazy-load images when they approach the viewport
-    var lazyObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (!entry.isIntersecting) return;
-            var card = entry.target;
-            var data = card._lazyData;
-            if (!data) return;
-            loadPictureSources(data);
-            delete card._lazyData;
-            lazyObserver.unobserve(card);
-        });
-    }, { rootMargin: '400px 0px' });
-
     // Build gallery cards
     displayedGalleryData.forEach(function(image, index) {
         try {
@@ -189,7 +173,6 @@ document.addEventListener('DOMContentLoaded', function() {
             photoCard.setAttribute('aria-label', 'View photo ' + (index + 1));
             photoCard.className = 'photo-card';
 
-            var isEager = index < 6;
             var sources = getImageSources(image.src);
             var result = createResponsivePicture('Photo ' + (index + 1));
 
@@ -216,14 +199,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 jpegSource: result.jpegSource
             };
 
-            if (isEager) {
-                if (index === 0) result.img.fetchPriority = 'high';
-                loadPictureSources(pictureData);
-                if (result.img.complete) result.img.classList.add('loaded');
-            } else {
-                photoCard._lazyData = pictureData;
-                lazyObserver.observe(photoCard);
-            }
+            if (index === 0) result.img.fetchPriority = 'high';
+            loadPictureSources(pictureData);
+            if (result.img.complete) result.img.classList.add('loaded');
 
             photoCard.addEventListener('click', function() {
                 openModal(index);

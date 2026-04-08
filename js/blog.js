@@ -39,9 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!post) return;
 
         // Show modal immediately with loading state
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-        modalClose.focus();
+        Modal.open(modal, modalClose);
 
         if (postCache[post.file]) {
             renderPost(post, postCache[post.file]);
@@ -74,8 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function closeModal() {
-        modal.classList.remove('show');
-        document.body.style.overflow = 'auto';
+        Modal.close(modal);
     }
 
     modalClose.addEventListener('click', closeModal);

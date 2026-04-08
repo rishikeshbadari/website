@@ -2,6 +2,16 @@
    Base — reset, typography, dark theme
    ======================================== */
 
+:root {
+    --color-bg:       #141414;
+    --color-surface:  #1a1a1a;
+    --color-card:     #1c1c1c;
+    --color-text:     #e8e8e8;
+    --color-text-rgb: 232, 232, 232;
+    --border-card:       rgba(255, 255, 255, 0.07);
+    --border-card-hover: rgba(255, 255, 255, 0.18);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -14,9 +24,9 @@ html {
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #e8e8e8;
+    color: var(--color-text);
     line-height: 1.6;
-    background-color: #141414;
+    background-color: var(--color-bg);
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

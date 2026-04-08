@@ -11,10 +11,10 @@
 
 /* Project card */
 .project-card {
-    background-color: #1c1c1c;
+    background-color: var(--color-card);
     border-radius: 10px;
     padding: 22px 24px;
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--border-card);
     transition: border-color 0.25s ease, transform 0.25s ease;
     cursor: pointer;
     display: flex;
@@ -25,13 +25,12 @@
 }
 
 .project-card:hover {
-    border-color: rgba(255, 255, 255, 0.18);
     transform: translateY(-2px);
 }
 
 .project-card h3 {
     margin: 0;
-    color: #e8e8e8;
+    color: var(--color-text);
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -40,7 +39,7 @@
 /* Project link */
 .project-link {
     display: inline-block;
-    color: rgba(232, 232, 232, 0.45);
+    color: rgba(var(--color-text-rgb), 0.45);
     text-decoration: none;
     font-weight: 500;
     font-size: 12px;
@@ -51,17 +50,17 @@
 }
 
 .project-card:hover .project-link {
-    color: rgba(232, 232, 232, 0.8);
+    color: rgba(var(--color-text-rgb), 0.8);
 }
 
 /* Modal README section */
 .project-modal-readme {
     padding: 32px 40px 12px 40px;
-    background: #1a1a1a;
+    background: var(--color-surface);
 }
 
 .readme-content h1 {
-    color: #e8e8e8;
+    color: var(--color-text);
     font-size: 26px;
     font-weight: 700;
     margin: 0 0 12px;
@@ -69,7 +68,7 @@
 }
 
 .readme-content p {
-    color: rgba(232, 232, 232, 0.65);
+    color: rgba(var(--color-text-rgb), 0.65);
     line-height: 1.65;
     margin-bottom: 12px;
     font-size: 15px;
@@ -94,7 +93,7 @@
 
 .project-links a {
     display: inline-block;
-    color: rgba(232, 232, 232, 0.7);
+    color: rgba(var(--color-text-rgb), 0.7);
     text-decoration: none;
     font-weight: 500;
     font-size: 13px;
@@ -104,7 +103,7 @@
 }
 
 .project-links a:hover {
-    color: #e8e8e8;
+    color: var(--color-text);
 }
 
 .github-link {
@@ -128,12 +127,12 @@
 /* Modal demo section */
 .project-modal-demo {
     padding: 0 40px 32px 40px;
-    background: #1a1a1a;
+    background: var(--color-surface);
     min-height: 200px;
 }
 
 .project-modal-demo h3 {
-    color: #e8e8e8;
+    color: var(--color-text);
     font-size: 18px;
     font-weight: 600;
     margin: 0 0 14px;
@@ -168,7 +167,7 @@
 }
 
 .game-instructions {
-    color: rgba(232, 232, 232, 0.5);
+    color: rgba(var(--color-text-rgb), 0.5);
     font-size: 13px;
     text-align: center;
     margin: 0;
@@ -189,7 +188,7 @@
 .branch-btn {
     padding: 9px 18px;
     background: rgba(255, 255, 255, 0.08);
-    color: rgba(232, 232, 232, 0.7);
+    color: rgba(var(--color-text-rgb), 0.7);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     cursor: pointer;
@@ -199,20 +198,20 @@
 
 .branch-btn:hover {
     background: rgba(255, 255, 255, 0.14);
-    color: #e8e8e8;
+    color: var(--color-text);
 }
 
 .branch-btn.active {
     background: rgba(255, 255, 255, 0.18);
-    color: #e8e8e8;
+    color: var(--color-text);
     border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Fractal content */
 #fractal-content { line-height: 1.6; max-width: none; }
-#fractal-content h2 { color: #e8e8e8; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 8px; margin-top: 0; }
-#fractal-content h3 { color: #e8e8e8; margin-top: 28px; margin-bottom: 12px; }
-#fractal-content h4 { color: #e8e8e8; margin-top: 20px; margin-bottom: 8px; }
+#fractal-content h2 { color: var(--color-text); border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 8px; margin-top: 0; }
+#fractal-content h3 { color: var(--color-text); margin-top: 28px; margin-bottom: 12px; }
+#fractal-content h4 { color: var(--color-text); margin-top: 20px; margin-bottom: 8px; }
 #fractal-content p  { color: rgba(232,232,232,0.7); margin-bottom: 14px; }
 #fractal-content ol, #fractal-content ul { color: rgba(232,232,232,0.7); margin-bottom: 16px; padding-left: 22px; }
 #fractal-content li { margin-bottom: 6px; }
@@ -225,7 +224,7 @@
 
 /* TestFlight notice */
 .testflight-notice { margin-top: 14px; color: rgba(232,232,232,0.7); font-size: 14px; }
-.testflight-notice a { color: #e8e8e8; text-decoration: underline; text-underline-offset: 2px; }
+.testflight-notice a { color: var(--color-text); text-decoration: underline; text-underline-offset: 2px; }
 .testflight-notice a:hover { opacity: 0.6; }
 
 /* QuizBowl screenshots */
@@ -285,7 +284,7 @@
     justify-content: center;
     cursor: pointer;
     font-size: 18px;
-    color: #e8e8e8;
+    color: var(--color-text);
     z-index: 1;
     transition: background 0.2s ease;
 }
@@ -306,7 +305,7 @@
     justify-content: center;
     cursor: pointer;
     font-size: 22px;
-    color: #e8e8e8;
+    color: var(--color-text);
     transition: background 0.2s ease;
 }
 
