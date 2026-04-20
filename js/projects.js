@@ -49,23 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Close modal
-    function closeProjectModal() {
-        Modal.close(projectModal);
-    }
-
-    modalClose.addEventListener('click', closeProjectModal);
-
-    projectModal.addEventListener('click', function(e) {
-        if (e.target === projectModal) {
-            closeProjectModal();
-        }
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && projectModal.classList.contains('show')) {
-            closeProjectModal();
-        }
-    });
+    Modal.bindClose(projectModal, modalClose);
 
     // --- Fractal branch switching ---
 

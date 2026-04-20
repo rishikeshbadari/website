@@ -51,9 +51,7 @@
             // HTML pages
             var pages = [
                 '/',
-                '/pictures.html',
-                '/projects.html',
-                '/art.html'
+                '/projects.html'
             ];
 
             if (typeof blogData !== 'undefined' && blogData.length > 0) {
@@ -63,9 +61,7 @@
             // Page-specific CSS, JS, and data files
             var resources = [
                 '/css/home.css',
-                '/css/gallery.css', '/data/gallery-data.js', '/js/gallery.js',
                 '/css/projects.css', '/data/projects-data.js', '/js/projects.js',
-                '/css/art.css', '/data/art-data.js', '/js/art.js',
                 '/css/blog.css', '/js/blog.js', '/vendor/marked.min.js'
             ];
 
@@ -87,7 +83,7 @@
             !HTMLScriptElement.supports ||
             !HTMLScriptElement.supports('speculationrules')) return;
 
-        var urls = ['/', '/pictures.html', '/projects.html', '/art.html'];
+        var urls = ['/', '/projects.html'];
         if (typeof blogData !== 'undefined' && blogData.length > 0) {
             urls.push('/blog.html');
         }

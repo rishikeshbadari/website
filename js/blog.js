@@ -71,21 +71,5 @@ document.addEventListener('DOMContentLoaded', function() {
             '<div class="blog-post-body">' + html + '</div>';
     }
 
-    function closeModal() {
-        Modal.close(modal);
-    }
-
-    modalClose.addEventListener('click', closeModal);
-
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
-            closeModal();
-        }
-    });
+    Modal.bindClose(modal, modalClose);
 });

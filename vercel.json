@@ -1,20 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/pictures",
-      "destination": "/pictures.html"
-    },
-    {
       "source": "/projects",
       "destination": "/projects.html"
     },
     {
       "source": "/blog",
       "destination": "/blog.html"
-    },
-    {
-      "source": "/art",
-      "destination": "/art.html"
     }
   ],
   "redirects": [

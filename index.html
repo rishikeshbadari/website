@@ -21,27 +21,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
-    <!-- API preconnects for art section -->
-    <link rel="preconnect" href="https://itunes.apple.com">
-    <link rel="preconnect" href="https://image.tmdb.org">
-
     <!-- Stylesheets: above-the-fold first (render-blocking), rest async -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/gallery.css"  media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/gallery.css"></noscript>
     <link rel="stylesheet" href="css/projects.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/projects.css"></noscript>
     <link rel="stylesheet" href="css/blog.css"     media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/blog.css"></noscript>
-    <link rel="stylesheet" href="css/art.css"      media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/art.css"></noscript>
 </head>
 <body>
     <!-- Fixed vertical nav on the right -->
     <nav class="side-nav">
         <a href="#hero"      class="nav-link">Home</a>
-        <a href="#pictures"  class="nav-link">Pictures</a>
         <a href="#projects"  class="nav-link">Projects</a>
+        <a href="https://www.instagram.com/bonelessorb/" target="_blank" rel="noopener noreferrer" class="nav-link">Pictures</a>
         <a href="#blog"      class="nav-link nav-blog-link">Blog</a>
-        <a href="#favorites" class="nav-link">Favorites</a>
     </nav>
 
     <main>
@@ -74,16 +67,6 @@
                         </span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- ── Pictures ── -->
-        <section id="pictures" class="page-section">
-            <div class="section-container">
-                <div class="section-head">
-                    <h2 class="section-heading">Pictures</h2>
-                </div>
-                <div id="image-gallery" class="image-gallery pictures-page"></div>
             </div>
         </section>
 
@@ -128,41 +111,6 @@
             </div>
         </section>
 
-        <!-- ── Favorites ── -->
-        <section id="favorites" class="page-section">
-            <div class="section-container">
-                <div class="section-head">
-                    <h2 class="section-heading">Favorites</h2>
-                </div>
-                <div class="art-page">
-                    <section class="art-section">
-                        <h3>Music</h3>
-                        <div class="art-carousel" id="music-carousel">
-                            <button class="art-nav art-nav-prev" aria-label="Previous">&#8249;</button>
-                            <div class="art-carousel-window">
-                                <div class="art-carousel-track"></div>
-                            </div>
-                            <button class="art-nav art-nav-next" aria-label="Next">&#8250;</button>
-                        </div>
-                    </section>
-                    <section class="art-section">
-                        <h3>Movies</h3>
-                        <div class="art-carousel" id="movies-carousel">
-                            <button class="art-nav art-nav-prev" aria-label="Previous">&#8249;</button>
-                            <div class="art-carousel-window">
-                                <div class="art-carousel-track"></div>
-                            </div>
-                            <button class="art-nav art-nav-next" aria-label="Next">&#8250;</button>
-                        </div>
-                    </section>
-                    <section class="art-section">
-                        <h3>Quotes</h3>
-                        <div class="quotes-list" id="quotes-list"></div>
-                    </section>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <!-- ── Project modal ── -->
@@ -193,18 +141,11 @@
     <script defer src="js/modal.js"></script>
     <script defer src="data/gallery-data.js"></script>
     <script defer src="js/mosaic.js"></script>
-    <script defer src="js/gallery.js"></script>
     <script defer src="data/projects-data.js"></script>
     <script defer src="js/projects.js"></script>
     <script defer src="vendor/marked.min.js"></script>
     <script defer src="data/blog-data.js"></script>
     <script defer src="js/blog.js"></script>
-    <script defer src="data/art-data.js"></script>
-    <script defer src="js/art-cache.js"></script>
-    <script defer src="js/art-fetch.js"></script>
-    <script defer src="js/art.js"></script>
-    <script defer src="data/quotes-data.js"></script>
-    <script defer src="js/quotes.js"></script>
 
     <script>
         // Runs after all deferred scripts have executed (just before DOMContentLoaded)

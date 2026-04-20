@@ -45,6 +45,9 @@
 .page-section {
     padding: clamp(72px, 11vh, 120px) 0;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
+    min-height: 100svh;
+    min-height: 100vh;
+    min-height: 100dvh;
 }
 
 /* Section heading row */
@@ -139,10 +142,8 @@
    (transform overrides live in each page-specific file)
    ---------------------------------------- */
 
-.photo-card:hover,
 .project-card:hover,
-.blog-card:hover,
-.art-card:hover {
+.blog-card:hover {
     border-color: var(--border-card-hover);
 }
 
@@ -211,8 +212,3 @@
     }
 }
 
-@media screen and (max-width: 479px) {
-    .nav-links {
-        gap: 14px;
-    }
-}
