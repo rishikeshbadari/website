@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background:#141414;color-scheme:dark;">
 <head>
     <meta charset="UTF-8">
+    <meta name="color-scheme" content="dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rishikesh Badari</title>
     <meta name="description" content="Rishikesh Badari — software engineer in San Francisco. Portfolio, projects, and photography.">
@@ -16,7 +17,10 @@
         :root { color-scheme: dark; background: #141414; }
         html { background: #141414; }
         body { margin: 0; background: #141414; color: #e8e8e8; }
+        #boot-cover { position: fixed; inset: 0; z-index: 2147483647; background: #141414; pointer-events: none; transition: opacity 0.18s ease; }
+        @media (prefers-reduced-motion: reduce) { #boot-cover { transition: none; } }
     </style>
+    <noscript><style>#boot-cover { display: none; }</style></noscript>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +34,8 @@
     <link rel="stylesheet" href="css/projects.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/projects.css"></noscript>
     <link rel="stylesheet" href="css/blog.css"     media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/blog.css"></noscript>
 </head>
-<body>
+<body style="background:#141414;color:#e8e8e8;">
+    <div id="boot-cover" aria-hidden="true"></div>
     <!-- Fixed vertical nav on the right -->
     <nav class="side-nav">
         <a href="#hero"      class="nav-link">Home</a>
@@ -138,6 +143,21 @@
             </div>
         </div>
     </div>
+
+    <script>
+        (function () {
+            var bootCover = document.getElementById('boot-cover');
+            if (!bootCover) return;
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    bootCover.style.opacity = '0';
+                    setTimeout(function () {
+                        if (bootCover.parentNode) bootCover.parentNode.removeChild(bootCover);
+                    }, 220);
+                });
+            });
+        })();
+    </script>
 
     <!-- Scripts: all deferred so they never block rendering -->
     <script defer src="js/modal.js"></script>
