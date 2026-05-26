@@ -8,18 +8,20 @@
     <meta property="og:title" content="Blog - Rishikesh Badari">
     <meta property="og:description" content="Blog by Rishikesh Badari.">
     <meta property="og:type" content="website">
+    <meta name="theme-color" content="#141414">
 
-    <!-- Prevent flash -->
+    <!-- Critical paint shell: render dark immediately, then progressively enhance. -->
     <style>
-        html { background-color: #ffffff; }
-        body { opacity: 0; }
+        :root { color-scheme: dark; background: #141414; }
+        html { background: #141414; }
+        body { margin: 0; background: #141414; color: #e8e8e8; }
     </style>
     <script>if(sessionStorage.getItem('internalNav'))document.documentElement.classList.add('internal-nav')</script>
 
     <!-- Optimized font loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/base.css">

@@ -49,55 +49,83 @@
         img.alt       = '';
         img.loading   = 'eager';
         img.decoding  = 'async';
+        img.fetchPriority = 'high';
+        img.setAttribute('fetchpriority', 'high');
         container.appendChild(img);
 
-        // Show first photo
-        img.src = photos[0].src;
-        setTitleColor(textColorFromPhoto(photos[0].color));
+        function revealPhoto(photo) {
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    setTitleColor(textColorFromPhoto(photo.color));
+                    img.classList.add('is-visible');
+                    scheduleNext();
+                });
+            });
+        }
+
+        function loadPhoto(photo) {
+            var settled = false;
+
+            function cleanup() {
+                img.onload = null;
+                img.onerror = null;
+            }
+
+            function finish() {
+                if (settled) return;
+                settled = true;
+                cleanup();
+                revealPhoto(photo);
+            }
+
+            function fail() {
+                if (settled) return;
+                settled = true;
+                cleanup();
+                scheduleNext();
+            }
+
+            img.onload = function () {
+                if (typeof img.decode === 'function') {
+                    img.decode().then(finish).catch(finish);
+                } else {
+                    finish();
+                }
+            };
+            img.onerror = fail;
+            img.src = photo.src;
+
+            if (img.complete) {
+                if (img.naturalWidth > 0) {
+                    img.onload();
+                } else {
+                    fail();
+                }
+            }
+        }
+
+        // Load the first photo without blocking the rest of the page.
+        loadPhoto(photos[0]);
 
         function advance() {
             photoIdx = (photoIdx + 1) % photos.length;
             var photo = photos[photoIdx];
 
             // Step 1: fade out
-            img.style.opacity = '0';
+            img.classList.remove('is-visible');
 
             setTimeout(function () {
-                // Step 2: swap src while dark, preload fully before fading in
-                img.src = photo.src;
-
-                function fadeIn() {
-                    // Two rAFs guarantee the browser has painted opacity:0
-                    // before we set opacity:1 — without this, a cached image
-                    // resolves decode() in the same frame and the transition snaps.
-                    requestAnimationFrame(function () {
-                        requestAnimationFrame(function () {
-                            setTitleColor(textColorFromPhoto(photo.color));
-                            img.style.opacity = '1';
-                            scheduleNext();
-                        });
-                    });
-                }
-
-                if (typeof img.decode === 'function') {
-                    img.decode().then(fadeIn).catch(fadeIn);
-                } else if (img.complete && img.naturalWidth > 0) {
-                    fadeIn();
-                } else {
-                    img.onload  = fadeIn;
-                    img.onerror = scheduleNext;
-                }
+                // Step 2: swap src while dark, decode fully, then fade in.
+                loadPhoto(photo);
             }, FADE_MS);
         }
 
         function scheduleNext() {
             setTimeout(advance, HOLD_S * 1000);
         }
-
-        scheduleNext();
     }
 
-    if (document.readyState === 'loading') {
+    if (document.readyState === 'loading' && !document.querySelector('.hero-mosaic')) {
         document.addEventListener('DOMContentLoaded', buildHero);
     } else {
         buildHero();

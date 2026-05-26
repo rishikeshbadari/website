@@ -9,6 +9,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background-color: var(--color-bg);
 }
 
 /* ----------------------------------------
@@ -21,9 +22,9 @@
     overflow: hidden;
     pointer-events: none;
     user-select: none;
+    background-color: var(--color-bg);
 }
 
-/* Both images fill the container */
 .hero-bg-img {
     position: absolute;
     inset: 0;
@@ -31,10 +32,13 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    will-change: opacity;
 }
 
-.hero-bg-img {
-    transition: opacity 1.5s ease-in-out;
+.hero-bg-img.is-visible {
+    opacity: 1;
 }
 
 /* Gradient overlay — photos visible at top, solid dark at bottom for text. */

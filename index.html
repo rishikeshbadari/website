@@ -9,17 +9,19 @@
     <meta property="og:description" content="Software engineer in San Francisco. Portfolio, projects, and photography.">
     <meta property="og:image" content="/assets/headshot-optimized.jpg">
     <meta property="og:type" content="website">
+    <meta name="theme-color" content="#141414">
 
-    <!-- Prevent flash of white -->
+    <!-- Critical paint shell: render dark immediately, then progressively enhance. -->
     <style>
-        html { background-color: #141414; }
-        body { opacity: 0; }
+        :root { color-scheme: dark; background: #141414; }
+        html { background: #141414; }
+        body { margin: 0; background: #141414; color: #e8e8e8; }
     </style>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"></noscript>
 
     <!-- Stylesheets: above-the-fold first (render-blocking), rest async -->
     <link rel="stylesheet" href="css/base.css">
@@ -34,7 +36,7 @@
         <a href="#hero"      class="nav-link">Home</a>
         <a href="#projects"  class="nav-link">Projects</a>
         <a href="https://www.instagram.com/bonelessorb/" target="_blank" rel="noopener noreferrer" class="nav-link">Pictures</a>
-        <a href="#blog"      class="nav-link nav-blog-link">Blog</a>
+        <a href="#blog"      class="nav-link nav-blog-link" style="display:none">Blog</a>
     </nav>
 
     <main>
@@ -172,10 +174,6 @@
                     }
                 });
             });
-
-            // Fade in
-            document.body.style.transition = 'opacity 0.3s ease';
-            document.body.style.opacity = '1';
         });
     </script>
 </body>
