@@ -38,8 +38,8 @@
                 }
 
                 sessionStorage.setItem('internalNav', '1');
-                document.body.style.transition = 'opacity 0.15s ease-out';
-                document.body.style.opacity = '0.7';
+                document.documentElement.classList.remove('boot-cover-gone');
+                document.documentElement.classList.remove('booted');
             });
         });
     }

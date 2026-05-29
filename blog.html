@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="background:#141414;color-scheme:dark;">
 <head>
+    <style>
+        :root { color-scheme: dark; background: #141414; }
+        html { min-height: 100%; background: #141414; color-scheme: dark; }
+        html:not(.booted)::before { content: ""; position: fixed; inset: 0; z-index: 2147483647; background: #141414; pointer-events: none; opacity: 1; transition: opacity 0.18s ease; }
+        html.booted::before { opacity: 0; }
+        html.boot-cover-gone::before { display: none; }
+        body { margin: 0; min-height: 100%; background: #141414; color: #e8e8e8; }
+        @media (prefers-reduced-motion: reduce) { html:not(.booted)::before { transition: none; } }
+    </style>
+    <noscript><style>html::before { display: none !important; }</style></noscript>
     <meta charset="UTF-8">
     <meta name="color-scheme" content="dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +21,6 @@
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#141414">
 
-    <!-- Critical paint shell: render dark immediately, then progressively enhance. -->
-    <style>
-        :root { color-scheme: dark; background: #141414; }
-        html { background: #141414; }
-        body { margin: 0; background: #141414; color: #e8e8e8; }
-        #boot-cover { position: fixed; inset: 0; z-index: 2147483647; background: #141414; pointer-events: none; transition: opacity 0.18s ease; }
-        @media (prefers-reduced-motion: reduce) { #boot-cover { transition: none; } }
-    </style>
-    <noscript><style>#boot-cover { display: none; }</style></noscript>
     <script>if(sessionStorage.getItem('internalNav'))document.documentElement.classList.add('internal-nav')</script>
 
     <!-- Optimized font loading -->
@@ -36,7 +37,6 @@
     <link rel="preload" href="js/page-transitions.js" as="script">
 </head>
 <body style="background:#141414;color:#e8e8e8;">
-    <div id="boot-cover" aria-hidden="true"></div>
     <!-- Decorative flowing lines -->
     <svg class="home-lines" aria-hidden="true">
         <path class="hline hline-lt1" pathLength="1" />
@@ -79,13 +79,12 @@
 
     <script>
         (function () {
-            var bootCover = document.getElementById('boot-cover');
-            if (!bootCover) return;
+            var root = document.documentElement;
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
-                    bootCover.style.opacity = '0';
+                    root.classList.add('booted');
                     setTimeout(function () {
-                        if (bootCover.parentNode) bootCover.parentNode.removeChild(bootCover);
+                        root.classList.add('boot-cover-gone');
                     }, 220);
                 });
             });

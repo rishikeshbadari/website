@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" style="background:#141414;color-scheme:dark;">
 <head>
+    <style>
+        :root { color-scheme: dark; background: #141414; }
+        html { min-height: 100%; background: #141414; color-scheme: dark; }
+        html:not(.booted)::before { content: ""; position: fixed; inset: 0; z-index: 2147483647; background: #141414; pointer-events: none; opacity: 1; transition: opacity 0.18s ease; }
+        html.booted::before { opacity: 0; }
+        html.boot-cover-gone::before { display: none; }
+        body { margin: 0; min-height: 100%; background: #141414; color: #e8e8e8; }
+        @media (prefers-reduced-motion: reduce) { html:not(.booted)::before { transition: none; } }
+    </style>
+    <noscript><style>html::before { display: none !important; }</style></noscript>
     <meta charset="UTF-8">
     <meta name="color-scheme" content="dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,16 +21,6 @@
     <meta property="og:image" content="/assets/headshot-optimized.jpg">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#141414">
-
-    <!-- Critical paint shell: render dark immediately, then progressively enhance. -->
-    <style>
-        :root { color-scheme: dark; background: #141414; }
-        html { background: #141414; }
-        body { margin: 0; background: #141414; color: #e8e8e8; }
-        #boot-cover { position: fixed; inset: 0; z-index: 2147483647; background: #141414; pointer-events: none; transition: opacity 0.18s ease; }
-        @media (prefers-reduced-motion: reduce) { #boot-cover { transition: none; } }
-    </style>
-    <noscript><style>#boot-cover { display: none; }</style></noscript>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,6 @@
     <link rel="stylesheet" href="css/blog.css"     media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/blog.css"></noscript>
 </head>
 <body style="background:#141414;color:#e8e8e8;">
-    <div id="boot-cover" aria-hidden="true"></div>
     <!-- Fixed vertical nav on the right -->
     <nav class="side-nav">
         <a href="#hero"      class="nav-link">Home</a>
@@ -146,13 +145,12 @@
 
     <script>
         (function () {
-            var bootCover = document.getElementById('boot-cover');
-            if (!bootCover) return;
+            var root = document.documentElement;
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
-                    bootCover.style.opacity = '0';
+                    root.classList.add('booted');
                     setTimeout(function () {
-                        if (bootCover.parentNode) bootCover.parentNode.removeChild(bootCover);
+                        root.classList.add('boot-cover-gone');
                     }, 220);
                 });
             });
