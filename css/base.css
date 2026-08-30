@@ -1,47 +1,53 @@
-/* ========================================
-   Base — reset, typography, dark theme
-   ======================================== */
-
 :root {
-    --color-bg:       #141414;
-    --color-surface:  #1a1a1a;
-    --color-card:     #1c1c1c;
-    --color-text:     #e8e8e8;
-    --color-text-rgb: 232, 232, 232;
-    --border-card:       rgba(255, 255, 255, 0.07);
-    --border-card-hover: rgba(255, 255, 255, 0.18);
+    --page-bg: #111111;
+    --panel-bg: rgba(17, 17, 17, 0.78);
+    --text: #f1f1ee;
+    --muted: rgba(241, 241, 238, 0.52);
+    --line: rgba(241, 241, 238, 0.12);
 }
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
     min-height: 100%;
-    background-color: var(--color-bg);
+    background: var(--page-bg);
     color-scheme: dark;
     scroll-behavior: smooth;
 }
 
 body {
     min-height: 100%;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: var(--color-text);
-    line-height: 1.6;
-    background-color: var(--color-bg);
-    font-size: 16px;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 a {
     color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
     }
 }

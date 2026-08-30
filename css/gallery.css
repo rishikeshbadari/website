@@ -1,0 +1,149 @@
+.gallery-shell {
+    width: min(100%, 1640px);
+    margin: 0 auto;
+    padding: clamp(6px, 1vw, 14px);
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-auto-flow: dense;
+    grid-auto-rows: 8px;
+    gap: clamp(6px, 0.9vw, 12px);
+}
+
+.photo-tile {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 2px;
+    overflow: hidden;
+    background: transparent;
+    cursor: zoom-in;
+    opacity: 1;
+    transition: filter 0.2s ease;
+}
+
+.photo-tile:hover {
+    filter: brightness(0.86);
+}
+
+.photo-tile img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.photo-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.photo-lightbox.is-open {
+    display: flex;
+}
+
+.lightbox-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.lightbox-img {
+    display: block;
+    max-width: min(92vw, 1800px);
+    max-height: 86dvh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 2px;
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+}
+
+.lightbox-close,
+.lightbox-nav {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    background: rgba(20, 20, 20, 0.58);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background: rgba(52, 52, 52, 0.74);
+}
+
+.lightbox-close {
+    top: 22px;
+    right: 22px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.lightbox-nav {
+    top: 50%;
+    width: 46px;
+    height: 58px;
+    transform: translateY(-50%);
+    font-size: 34px;
+    line-height: 1;
+}
+
+.lightbox-prev {
+    left: 18px;
+}
+
+.lightbox-next {
+    right: 18px;
+}
+
+.lightbox-nav.is-disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+@media (max-width: 760px) {
+    .gallery-shell {
+        padding: 6px;
+    }
+
+    .photo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+    }
+
+    .photo-lightbox {
+        padding: 14px;
+    }
+
+    .lightbox-img {
+        max-width: 96vw;
+        max-height: 84dvh;
+    }
+
+    .lightbox-nav {
+        width: 42px;
+        height: 52px;
+    }
+}

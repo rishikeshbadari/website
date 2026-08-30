@@ -1,194 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" style="background:#141414;color-scheme:dark;">
+<html lang="en">
 <head>
-    <style>
-        :root { color-scheme: dark; background: #141414; }
-        html { min-height: 100%; background: #141414; color-scheme: dark; }
-        html:not(.booted)::before { content: ""; position: fixed; inset: 0; z-index: 2147483647; background: #141414; pointer-events: none; opacity: 1; transition: opacity 0.18s ease; }
-        html.booted::before { opacity: 0; }
-        html.boot-cover-gone::before { display: none; }
-        body { margin: 0; min-height: 100%; background: #141414; color: #e8e8e8; }
-        @media (prefers-reduced-motion: reduce) { html:not(.booted)::before { transition: none; } }
-    </style>
-    <noscript><style>html::before { display: none !important; }</style></noscript>
     <meta charset="UTF-8">
     <meta name="color-scheme" content="dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rishikesh Badari</title>
-    <meta name="description" content="Rishikesh Badari — software engineer in San Francisco. Portfolio, projects, and photography.">
+    <meta name="description" content="A photo gallery by Rishikesh Badari.">
     <meta property="og:title" content="Rishikesh Badari">
-    <meta property="og:description" content="Software engineer in San Francisco. Portfolio, projects, and photography.">
-    <meta property="og:image" content="/assets/headshot-optimized.jpg">
+    <meta property="og:description" content="A photo gallery by Rishikesh Badari.">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#141414">
+    <meta name="theme-color" content="#111111">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"></noscript>
 
-    <!-- Stylesheets: above-the-fold first (render-blocking), rest async -->
     <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/home.css">
-    <link rel="stylesheet" href="css/projects.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/projects.css"></noscript>
-    <link rel="stylesheet" href="css/blog.css"     media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="css/blog.css"></noscript>
+    <link rel="stylesheet" href="css/gallery.css">
 </head>
-<body style="background:#141414;color:#e8e8e8;">
-    <!-- Fixed vertical nav on the right -->
-    <nav class="side-nav">
-        <a href="#blog"      class="nav-link nav-blog-link" style="display:none">Blog</a>
-    </nav>
-
-    <main>
-
-        <!-- ── Hero ── -->
-        <section id="hero" class="section-hero">
-            <!-- Animated photo mosaic (populated by mosaic.js) -->
-            <div class="hero-mosaic" aria-hidden="true"></div>
-            <!-- Gradient overlay for text legibility -->
-            <div class="hero-overlay" aria-hidden="true"></div>
-            <!-- Text content -->
-            <div class="hero-content">
-                <div class="hero">
-                    <h1 class="hero-title">Rishikesh Badari</h1>
-                </div>
-                <div class="hero-rule"></div>
-                <div class="hero-meta">
-                    <p class="hero-meta-desc">Software Engineer</p>
-                    <div class="hero-meta-item">
-                        <span class="meta-label">Location</span>
-                        <span class="meta-value">San Francisco, California</span>
-                    </div>
-                    <div class="hero-meta-item">
-                        <span class="meta-label">Contact</span>
-                        <span class="meta-value contact-icons">
-                            <a href="mailto:badari.rishikesh@gmail.com" aria-label="Email"><img src="assets/gmail-logo.png" alt="Gmail" class="contact-icon"></a>
-                            <a href="https://www.linkedin.com/in/rbadari/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="assets/linkedin.png" alt="LinkedIn" class="contact-icon"></a>
-                            <a href="https://letterboxd.com/rbadari/" target="_blank" rel="noopener noreferrer" aria-label="Letterboxd"><img src="assets/letterboxd.png" alt="Letterboxd" class="contact-icon contact-icon--letterboxd"></a>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Projects ── -->
-        <section id="projects" class="page-section">
-            <div class="section-container">
-                <div class="section-head">
-                    <h2 class="section-heading">Projects</h2>
-                </div>
-                <div class="projects-container">
-                    <article class="project-card" data-project="quizbowl">
-                        <h3>QuizBowl</h3>
-                        <a href="#" class="project-link">View Project</a>
-                    </article>
-                    <article class="project-card" data-project="llm-classification">
-                        <h3>Fine-tuning LLMs for Classification</h3>
-                        <a href="#" class="project-link">View Project</a>
-                    </article>
-                    <article class="project-card" data-project="olympic-wins">
-                        <h3>Predictive Analysis for Olympic Wins</h3>
-                        <a href="#" class="project-link">View Project</a>
-                    </article>
-                    <article class="project-card" data-project="fractals">
-                        <h3>Fractals</h3>
-                        <a href="#" class="project-link">View Project</a>
-                    </article>
-                    <article class="project-card" data-project="snake-game">
-                        <h3>Snake</h3>
-                        <a href="#" class="project-link">View Project</a>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Blog (hidden until posts exist) ── -->
-        <section id="blog" class="page-section" style="display:none">
-            <div class="section-container">
-                <div class="section-head">
-                    <h2 class="section-heading">Blog</h2>
-                </div>
-                <div id="blog-container" class="blog-container"></div>
-            </div>
-        </section>
-
+<body>
+    <main id="top" class="gallery-shell">
+        <section class="photo-grid" id="photoGrid" aria-label="Photo gallery"></section>
     </main>
 
-    <!-- ── Project modal ── -->
-    <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Project details">
-        <div class="project-modal-content">
-            <button class="project-modal-close" id="projectModalClose" aria-label="Close">&times;</button>
-            <div class="project-modal-scroll">
-                <div class="project-modal-readme">
-                    <div class="readme-content" id="modalReadmeContent"></div>
-                    <div class="project-links" id="modalProjectLinks" style="display:none;"></div>
-                </div>
-                <div class="project-modal-demo" id="modalProjectDemo"></div>
-            </div>
-        </div>
+    <div class="photo-lightbox" id="photoLightbox" aria-hidden="true">
+        <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous picture">&lsaquo;</button>
+        <figure class="lightbox-figure">
+            <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        </figure>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next picture">&rsaquo;</button>
     </div>
 
-    <!-- ── Blog modal ── -->
-    <div class="project-modal" id="blogModal" role="dialog" aria-modal="true" aria-label="Blog post">
-        <div class="project-modal-content">
-            <button class="project-modal-close" id="blogModalClose" aria-label="Close">&times;</button>
-            <div class="project-modal-scroll">
-                <div class="blog-modal-body" id="blogModalContent"></div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        (function () {
-            var root = document.documentElement;
-            requestAnimationFrame(function () {
-                requestAnimationFrame(function () {
-                    root.classList.add('booted');
-                    setTimeout(function () {
-                        root.classList.add('boot-cover-gone');
-                    }, 220);
-                });
-            });
-        })();
-    </script>
-
-    <!-- Scripts: all deferred so they never block rendering -->
-    <script defer src="js/modal.js"></script>
     <script defer src="data/gallery-data.js"></script>
-    <script defer src="js/mosaic.js"></script>
-    <script defer src="data/projects-data.js"></script>
-    <script defer src="js/projects.js"></script>
-    <script defer src="vendor/marked.min.js"></script>
-    <script defer src="data/blog-data.js"></script>
-    <script defer src="js/blog.js"></script>
-
-    <script>
-        // Runs after all deferred scripts have executed (just before DOMContentLoaded)
-        document.addEventListener('DOMContentLoaded', function () {
-
-            // Show blog section and nav link if posts exist
-            if (typeof blogData !== 'undefined' && blogData.length > 0) {
-                var blogSection = document.getElementById('blog');
-                if (blogSection) blogSection.style.display = '';
-                var blogNavLink = document.querySelector('.nav-blog-link');
-                if (blogNavLink) blogNavLink.style.display = '';
-            } else {
-                var blogNavLink = document.querySelector('.nav-blog-link');
-                if (blogNavLink) blogNavLink.style.display = 'none';
-            }
-
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-                link.addEventListener('click', function (e) {
-                    var target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        e.preventDefault();
-                        window.scrollTo({ top: target.offsetTop, behavior: 'smooth' });
-                    }
-                });
-            });
-        });
-    </script>
+    <script defer src="js/gallery.js"></script>
 </body>
 </html>
