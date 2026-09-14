@@ -125,7 +125,7 @@ body.lightbox-open {
 
 @media (max-width: 760px) {
     .gallery-shell {
-        padding: 6px;
+        padding: 64px 6px 6px;
     }
 
     .photo-grid {

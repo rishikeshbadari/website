@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictures - Rishikesh Badari</title>
+    <meta name="description" content="A photo gallery by Rishikesh Badari.">
+    <meta property="og:title" content="Pictures - Rishikesh Badari">
+    <meta property="og:description" content="A photo gallery by Rishikesh Badari.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#111111">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+    <nav class="side-nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/projects.html" class="nav-link">Projects</a>
+    </nav>
+
+    <main id="top" class="gallery-shell">
+        <section class="photo-grid" id="photoGrid" aria-label="Photo gallery"></section>
+    </main>
+
+    <div class="photo-lightbox" id="photoLightbox" aria-hidden="true">
+        <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous picture">&lsaquo;</button>
+        <figure class="lightbox-figure">
+            <img class="lightbox-img" id="lightboxImg" src="" alt="">
+        </figure>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next picture">&rsaquo;</button>
+    </div>
+
+    <script defer src="data/gallery-data.js"></script>
+    <script defer src="js/gallery.js"></script>
+</body>
+</html>
