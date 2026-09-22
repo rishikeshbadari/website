@@ -3,7 +3,7 @@ var projectData = [
         id: 'pictures',
         title: 'Pictures',
         action: 'View Project',
-        readme: '<h1>Pictures</h1>',
+        readme: '<div class="pictures-project-heading"><h1>Pictures</h1><p><span data-picture-count></span> photographs</p></div>',
         links: '',
         demo: '<div class="pictures-all" data-pictures-all></div>'
     },
