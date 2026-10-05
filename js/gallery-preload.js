@@ -15,10 +15,10 @@
                 var url = urls[nextIndex++];
                 activeRequests += 1;
 
-                // `reload` refreshes the browser cache after every page reload.
-                // Consuming the body ensures the complete original is cached before
-                // the queue continues, without adding image elements to the page.
-                fetch(url, { cache: 'reload' })
+                // Prefer an existing browser-cache entry on later visits. Consuming
+                // the body ensures the complete original is cached before the queue
+                // continues, without adding image elements to the page.
+                fetch(url, { cache: 'force-cache' })
                     .then(function(response) {
                         return response.ok ? response.blob() : null;
                     })

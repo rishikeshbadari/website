@@ -18,6 +18,7 @@ var galleryData = [
 ].map(function(filename) {
     return {
         src: "pictures/full/" + filename,
-        thumb: "pictures/thumbs/" + filename
+        thumb: "pictures/thumbs/" + filename,
+        hero: "pictures/hero/" + filename
     };
 });

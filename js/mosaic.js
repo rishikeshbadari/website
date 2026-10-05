@@ -58,7 +58,7 @@
         img.addEventListener('error', function() {
             setTimeout(advance, HOLD_MS);
         }, { once: true });
-        img.src = photos[0].src;
+        img.src = photos[0].hero;
 
         function advance() {
             index = (index + 1) % photos.length;
@@ -66,7 +66,7 @@
             img.style.opacity = '0';
 
             setTimeout(function() {
-                img.src = photo.src;
+                img.src = photo.hero;
                 function fadeIn() {
                     requestAnimationFrame(function() {
                         requestAnimationFrame(function() {
