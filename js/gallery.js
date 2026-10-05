@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         img.addEventListener('load', function() {
             sizeTile(tile, img);
         });
-        img.src = photo.src.replace('/optimized/', '/thumbs/');
+        img.src = photo.thumb;
 
         tile.appendChild(img);
         tile.addEventListener('click', function() {

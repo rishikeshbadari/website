@@ -90,8 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (count) count.textContent = galleryData.length;
 
         var photos = galleryData.map(function(photo, index) {
-            var thumb = photo.src.replace('/optimized/', '/thumbs/');
-            return '<button class="picture-project-tile" type="button" data-picture-index="' + index + '" aria-label="Open photograph ' + (index + 1) + ' of ' + galleryData.length + '" style="background-color:' + photo.color + '"><img src="' + thumb + '" alt="" loading="' + (index < 18 ? 'eager' : 'lazy') + '" decoding="async"></button>';
+            return '<button class="picture-project-tile" type="button" data-picture-index="' + index + '" aria-label="Open photograph ' + (index + 1) + ' of ' + galleryData.length + '"><img src="' + photo.thumb + '" alt="" loading="' + (index < 18 ? 'eager' : 'lazy') + '" decoding="async"></button>';
         });
 
         mount.innerHTML = photos.join('');

@@ -48,7 +48,7 @@
         img.decoding = 'async';
         img.src = photos[0].src;
         container.appendChild(img);
-        setTitleColor(titleColorFromPhoto(photos[0].color));
+        setTitleColor('hsl(0, 0%, 91%)');
 
         setTimeout(advance, HOLD_MS);
 
@@ -62,7 +62,7 @@
                 function fadeIn() {
                     requestAnimationFrame(function() {
                         requestAnimationFrame(function() {
-                            setTitleColor(titleColorFromPhoto(photo.color));
+                            setTitleColor('hsl(0, 0%, 91%)');
                             img.style.opacity = '1';
                             setTimeout(advance, HOLD_MS);
                         });
