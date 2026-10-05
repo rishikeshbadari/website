@@ -2,21 +2,37 @@
     function preloadGallery() {
         if (typeof galleryData === 'undefined' || window.sessionGalleryImageCache) return;
 
-        var sessionKey = Date.now().toString(36) + Math.random().toString(36).slice(2);
-        var images = [];
+        var urls = galleryData.map(function(photo) { return photo.src; });
+        var nextIndex = 0;
+        var activeRequests = 0;
+        var maxConcurrentRequests = 2;
 
-        galleryData.forEach(function(photo) {
-            var separator = photo.src.indexOf('?') === -1 ? '?' : '&';
-            photo.src += separator + 'gallery-session=' + sessionKey;
+        // This marker prevents duplicate preload queues during this page session.
+        window.sessionGalleryImageCache = true;
 
-            var image = new Image();
-            image.decoding = 'async';
-            image.src = photo.src;
-            images.push(image);
-        });
+        function loadNext() {
+            while (activeRequests < maxConcurrentRequests && nextIndex < urls.length) {
+                var url = urls[nextIndex++];
+                activeRequests += 1;
 
-        // Keep the image resources alive for this document's entire session.
-        window.sessionGalleryImageCache = images;
+                // `reload` refreshes the browser cache after every page reload.
+                // Consuming the body ensures the complete original is cached before
+                // the queue continues, without adding image elements to the page.
+                fetch(url, { cache: 'reload' })
+                    .then(function(response) {
+                        return response.ok ? response.blob() : null;
+                    })
+                    .catch(function() {
+                        // A click can still load an image if its background request fails.
+                    })
+                    .then(function() {
+                        activeRequests -= 1;
+                        loadNext();
+                    });
+            }
+        }
+
+        loadNext();
     }
 
     // Do not compete with the initial page render or its critical resources.
