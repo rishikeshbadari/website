@@ -46,11 +46,19 @@
         img.alt = '';
         img.loading = 'eager';
         img.decoding = 'async';
-        img.src = photos[0].src;
         container.appendChild(img);
         setTitleColor('hsl(0, 0%, 91%)');
 
-        setTimeout(advance, HOLD_MS);
+        img.addEventListener('load', function showInitialPhoto() {
+            requestAnimationFrame(function() {
+                img.style.opacity = '1';
+                setTimeout(advance, HOLD_MS);
+            });
+        }, { once: true });
+        img.addEventListener('error', function() {
+            setTimeout(advance, HOLD_MS);
+        }, { once: true });
+        img.src = photos[0].src;
 
         function advance() {
             index = (index + 1) % photos.length;
