@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var prevBtn = lightbox.querySelector('.lightbox-prev');
     var nextBtn = lightbox.querySelector('.lightbox-next');
     var activeIndex = 0;
+    var returnFocus = null;
 
     if (!grid || typeof galleryData === 'undefined') return;
 
@@ -53,6 +54,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.addEventListener('keydown', function(event) {
         if (!lightbox.classList.contains('is-open')) return;
+        if (event.key === 'Tab') {
+            var controls = [closeBtn, prevBtn, nextBtn].filter(function(button) { return !button.disabled; });
+            var current = controls.indexOf(document.activeElement);
+            var next = (current + (event.shiftKey ? -1 : 1) + controls.length) % controls.length;
+            event.preventDefault();
+            controls[next].focus();
+        }
         if (event.key === 'Escape') closeLightbox();
         if (event.key === 'ArrowLeft' && activeIndex > 0) openLightbox(activeIndex - 1);
         if (event.key === 'ArrowRight' && activeIndex < galleryData.length - 1) openLightbox(activeIndex + 1);
@@ -69,9 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function openLightbox(index) {
+        if (!lightbox.classList.contains('is-open')) returnFocus = document.activeElement;
         activeIndex = index;
         var photo = galleryData[index];
         lightboxImg.src = photo.src;
+        lightboxImg.alt = 'Photograph ' + (index + 1) + ' of ' + galleryData.length;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === galleryData.length - 1;
         prevBtn.classList.toggle('is-disabled', index === 0);
         nextBtn.classList.toggle('is-disabled', index === galleryData.length - 1);
         lightbox.classList.add('is-open');
@@ -85,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
         lightbox.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('lightbox-open');
         lightboxImg.removeAttribute('src');
+        if (returnFocus) returnFocus.focus();
     }
 
     function debounce(fn, delay) {

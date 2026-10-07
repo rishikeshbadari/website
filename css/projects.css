@@ -173,6 +173,10 @@
     font-weight: 600;
 }
 
+.pictures-project-description {
+    margin-top: 16px;
+}
+
 .readme-content .pictures-project-heading p {
     margin: 0;
     color: rgba(var(--color-text-rgb), 0.45);

@@ -2,45 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="color-scheme" content="dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pictures - Rishikesh Badari</title>
+    <meta name="color-scheme" content="light">
+    <title>Pictures — Rishikesh Badari</title>
     <meta name="description" content="A photo gallery by Rishikesh Badari.">
-    <meta property="og:title" content="Pictures - Rishikesh Badari">
+    <meta property="og:title" content="Pictures — Rishikesh Badari">
     <meta property="og:description" content="A photo gallery by Rishikesh Badari.">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#111111">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
-
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/gallery.css">
+    <meta name="theme-color" content="#faf9f6">
+    <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-    <nav class="side-nav">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/projects.html" class="nav-link">Projects</a>
-    </nav>
-
-    <main id="top" class="gallery-shell">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <a href="pictures.html" aria-current="page">Pictures</a>
+        </nav>
+    </header>
+    <main id="main">
+        <div class="gallery-description">
+            <!-- PICTURES DESCRIPTION: generated from content/pictures.md; run npm run build. -->
+            <p>I take pictures with a Canon EOS ELAN II, a 35mm film camera. </p>
+            <p>I&#39;ve had an interest in shooting a short film since college, but I&#39;ve always let other priorities get in the way. For now, film photography will have to do. :)</p>
+            <!-- END PICTURES DESCRIPTION -->
+        </div>
         <section class="photo-grid" id="photoGrid" aria-label="Photo gallery"></section>
+        <noscript><p>Please enable JavaScript to browse the photo gallery.</p></noscript>
     </main>
-
-    <div class="photo-lightbox" id="photoLightbox" aria-hidden="true">
-        <button class="lightbox-close" type="button" aria-label="Close">&times;</button>
-        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous picture">&lsaquo;</button>
+    <footer class="site-footer">
+        <a href="mailto:badari.rishikesh@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/rbadari/">LinkedIn</a>
+        <a href="https://github.com/rishikeshbadari">GitHub</a>
+    </footer>
+    <div class="photo-lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+        <button class="lightbox-close" type="button" aria-label="Close">×</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous picture">‹</button>
         <figure class="lightbox-figure">
-            <img class="lightbox-img" id="lightboxImg" src="" alt="">
+            <img class="lightbox-img" id="lightboxImg" alt="">
         </figure>
-        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next picture">&rsaquo;</button>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next picture">›</button>
     </div>
-
     <script defer src="data/gallery-data.js"></script>
-    <script defer src="js/gallery-preload.js"></script>
     <script defer src="js/gallery.js"></script>
 </body>
 </html>

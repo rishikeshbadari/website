@@ -1,0 +1,13 @@
+{
+  "name": "rishikesh-personal-website",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "marked": "18.1.0"
+  }
+}

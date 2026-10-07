@@ -2,57 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="color-scheme" content="dark">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - Rishikesh Badari</title>
+    <meta name="color-scheme" content="light">
+    <title>Projects — Rishikesh Badari</title>
     <meta name="description" content="Projects by Rishikesh Badari.">
-    <meta property="og:title" content="Projects - Rishikesh Badari">
+    <meta property="og:title" content="Projects — Rishikesh Badari">
     <meta property="og:description" content="Projects by Rishikesh Badari.">
     <meta property="og:type" content="website">
-    <meta name="theme-color" content="#111111">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"></noscript>
-
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/projects.css">
+    <meta name="theme-color" content="#faf9f6">
+    <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-    <nav class="side-nav">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/projects.html" class="nav-link">Projects</a>
-    </nav>
-
-    <main class="page-main">
-        <section class="page-section page-section-first">
-            <div class="section-container">
-                <div class="section-head">
-                    <h1 class="section-heading">Projects</h1>
-                </div>
-                <div class="projects-container" data-project-list></div>
-            </div>
-        </section>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="projects.html" aria-current="page">Projects</a>
+            <a href="pictures.html">Pictures</a>
+        </nav>
+    </header>
+    <main id="main">
+        <article class="project" id="qbreader">
+            <h2><a href="projects/qbreader.html">iOS QBReader</a></h2>
+            <p>A quiz bowl app for iPhone. Read tossups, buzz in, and practice.</p>
+        </article>
     </main>
-
-    <div class="project-modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Project details">
-        <div class="project-modal-content">
-            <button class="project-modal-close" id="projectModalClose" aria-label="Close">&times;</button>
-            <div class="project-modal-scroll">
-                <div class="project-modal-readme">
-                    <div class="readme-content" id="modalReadmeContent"></div>
-                    <div class="project-links" id="modalProjectLinks"></div>
-                </div>
-                <div class="project-modal-demo" id="modalProjectDemo"></div>
-            </div>
-        </div>
-    </div>
-
-    <script defer src="data/gallery-data.js"></script>
-    <script defer src="js/gallery-preload.js"></script>
-    <script defer src="data/projects-data.js"></script>
-    <script defer src="js/projects.js"></script>
+    <footer class="site-footer">
+        <a href="mailto:badari.rishikesh@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/rbadari/">LinkedIn</a>
+        <a href="https://github.com/rishikeshbadari">GitHub</a>
+    </footer>
 </body>
 </html>
