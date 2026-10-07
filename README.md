@@ -14,6 +14,9 @@ HTML before deployment.
 - **Homepage photo:** `js/home-photo.js` randomly chooses one photo from
   `data/gallery-data.js` on each page load. It loads the full-quality original
   and displays it below the introduction without cropping or a slideshow.
+  The homepage reveals its content once the photo has loaded and decoded.
+  A failed request or a 15-second timeout reveals the page anyway. This does
+  not affect asynchronous image loading on Pictures.
 - **Project list:** Edit the links and summaries in `projects.html`.
 - **Project details:** Each project has its own HTML file in `projects/`,
   starting with `projects/qbreader.html`. To add a project, create another

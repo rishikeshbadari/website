@@ -10,6 +10,15 @@
     <meta property="og:description" content="Rishikesh Badari — software engineer in Palo Alto, California. Projects and photography.">
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#faf9f6">
+    <script>
+        document.documentElement.classList.add('home-loading');
+        window.revealHome = function() {
+            clearTimeout(window.homeLoadingTimeout);
+            document.documentElement.classList.remove('home-loading');
+        };
+        // Still show the site if a script or image request stalls.
+        window.homeLoadingTimeout = setTimeout(window.revealHome, 15000);
+    </script>
     <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
@@ -29,7 +38,7 @@
         by some of the websites/blogs that I look up to.</p>
         <!-- END INTRODUCTION -->
         <figure class="home-photo" id="homePhoto" hidden>
-            <img id="homePhotoImage" alt="A photograph from my Pictures gallery" decoding="async">
+            <img id="homePhotoImage" alt="A photograph from my Pictures gallery" loading="eager" fetchpriority="high" decoding="async">
         </figure>
     </main>
     <footer class="site-footer">
