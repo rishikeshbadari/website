@@ -12,9 +12,10 @@ HTML before deployment.
   automatically during deployment. Do not edit the generated introduction in
   `index.html`.
 - **Homepage photo:** `js/home-photo.js` randomly chooses one photo from
-  `data/gallery-data.js` on each page load. It loads the full-quality original
-  and displays it below the introduction without cropping or a slideshow.
-  The homepage reveals its content once the photo has loaded and decoded.
+  `data/gallery-data.js` on each page load. It first displays a small preview,
+  then replaces it with the full-quality original in the background, without
+  cropping or a slideshow. The homepage reveals its content once the preview
+  has loaded and decoded, rather than waiting for the large original.
   A failed request or a 15-second timeout reveals the page anyway. This does
   not affect asynchronous image loading on Pictures.
 - **Project list:** Edit the links and summaries in `projects.html`.
@@ -27,7 +28,9 @@ HTML before deployment.
   Vercel builds it automatically during deployment, just like the homepage
   introduction. Use blank lines for paragraphs; links, bold, and italics work too.
 - **Photo list:** Edit `data/gallery-data.js`. Images are in `pictures/thumbs`
-  and `pictures/full`.
+  and `pictures/full`. After adding thumbnails, run `npm run build` to update
+  `data/gallery-dimensions.js`. These dimensions keep the gallery layout stable
+  while photos load asynchronously.
 - **Appearance:** Edit `css/site.css`.
 
 The older `data/projects-data.js` and other legacy styles/scripts are no longer
