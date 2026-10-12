@@ -30,4 +30,4 @@ Looking back in history, the progression of auditory stimuli was something like 
 
 So it really hasn't been that long since people started walking around playing things in their ears. This is a somewhat sobering fact. I wonder how many conversations, people, or thoughts I've neglected in favor of this slight dopaminergic boost. 
 
-I don't know if it's possible or necessary to write off music entirely. But I also don't know if "everything in moderation" is as easy as it sounds anymore. Regardless, I'd probably be better off listening to silence more often.
+I don't know if it's possible or necessary to write off music entirely, but I also don't know if "everything in moderation" is as easy as it sounds anymore. Regardless, I'd probably be better off listening to silence more often.
