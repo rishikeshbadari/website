@@ -15,7 +15,7 @@ It took me until college to take a step back and realize what I was doing. Music
 <- [ songs we hate  ] ---- [songs we don't care for] ---- [ songs we love  ] ->
 ```
 
-However, the magnitude of positive and negative ends has gotten much larger. 
+However, I'm fairly certain the spectrum has extended in magnitude in both directions.
 Looking back in history, the progression of auditory stimuli was something like this:
 - [pre-1877] live music
 - [1877-1920] Edison creates phonograph; recorded sound
