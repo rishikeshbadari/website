@@ -8,7 +8,7 @@ I've always enjoyed listening to music. It was never really a problem until midd
 
 Suddenly, I no longer had to wait to be in front of a computer to listen to music. I could listen anywhere. On the bus, in between class, while doing homework.
 
-It took me until college to take a step back and realize what I was doing. Music, like any other sensory input, is some form of stimuli. Perhaps something like this:
+It took me until college to take a step back and realize what I was doing. Music, like any other sensory input, is some form of stimuli. Perhaps the spectrum is something like this:
 
 ```text
 <- [negative stimuli] ---- [    neutral stimuli    ] ---- [positive stimuli] ->
@@ -21,7 +21,7 @@ Looking back in history, the progression of auditory stimuli was something like 
 - [1877-1920] Edison creates phonograph; recorded sound
 - [1920-1950] radio
 - [1950-1979] stereo
-- [1979-1990] Sony's Walkman (crazy jump)
+- [1979-1990] Sony's Walkman
     - This is a crazy jump. We can now listen to music in-ear wherever we are.
 - [1990-2007] mp3-players, iPod, wired headphones
     - A gradual, but steep jump. Headphone quality and audio quality increased.
