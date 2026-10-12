@@ -25,7 +25,7 @@ Looking back in history, the progression of auditory stimuli was something like 
     - This is a crazy jump. We can now listen to music in-ear wherever we are.
 - [1990-2007] mp3-players, iPod, wired headphones
     - A gradual, but steep jump. Headphone quality and audio quality increased.
-- [2007-present] on-demand streaming, algorithmic recommendations, wireless headphones (another big jump)
+- [2007-present] on-demand streaming, algorithmic recommendations, wireless headphones
     - Another crazy jump. We can listen to any song ever recorded in history. We can listen on headphones that damn near maximize the potential for positive stimuli. And we can have an algorithm forever recommend us new songs that we'd enjoy. 
 
 So it really hasn't been that long since people started walking around playing things in their ears. This is a somewhat sobering fact. I wonder how many conversations, people, or thoughts I've neglected in favor of some slight dopaminergic boost. 
