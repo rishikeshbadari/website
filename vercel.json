@@ -3,6 +3,10 @@
   "outputDirectory": ".",
   "rewrites": [
     {
+      "source": "/essays",
+      "destination": "/essays.html"
+    },
+    {
       "source": "/projects",
       "destination": "/projects.html"
     }

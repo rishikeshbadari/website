@@ -21,7 +21,7 @@ h2 { font-size: 23px; margin: 0 0 14px; }
 h2 a { text-decoration: none; }
 h2 a:hover { text-decoration: underline; }
 .site-header { display: flex; justify-content: center; margin-bottom: 64px; }
-nav { display: flex; gap: 20px; font-size: 14px; }
+nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 20px; font-size: 14px; }
 nav a { text-decoration: none; }
 nav a:hover { text-decoration: underline; }
 nav a[aria-current="page"], nav a[aria-current="location"] { color: #30312e; text-decoration: underline; }
@@ -31,6 +31,14 @@ nav a[aria-current="page"], nav a[aria-current="location"] { color: #30312e; tex
 .site-footer { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 64px; padding-top: 20px; border-top: 1px solid #deded6; font-size: 13px; }
 .site-footer a { color: #666760; }
 .project { margin-top: 32px; }
+.essay-list { list-style: none; margin: 0; padding: 0; }
+.essay-intro > :last-child { margin-bottom: 32px; }
+.essay-list li + li { margin-top: 16px; }
+.essay-content { overflow-wrap: break-word; }
+.essay-content h2, .essay-content h3 { margin-top: 32px; }
+.essay-content img { max-width: 100%; height: auto; }
+.essay-content pre { overflow-x: auto; padding: 16px; background: #efeee9; }
+.essay-content blockquote { margin: 24px 0; padding-left: 20px; border-left: 2px solid #deded6; }
 .app-screenshots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; align-items: start; }
 .app-screenshots img { display: block; width: 100%; height: auto; border: 1px solid #deded6; border-radius: 8px; }
 .skip-link { position: absolute; top: 8px; left: 16px; transform: translateY(-200%); }

@@ -1,0 +1,3 @@
+# Move filenames up or down to change the order on the Essays page.
+# Essays not listed here appear afterward, alphabetically.
+music.md
