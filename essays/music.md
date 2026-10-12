@@ -6,7 +6,7 @@ October 11th, 2026
 
 I've always enjoyed listening to music. It was never really a problem until middle school, when I was gifted an iPod nano.
 
-Suddenly, I no longer had to wait to be in front of a computer to listen to music. I could listen anywhere. On the bus, in between class, while doing homework. A 6th grader, listening to music, while doing homework.
+Suddenly, I no longer had to wait to be in front of a computer to listen to music. I could listen anywhere. On the bus, in between class, while doing homework.
 
 It took me until college to take a step back and realize what I was doing. Music, like any other sensory input, is some form of stimuli. Perhaps something like this:
 
