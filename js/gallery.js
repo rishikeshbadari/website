@@ -3,13 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var lightbox = document.getElementById('photoLightbox');
     var lightboxImg = document.getElementById('lightboxImg');
     if (!grid || !lightbox || !lightboxImg || typeof galleryData === 'undefined') return;
+    var photos = galleryData.slice().reverse();
     var closeBtn = lightbox.querySelector('.lightbox-close');
     var prevBtn = lightbox.querySelector('.lightbox-prev');
     var nextBtn = lightbox.querySelector('.lightbox-next');
     var activeIndex = 0;
     var returnFocus = null;
 
-    galleryData.forEach(function(photo, index) {
+    photos.forEach(function(photo, index) {
         var tile = document.createElement('button');
         tile.className = 'photo-tile';
         tile.type = 'button';
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (activeIndex > 0) openLightbox(activeIndex - 1);
     });
     nextBtn.addEventListener('click', function() {
-        if (activeIndex < galleryData.length - 1) openLightbox(activeIndex + 1);
+        if (activeIndex < photos.length - 1) openLightbox(activeIndex + 1);
     });
     lightbox.addEventListener('click', function(event) {
         if (event.target === lightbox) closeLightbox();
@@ -88,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (event.key === 'Escape') closeLightbox();
         if (event.key === 'ArrowLeft' && activeIndex > 0) openLightbox(activeIndex - 1);
-        if (event.key === 'ArrowRight' && activeIndex < galleryData.length - 1) openLightbox(activeIndex + 1);
+        if (event.key === 'ArrowRight' && activeIndex < photos.length - 1) openLightbox(activeIndex + 1);
     });
 
     function sizeTile(tile, img) {
@@ -107,13 +108,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function openLightbox(index) {
         if (!lightbox.classList.contains('is-open')) returnFocus = document.activeElement;
         activeIndex = index;
-        var photo = galleryData[index];
+        var photo = photos[index];
         lightboxImg.src = photo.src;
-        lightboxImg.alt = 'Photograph ' + (index + 1) + ' of ' + galleryData.length;
+        lightboxImg.alt = 'Photograph ' + (index + 1) + ' of ' + photos.length;
         prevBtn.disabled = index === 0;
-        nextBtn.disabled = index === galleryData.length - 1;
+        nextBtn.disabled = index === photos.length - 1;
         prevBtn.classList.toggle('is-disabled', index === 0);
-        nextBtn.classList.toggle('is-disabled', index === galleryData.length - 1);
+        nextBtn.classList.toggle('is-disabled', index === photos.length - 1);
         lightbox.classList.add('is-open');
         lightbox.setAttribute('aria-hidden', 'false');
         document.body.classList.add('lightbox-open');
