@@ -1,7 +1,6 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { marked } from 'marked';
 import { imageSize } from 'image-size';
-import { buildEssays } from './build-essays.mjs';
 
 // Resolve against this script so the build also works from another directory.
 async function buildMarkdown(pageFile, sourceFile, label, indent) {
@@ -32,7 +31,6 @@ async function buildMarkdown(pageFile, sourceFile, label, indent) {
 
 await buildMarkdown('index.html', 'content/intro.md', 'INTRODUCTION', '        ');
 await buildMarkdown('pictures.html', 'content/pictures.md', 'PICTURES DESCRIPTION', '            ');
-await buildEssays();
 
 // Reserve gallery space before any thumbnail downloads finish.
 const thumbnailDir = new URL('../pictures/thumbs/', import.meta.url);

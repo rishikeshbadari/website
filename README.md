@@ -1,6 +1,6 @@
 # Personal website
 
-A static website with Home, Projects, Essays, and Pictures pages. The homepage
+A static website with Home, Projects, and Pictures pages. The homepage
 introduction and Pictures description are written in Markdown and compiled into
 HTML before deployment.
 
@@ -19,25 +19,6 @@ HTML before deployment.
   A failed request or a 15-second timeout reveals the page anyway. This does
   not affect asynchronous image loading on Pictures.
 - **Project list:** Edit the links and summaries in `projects.html`.
-- **Essays introduction:** Edit `content/essays.md` to add text above the essay
-  links on the Essays page. Paragraphs, headings, links, and other Markdown
-  formatting work. Run `npm run build` and refresh to preview changes.
-- **New essay:** Run `npm run essay -- "Your essay title"` (or `npm run essay`
-  to be asked for a title). This creates the Markdown file in `essays/`, adds
-  it at the top of the list, and builds the essay pages. Open the printed file
-  path and write beneath its title.
-- **Essay order:** Open `essays/order.txt` and move filenames up or down.
-  One filename per line; no numbers or JSON needed. The top line appears first.
-  Blank lines and comments starting with `#` are ignored. Unlisted Markdown
-  files still appear afterward, alphabetically. Entries for deleted files are ignored.
-- **Editing essays:** Edit `essays/*.md`, then run `npm run build` and refresh.
-  A `# Title` heading sets the displayed title. Without one, the title comes
-  from the filename (`a-new-idea.md` → “A New Idea”). Headings are optional,
-  and your text is rendered as written. The filename sets the URL
-  (`music.md` → `/essays/music.html`). You can also add Markdown files
-  directly; use lowercase filenames with hyphens.
-  Removing a Markdown file removes its generated page on the next build.
-  Vercel runs the same build automatically.
 - **Project details:** Each project has its own HTML file in `projects/`,
   starting with `projects/qbreader.html`. To add a project, create another
   page there and link to it from `projects.html`. On project pages, shared
@@ -54,6 +35,9 @@ HTML before deployment.
 
 The older `data/projects-data.js` and other legacy styles/scripts are no longer
 loaded by these pages.
+
+The retired essay drafts remain in `essays/` and `content/essays.md`.
+They are no longer built or linked, and `.vercelignore` excludes them from deployments.
 
 ## Local Development
 
